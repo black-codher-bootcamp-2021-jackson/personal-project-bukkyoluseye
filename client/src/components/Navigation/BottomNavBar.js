@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
 import NavBarItem from './NavBarItem'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
+
 
 const BottomNavBar = () => {
-    const [activeButton, setActiveButton] = useState("")
+    const location = useLocation();
+    const [activeButton, setActiveButton] = useState(location.pathname);
     //        window.localStorage.getItem('state')
     // ? JSON.parse(window.localStorage.getItem('state'))
     console.log(activeButton)
+    console.log(location)
     const [isClicked, setIsClicked] = useState(true)
 
     const items = ['Bookings', 'Requests', 'Messages', 'More']
 
     return (
         <div id="bottom-nav">
-            <Router>
+            <>
                 <Routes>
                     <Route
                         path="/"
@@ -25,7 +28,10 @@ const BottomNavBar = () => {
                                         key={item}
                                         screen={item}
                                         isActive={
-                                            activeButton === item && isClicked
+                                            (activeButton === item &&
+                                                isClicked) ||
+                                                 location.pathname ===
+                                                  `/${item}`
                                         }
                                         setActiveButton={setActiveButton}
                                         setIsClicked={setIsClicked}
@@ -44,8 +50,10 @@ const BottomNavBar = () => {
                                         key={item}
                                         screen={item}
                                         isActive={
-                                            activeButton === item && isClicked
-                                        }
+                                            (activeButton === item &&
+                                                isClicked) ||
+                                            location.pathname ===
+                                            `/${item}`}
                                         setActiveButton={setActiveButton}
                                         setIsClicked={setIsClicked}
                                     />
@@ -63,7 +71,9 @@ const BottomNavBar = () => {
                                         key={item}
                                         screen={item}
                                         isActive={
-                                            activeButton === item && isClicked
+                                            (activeButton === item &&
+                                                isClicked) ||
+                                            location.pathname === item
                                         }
                                         setActiveButton={setActiveButton}
                                         setIsClicked={setIsClicked}
@@ -83,7 +93,9 @@ const BottomNavBar = () => {
                                         key={item}
                                         screen={item}
                                         isActive={
-                                            activeButton === item && isClicked
+                                            (activeButton === item &&
+                                                isClicked) ||
+                                            location.pathname === item
                                         }
                                         setActiveButton={setActiveButton}
                                         setIsClicked={setIsClicked}
@@ -93,7 +105,7 @@ const BottomNavBar = () => {
                         }
                     />
                 </Routes>
-            </Router>
+            </>
         </div>
     )
 }

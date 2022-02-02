@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import NavBarItem from './NavBarItem';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import BottomNavBar from './BottomNavBar';
 
 
 const SideNavBar = () => {
-        const [activeButton, setActiveButton] = useState('Bookings')
+        const location = useLocation()
+        const [activeButton, setActiveButton] = useState(location.pathname)
+
         const [isClicked, setIsClicked] = useState(true)
 
         const items = ['Bookings', 'Requests', 'Messages', 'More']
@@ -12,7 +15,7 @@ const SideNavBar = () => {
         <div id="side-nav">
             <div className="logo"></div>
             <div id="side-nav-items">
-                <Router>
+                <>
                     <Routes>
                         <Route
                             path="/"
@@ -24,8 +27,9 @@ const SideNavBar = () => {
                                             key={item}
                                             screen={item}
                                             isActive={
-                                                activeButton === item &&
-                                                isClicked
+                                                (activeButton === item &&
+                                                    isClicked) ||
+                                                location.pathname === item
                                             }
                                             setActiveButton={setActiveButton}
                                             setIsClicked={setIsClicked}
@@ -44,8 +48,9 @@ const SideNavBar = () => {
                                             key={item}
                                             screen={item}
                                             isActive={
-                                                activeButton === item &&
-                                                isClicked
+                                                (activeButton === item &&
+                                                    isClicked) ||
+                                                location.pathname === item
                                             }
                                             setActiveButton={setActiveButton}
                                             setIsClicked={setIsClicked}
@@ -64,8 +69,9 @@ const SideNavBar = () => {
                                             key={item}
                                             screen={item}
                                             isActive={
-                                                activeButton === item &&
-                                                isClicked
+                                                (activeButton === item &&
+                                                    isClicked) ||
+                                                location.pathname === item
                                             }
                                             setActiveButton={setActiveButton}
                                             setIsClicked={setIsClicked}
@@ -84,8 +90,9 @@ const SideNavBar = () => {
                                             key={item}
                                             screen={item}
                                             isActive={
-                                                activeButton === item &&
-                                                isClicked
+                                                (activeButton === item &&
+                                                    isClicked) ||
+                                                location.pathname === item
                                             }
                                             setActiveButton={setActiveButton}
                                             setIsClicked={setIsClicked}
@@ -95,7 +102,7 @@ const SideNavBar = () => {
                             }
                         />
                     </Routes>
-                </Router>
+                </>
             </div>
             <div className="dark-mode-btn"></div>
         </div>

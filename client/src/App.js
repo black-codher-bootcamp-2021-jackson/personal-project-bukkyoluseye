@@ -4,6 +4,7 @@ import DarkModeWrapper from './components/DarkModeWrapper'
 import BottomNavBar from './components/Navigation/BottomNavBar'
 import SideNavBar from './components/Navigation/SideNavBar'
 import './App.css'
+import {BrowserRouter as Router} from 'react-router-dom'
 
 // SERVICES THAT CALL OUR API ENDPOINTS
 // import { getAllProfiles } from "./services/profileService";
@@ -35,15 +36,16 @@ function App() {
     //   );
     // };
 
-    return (
-        <DarkModeWrapper>
-            <div id="main-with-nav">
-                <SideNavBar />
-                <div id="main">
-                    {/* <DarkMode /> */}
+  return (
+      <Router>
+          <DarkModeWrapper>
+              <div id="main-with-nav">
+                  <SideNavBar />
+                  <div id="main">
+                      {/* <DarkMode /> */}
 
-                    <h1>Hi there my name is Bukky</h1>
-                    {/* <ul>
+                      <h1>Hi there my name is Bukky</h1>
+                      {/* <ul>
         {profiles && profiles.length > 0 ? (
           profiles.map((profile) => renderProfile(profile))
         ) : (
@@ -51,11 +53,12 @@ function App() {
         )}
       </ul> */}
 
-                    <BottomNavBar />
-                </div>
-            </div>
-        </DarkModeWrapper>
-    )
+                      <BottomNavBar />
+                  </div>
+              </div>
+          </DarkModeWrapper>
+      </Router>
+  )
 }
 
 export default App

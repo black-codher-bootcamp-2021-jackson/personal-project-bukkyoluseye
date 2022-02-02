@@ -25,7 +25,25 @@ const NavBarIcon = (props) => {
 }
 
 const NavBarItem = (props) => {
-    // console.log('are you working?')
+ 
+    return (
+        <>
+            <Link
+                to={props.screen === 'Bookings' ? '/' : `/${props.screen}`}
+                id={props.screen}
+                className={`nav-bar-item ${props.isActive ? "activeButton" : null}`}
+                onClick={() => { props.setIsClicked(true); props.setActiveButton(props.screen); }}
+            >
+                <NavBarIcon screen={props.screen} id={`${props.screen}-icon`} />
+                <span>{props.screen}</span>
+            </Link>
+        </>
+    )
+}
+
+export default NavBarItem
+
+   // console.log('are you working?')
     // Check if button is active using an eventlister. The default
     // const activeNavBarItem = (e) => {
     //     e.preventDefault()
@@ -43,19 +61,3 @@ const NavBarItem = (props) => {
     // }
     // I want my icon to take any svg in as a prop
 // window.localStorage.setItem('state', JSON.stringify(state)) 
-    return (
-        <>
-            <Link
-                to={props.screen === 'Bookings' ? '/' : `/${props.screen}`}
-                id={props.screen}
-                className={`nav-bar-item ${props.isActive ? "activeButton" : null}`}
-                onClick={() => { props.setIsClicked(true); props.setActiveButton(props.screen); }}
-            >
-                <NavBarIcon screen={props.screen} id={`${props.screen}-icon`} />
-                <span>{props.screen}</span>
-            </Link>
-        </>
-    )
-}
-
-export default NavBarItem
