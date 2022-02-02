@@ -1,21 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 #root {
-  height: 100vh;
-  font-family: Outfit, sans-serif;
+    height: 100vh;
+    font-family: Outfit, sans-serif;
 }
-
-body {
+* {
   margin: 0px;
 }
+body {
+    margin: 0px;
+}
 
+html {
+    font-size: 100%;
+} /*16px*/
+
+body {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 3rem 0 1.38rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 2.488rem;
+}
+
+h2 {
+    font-size: 2.074rem;
+}
+
+h3 {
+    font-size: 1.728rem;
+}
+
+h4 {
+    font-size: 1.44rem;
+}
+
+h5 {
+    font-size: 1.2rem;
+}
 
 .light {
-
-  height: 100%;
-  --primary-color-light: background: rgba(221, 213, 255, 1);
-  ;
-  /*Text Styles
+    height: 100%;
+    --primary-color-light: rgba(221, 213, 255, 1);
+    --primary-color-default: rgba(84, 46, 255, 1);
+    /*Text Styles
   --mobile-h1-font-size: ; Large Titles
   --mobile-h2-font-size: ; Titles
   --mobile-h3-font-size: ; Body Titles
@@ -23,7 +69,7 @@ body {
   --mobile-b2-font-size: ; Body Copy, CTAs
   */
 
-  /*Light Mode Design System
+    /*Light Mode Design System
   --primary-color-default: ;
   --primary-color-light: ;
   --primary-color-dark: ;
@@ -43,9 +89,9 @@ body {
   --accent-3-color-light: ;
   --accent-3-color-dark: ;
   --accent-3-color-darkest: ;
-
-  --rag-error-default: ;
-  --rag-error-light: ;
+*/
+    --rag-error-default: rgba(235, 87, 87, 1);
+    /* --rag-error-light: ;
   --rag-error-dark: ;
   --rag-error-darkest: ;
 
@@ -62,17 +108,18 @@ body {
   --rag-informational-default: ;
   --rag-informational-light: ;
   --rag-informational-dark: ;
-  --rag-informational-darkest: ;
+  --rag-informational-darkest: ; */
 
-   */
+    --grey-1: #303336;
+    --grey-4: rgba(189, 189, 189, 1);
+    --grey-5: rgba(224, 224, 224, 1);
+    --grey-7: #ffffff;
 
-  --grey-1: #303336;
-  --grey-7: #ffffff;
-  /*
+    /*
   --grey-2: ;
   --grey-3: ;
-  --grey-4: ;
-  --grey-5: ;
+  
+
   --grey-6: #f5f4f7;
 
   */
@@ -80,9 +127,9 @@ body {
 
 /*Dark Mode Design System */
 .dark {
-  height: 100%;
-  background-color: #121212;
-  /*
+    height: 100%;
+    background-color: #121212;
+    /*
   --primary-color-default: ;
   --primary-color-light: ;
   --primary-color-dark: ;
@@ -125,9 +172,9 @@ body {
   
    */
 
-  --grey-1: #ffffff;
+    --grey-1: #ffffff;
 
-  /*
+    /*
   --grey-2: ;
   --grey-3: ;
   --grey-4: ;
@@ -135,105 +182,162 @@ body {
   --grey-6: #f5f4f7;
   --grey-7: #ffffff;
   */
-
 }
-
 
 .moon:hover {
-  fill: var(--grey-1);
-  stroke: var(--grey-1);
+    fill: var(--grey-1);
+    stroke: var(--grey-1);
 }
 
-.sun, .moon {
-  fill:none;
-  stroke: var(--grey-1);
-  stroke-width: 25px;
-  width: 40px;
-  height: auto;
+.sun,
+.moon {
+    fill: none;
+    stroke: var(--grey-1);
+    stroke-width: 25px;
+    width: 40px;
+    height: auto;
 }
 
 .sun:hover {
-  fill: var(--grey-1);
-  stroke: var(--grey-1);
+    fill: var(--grey-1);
+    stroke: var(--grey-1);
 }
 
 h1 {
-  color: var(--grey-1);
+    color: var(--grey-1);
 }
 
 .nav-bar-item svg {
-  stroke: var(--grey-1);
+    stroke: var(--grey-1);
 }
 
 #requestsQuestion {
-  fill: var(--grey-1);
+    fill: var(--grey-1);
 }
 
-#More, #Bookings, #Requests, #Schools, #Messages {
-  text-decoration: none;
-  color: var(--grey-1);
-  font-weight: 600;
+#More,
+#Bookings,
+#Requests,
+#Schools,
+#Messages {
+    text-decoration: none;
+    color: var(--grey-1);
+    font-weight: 600;
 }
 
 #bottom-nav {
-  background: var(--grey-7);
-  box-shadow: 0px -1px 20px rgba(176, 176, 176, 0.25);
-  display: flex;
-  bottom: 0px;
-  position: sticky;
-  padding: 8px 5vw 16px;
-  justify-content: space-between;
+    background: var(--grey-7);
+    box-shadow: 0px -1px 20px rgba(176, 176, 176, 0.25);
+    display: flex;
+    bottom: 0px;
+    position: sticky;
+    padding: 8px 5vw 16px;
+    justify-content: space-between;
 }
 
 #bottom-nav a {
-  width: 65px;
+    width: 65px;
 }
 
 .nav-bar-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 13px;
-  line-height: 16px;
-  text-align: center;
-  letter-spacing: 0.01em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.01em;
 }
 
-@document regexp("*/messages") {  
-  #Messages-icon {
-    stroke: purple;
-  }
+@document regexp("*/messages") {
+    #Messages-icon {
+        stroke: purple;
+    }
 }
-/* 
-active svg, a[href="/messages"]:active svg  {
-  stroke: purple;
-}  */
+
+.activeButton svg,
+.activeButton span {
+    stroke: var(--primary-color-default);
+    fill: var(--primary-color-light);
+    color: var(--primary-color-default);
+}
 
 #darkMode {
-  background: transparent;
-  border-color: transparent;
+    background: transparent;
+    border-color: transparent;
 }
 
 #side-nav {
-  display: none;
-
+    display: none;
 }
 
+.active-nav-bar-item {
+    stroke: var(--primary-color-default);
+    fill: var(--primary-color-light);
+}
+
+.input {
+    border: 1px solid var(--grey-5);
+    box-sizing: border-box;
+    border-radius: 7px;
+    height: 48px;
+}
+
+button {
+    box-sizing: border-box;
+    border-radius: 7px;
+}
+ .cancel {
+   color: var(--rag-error-default)
+ }
+.error-btn {
+    border-color: var(--rag-error-default);
+}
+
+::placeholder,
+:-ms-input-placeholder,
+::-ms-input-placeholder {
+    color: var(--grey-4);
+}
+.logo {
+  height: 90px;
+  width: 100%
+}
+.dark-mode-btn {
+   height: 100px;
+  width: 100%
+}
 /* Tablet (S) */
 @media screen and (min-width: 867px) {
-  #bottom-nav {
-    display: none;
+  .main-with-nav {
+    display:flex;
+    flex-direction: row;
+    height:100vh;
   }
-  #side-nav {
-    display: block;
-    width: 116px;
-    height: 100%;
-    background: var(--grey-7);
-    box-shadow: 0px -1px 20px rgba(176, 176, 176, 0.25);
-    bottom: 0px;
-    position: sticky;
-    /* padding: 8px 16px 16px; */
-    /* justify-content: space-between; */
-
-  }
+    #bottom-nav {
+        display: none;
+    }
+    #side-nav {
+        display: block;
+        margin:0px;
+        width: 116px;
+        height: 100%;
+        background: var(--grey-7);
+        box-shadow: 0px -1px 20px rgba(176, 176, 176, 0.25);
+        left: 0px;
+        top:0px;
+        position: sticky;
+        
+        /* padding: 8px 16px 16px; */
+        /* justify-content: space-between; */
+    }
+    #side-nav-items {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+    }
 }
+
+/* @media only screen and (min-width: ) {
+  
+} */

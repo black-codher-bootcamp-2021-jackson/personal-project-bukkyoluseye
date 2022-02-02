@@ -1,5 +1,6 @@
-// const mongoose = require("mongoose");
-// const Profile = mongoose.model("profiles");
+const mongoose = require("mongoose");
+const TutorProfile = mongoose.model("tutorProfiles");
+// const session = require("express-session");
 
 // const profileRoutes = (app) => {
 //   app.get(`/api/profile`, async (req, res) => {

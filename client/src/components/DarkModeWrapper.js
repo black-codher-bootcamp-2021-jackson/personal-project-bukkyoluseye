@@ -13,11 +13,11 @@ const DarkModeWrapper = ({children}) => {
 
     // Checks if the client has a preferred colour scheme of dark
     // Check value of current local storage and doesn't match or if there is no local storage set and the window match media is set and doesn't match then we set it. if local storage not set, we check the Window. localstorage.getItem || window.matchmedia != theme, then set theme
-    console.log("Start",theme);
+
 
     // if the value saved in storage doesn't match the current theme
-    const switchTheme = () => {
-        console.log("Before",theme);
+    const switchTheme = (e) => {
+        e.preventDefault();
         if (theme === 'dark'){
             setTheme("light");
         }
@@ -25,9 +25,8 @@ const DarkModeWrapper = ({children}) => {
         else {
             setTheme("dark");
         }
-        console.log("After", theme);
     };
-    
+
     return (
         <div className={theme}>
             <button
