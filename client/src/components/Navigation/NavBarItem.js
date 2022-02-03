@@ -9,15 +9,15 @@ import MeatballsIcon from '../../assets/MeatballsIcon'
 const NavBarIcon = (props) => {
     // Passes the correct SVG to NavBarIcon Component depending on screen name
     switch (props.screen) {
-        case 'Bookings':
+        case 'bookings':
             return <BookingsIcon />
-        case 'Requests':
+        case 'requests':
             return <RequestsIcon />
-        case 'Schools':
+        case 'schools':
             return <SchoolsIcon />
-        case 'Messages':
+        case 'messages':
             return <MessagesIcon />
-        case 'More':
+        case 'more':
             return <MeatballsIcon />
         default:
             return <p>Error</p>
@@ -29,13 +29,21 @@ const NavBarItem = (props) => {
     return (
         <>
             <Link
-                to={props.screen === 'Bookings' ? '/' : `/${props.screen}`}
+                to={`/${props.screen}`}
                 id={props.screen}
-                className={`nav-bar-item ${props.isActive ? "activeButton" : null}`}
-                onClick={() => { props.setIsClicked(true); props.setActiveButton(props.screen); }}
+                className={`nav-bar-item ${
+                    props.isActive ? 'activeButton' : null
+                }`}
+                onClick={() => {
+                    props.setIsClicked(true)
+                    props.setActiveButton(props.screen)
+                }}
             >
                 <NavBarIcon screen={props.screen} id={`${props.screen}-icon`} />
-                <span>{props.screen}</span>
+                <span className="nav-label">
+                    {props.screen.charAt(0).toUpperCase() +
+                        props.screen.slice(1)}
+                </span>
             </Link>
         </>
     )

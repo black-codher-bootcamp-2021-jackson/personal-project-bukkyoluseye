@@ -1,16 +1,29 @@
 import React, {useState} from 'react';
 import NavBarItem from './NavBarItem';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import BottomNavBar from './BottomNavBar';
 
 
 const SideNavBar = () => {
-        const location = useLocation()
-        const [activeButton, setActiveButton] = useState(location.pathname)
+    const location = useLocation();
+    const [activeButton, setActiveButton] = useState(location.pathname);
 
-        const [isClicked, setIsClicked] = useState(true)
+    const [isClicked, setIsClicked] = useState(true)
 
-        const items = ['Bookings', 'Requests', 'Messages', 'More']
+    const items = ['bookings', 'requests', 'messages', 'more']
+
+    const navItems = items.map((item) => (
+        <NavBarItem
+            key={item}
+            screen={item}
+            isActive={
+                (activeButton === item && isClicked) ||
+                location.pathname === `/${item}`
+            }
+            setActiveButton={setActiveButton}
+            setIsClicked={setIsClicked}
+        />
+    ))
+
     return (
         <div id="side-nav">
             <div className="logo"></div>
@@ -18,88 +31,29 @@ const SideNavBar = () => {
                 <>
                     <Routes>
                         <Route
-                            path="/"
+                            path="/bookings"
                             id="bookingslink"
-                            element={
-                                <>
-                                    {items.map((item) => (
-                                        <NavBarItem
-                                            key={item}
-                                            screen={item}
-                                            isActive={
-                                                (activeButton === item &&
-                                                    isClicked) ||
-                                                location.pathname === item
-                                            }
-                                            setActiveButton={setActiveButton}
-                                            setIsClicked={setIsClicked}
-                                        />
-                                    ))}
-                                </>
-                            }
+                            element={<>{navItems}</>}
                         />
                         <Route
                             path="/requests"
                             id="requestslink"
-                            element={
-                                <>
-                                    {items.map((item) => (
-                                        <NavBarItem
-                                            key={item}
-                                            screen={item}
-                                            isActive={
-                                                (activeButton === item &&
-                                                    isClicked) ||
-                                                location.pathname === item
-                                            }
-                                            setActiveButton={setActiveButton}
-                                            setIsClicked={setIsClicked}
-                                        />
-                                    ))}
-                                </>
-                            }
+                            element={<>{navItems}</>}
                         />
                         <Route
                             path="/messages"
                             id="messageslink"
                             element={
                                 <>
-                                    {items.map((item) => (
-                                        <NavBarItem
-                                            key={item}
-                                            screen={item}
-                                            isActive={
-                                                (activeButton === item &&
-                                                    isClicked) ||
-                                                location.pathname === item
-                                            }
-                                            setActiveButton={setActiveButton}
-                                            setIsClicked={setIsClicked}
-                                        />
-                                    ))}
+                                    {navItems}
+                                    {console.log(activeButton)}
                                 </>
                             }
                         />
                         <Route
                             path="/more"
                             id="morelink"
-                            element={
-                                <>
-                                    {items.map((item) => (
-                                        <NavBarItem
-                                            key={item}
-                                            screen={item}
-                                            isActive={
-                                                (activeButton === item &&
-                                                    isClicked) ||
-                                                location.pathname === item
-                                            }
-                                            setActiveButton={setActiveButton}
-                                            setIsClicked={setIsClicked}
-                                        />
-                                    ))}
-                                </>
-                            }
+                            element={<>{navItems}</>}
                         />
                     </Routes>
                 </>

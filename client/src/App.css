@@ -7,9 +7,6 @@
 * {
   margin: 0px;
 }
-body {
-    margin: 0px;
-}
 
 html {
     font-size: 100%;
@@ -19,6 +16,7 @@ body {
     font-family: 'Outfit', sans-serif;
     font-weight: 400;
     line-height: 1.75;
+    letter-spacing: 0.01em;
 }
 
 p {
@@ -255,6 +253,11 @@ h1 {
     }
 }
 
+a {
+  text-decoration: none;
+  color: var(--grey-1)
+}
+
 .activeButton svg,
 .activeButton span {
     stroke: var(--primary-color-default);
@@ -262,6 +265,10 @@ h1 {
     color: var(--primary-color-default);
 }
 
+.nav-label {
+  text-decoration: none;
+  font-weight: 600;
+}
 #darkMode {
     background: transparent;
     border-color: transparent;
@@ -320,7 +327,7 @@ button {
     #side-nav {
         display: block;
         margin:0px;
-        width: 116px;
+        width: 112px;
         height: 100%;
         background: var(--grey-7);
         box-shadow: 0px -1px 20px rgba(176, 176, 176, 0.25);
@@ -331,10 +338,20 @@ button {
         /* padding: 8px 16px 16px; */
         /* justify-content: space-between; */
     }
+
+    #side-nav span {
+      font-size: 16px;
+    }
+    
+    #side-nav svg {
+      margin: 0px 0px 8px 0px;
+    }
+
     #side-nav-items {
           display: flex;
           flex-direction: column;
           flex-grow: 1;
+          gap: 72px;
     }
 }
 
