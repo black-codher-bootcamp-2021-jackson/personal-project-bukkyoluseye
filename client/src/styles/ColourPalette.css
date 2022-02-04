@@ -1,0 +1,128 @@
+.light {
+  padding-left: 88px;
+    height: 100%;
+    --primary-color-light: rgba(221, 213, 255, 1);
+    --primary-color-default: rgba(84, 46, 255, 1);
+    /*Text Styles
+  --mobile-h1-font-size: ; Large Titles
+  --mobile-h2-font-size: ; Titles
+  --mobile-h3-font-size: ; Body Titles
+  --mobile-bl-font-size: ; Large Body Copy
+  --mobile-b2-font-size: ; Body Copy, CTAs
+  */
+
+    /*Light Mode Design System
+  --primary-color-default: ;
+  --primary-color-light: ;
+  --primary-color-dark: ;
+  --primary-color-darkest: ;
+
+  --accent-1-color-default: ;
+  --accent-1-color-light: ;
+  --accent-1-color-dark: ;
+  --accent-1-color-darkest: ;
+*/
+  --accent-2-color-default: rgba(255, 181, 2, 1);
+  /* --accent-2-color-light: ;
+  --accent-2-color-dark: ;
+  --accent-2-color-darkest: ;
+
+  --accent-3-color-default: ;
+  --accent-3-color-light: ;
+  --accent-3-color-dark: ;
+  --accent-3-color-darkest: ;
+*/ 
+    --rag-error-default: rgba(235, 87, 87, 1);
+    /* --rag-error-light: ;
+  --rag-error-dark: ;
+  --rag-error-darkest: ;
+
+  --rag-warning-default: ;
+  --rag-warning-light: ;
+  --rag-warning-dark: ;
+  --rag-warning-darkest: ;
+
+  --rag-success-default: ;
+  --rag-success-light: ;
+  --rag-success-dark: ;
+  --rag-success-darkest: ;
+
+  --rag-informational-default: ;
+  --rag-informational-light: ;
+  --rag-informational-dark: ;
+  --rag-informational-darkest: ; */
+
+    --grey-1: #303336;
+    --grey-4: rgba(189, 189, 189, 1);
+    --grey-5: rgba(224, 224, 224, 1);
+    --grey-7: #ffffff;
+
+    /*
+  --grey-2: ;
+  --grey-3: ;
+  
+
+  --grey-6: #f5f4f7;
+
+  */
+}
+
+/*Dark Mode Design System */
+.dark {
+  padding-left: 88px;
+    height: 100%;
+    background-color: #121212;
+    /*
+  --primary-color-default: ;
+  --primary-color-light: ;
+  --primary-color-dark: ;
+  --primary-color-darkest: ;
+
+  --accent-1-color-default: ;
+  --accent-1-color-light: ;
+  --accent-1-color-dark: ;
+  --accent-1-color-darkest: ;
+
+  --accent-2-color-default: ;
+  --accent-2-color-light: ;
+  --accent-2-color-dark: ;
+  --accent-2-color-darkest: ;
+
+  --accent-3-color-default: ;
+  --accent-3-color-light: ;
+  --accent-3-color-dark: ;
+  --accent-3-color-darkest: ;
+
+  --rag-error-default: ;
+  --rag-error-light: ;
+  --rag-error-dark: ;
+  --rag-error-darkest: ;
+
+  --rag-warning-default: ;
+  --rag-warning-light: ;
+  --rag-warning-dark: ;
+  --rag-warning-darkest: ;
+
+  --rag-success-default: ;
+  --rag-success-light: ;
+  --rag-success-dark: ;
+  --rag-success-darkest: ;
+
+  --rag-informational-default: ;
+  --rag-informational-light: ;
+  --rag-informational-dark: ;
+  --rag-informational-darkest: ;
+  
+   */
+
+    --grey-1: #ffffff;
+
+    /*
+  --grey-2: ;
+  --grey-3: ;
+  --grey-4: ;
+  --grey-5: ;
+  --grey-6: #f5f4f7;
+  --grey-7: #ffffff;
+  */
+}

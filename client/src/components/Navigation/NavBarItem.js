@@ -1,23 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import BookingsIcon from '../../assets/BookingsIcon'
-import RequestsIcon from '../../assets/RequestsIcon'
-import SchoolsIcon from '../../assets/SchoolsIcon'
-import MessagesIcon from '../../assets/MessagesIcon'
-import MeatballsIcon from '../../assets/MeatballsIcon'
+import BookingsIcon from '../../assets/SVGR/BookingsIcon'
+import RequestsIcon from '../../assets/SVGR/RequestsIcon'
+import SchoolsIcon from '../../assets/SVGR/SchoolsIcon'
+import MessagesIcon from '../../assets/SVGR/MessagesIcon'
+import MeatballsIcon from '../../assets/SVGR/MeatballsIcon'
 
 const NavBarIcon = (props) => {
     // Passes the correct SVG to NavBarIcon Component depending on screen name
     switch (props.screen) {
-        case 'Bookings':
+        case 'bookings':
             return <BookingsIcon />
-        case 'Requests':
+        case 'requests':
             return <RequestsIcon />
-        case 'Schools':
+        case 'schools':
             return <SchoolsIcon />
-        case 'Messages':
+        case 'messages':
             return <MessagesIcon />
-        case 'More':
+        case 'more':
             return <MeatballsIcon />
         default:
             return <p>Error</p>
@@ -25,7 +25,33 @@ const NavBarIcon = (props) => {
 }
 
 const NavBarItem = (props) => {
-    // console.log('are you working?')
+ 
+    return (
+        <>
+            <Link
+                to={`/${props.screen}`}
+                id={props.screen}
+                className={`nav-bar-item ${
+                    props.isActive ? 'activeButton' : null
+                }`}
+                onClick={() => {
+                    props.setIsClicked(true)
+                    props.setActiveButton(props.screen)
+                }}
+            >
+                <NavBarIcon screen={props.screen} id={`${props.screen}-icon`} />
+                <span className="nav-label">
+                    {props.screen.charAt(0).toUpperCase() +
+                        props.screen.slice(1)}
+                </span>
+            </Link>
+        </>
+    )
+}
+
+export default NavBarItem
+
+   // console.log('are you working?')
     // Check if button is active using an eventlister. The default
     // const activeNavBarItem = (e) => {
     //     e.preventDefault()
@@ -43,19 +69,3 @@ const NavBarItem = (props) => {
     // }
     // I want my icon to take any svg in as a prop
 // window.localStorage.setItem('state', JSON.stringify(state)) 
-    return (
-        <>
-            <Link
-                to={props.screen === 'Bookings' ? '/' : `/${props.screen}`}
-                id={props.screen}
-                className={`nav-bar-item ${props.isActive ? "activeButton" : null}`}
-                onClick={() => { props.setIsClicked(true); props.setActiveButton(props.screen); }}
-            >
-                <NavBarIcon screen={props.screen} id={`${props.screen}-icon`} />
-                <span>{props.screen}</span>
-            </Link>
-        </>
-    )
-}
-
-export default NavBarItem

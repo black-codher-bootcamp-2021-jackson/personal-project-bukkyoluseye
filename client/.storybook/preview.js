@@ -1,3 +1,4 @@
+import "../src/styles/App";
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

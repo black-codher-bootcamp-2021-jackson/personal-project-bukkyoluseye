@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const TutorProfile = mongoose.model("tutorProfiles");
+const TutorProfile = mongoose.model("tutorProfile");
 // const session = require("express-session");
 
 // const profileRoutes = (app) => {

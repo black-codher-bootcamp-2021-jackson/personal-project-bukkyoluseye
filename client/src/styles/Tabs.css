@@ -1,0 +1,24 @@
+@import './ColourPalette.css';
+
+ul.tabs-nav {
+    display: flex;
+    gap: 32px;
+}
+
+ul.tabs-nav li {
+    list-style: none;
+    padding: 0px 4px;
+}
+
+
+
+ul.tabs-nav li.active:after {
+  content: "";
+  float: left;
+  background: var(--primary-color-default);
+  width: 100%;
+  height: 4px;
+  border-radius: 3px;
+  margin-top: 0px;
+}
+
