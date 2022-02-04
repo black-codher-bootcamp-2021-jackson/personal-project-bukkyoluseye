@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ChevronDown from '../../assets/SVGR/ChevronDown'
 import ChevronUp from '../../assets/SVGR/ChevronUp'
 import OpenLink from '../../assets/SVGR/OpenLink'
+import TextLink from '../Buttons/TextLink'
 
 const SubjectDetails = (props) => {
     const [isActive, setIsActive] = useState('true')
@@ -40,18 +41,13 @@ const SubjectDetails = (props) => {
                             props.student.subject.grade.target : "n/a"
                         </p>
                         <p className="dtl-title">Exam board</p>
-                        <a
+                        <TextLink
                             className="dtl-content text-link"
                             href="https://qualifications.pearson.com/en/home.html"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <p>
-                                props.student.subject.examBoard? props.student.subject.examBoard
-                                : "n/a"
-                            </p>
-                            {/*props.student.subject.examBoard?*/} <OpenLink /> {/*: null*/}
-                        </a>
+                            text={`props.student.subject.examBoard?
+                                props.student.subject.examBoard : "n/a"`}
+                            icon={<OpenLink />}
+                        />
                     </div>
                 ) : null}
             </div>

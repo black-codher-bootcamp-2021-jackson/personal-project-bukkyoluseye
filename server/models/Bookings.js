@@ -8,12 +8,12 @@ require('./TutorProfile')
 //Add subject details
 
 const bookingsSchema = new Schema({
-    tutorName: {
+    tutorId: {
         type: Schema.Types.ObjectId,
         ref: 'TutorProfile',
         required: false,
     },
-    studentName: {
+    studentId: {
         type: Schema.Types.ObjectId,
         ref: 'StudentProfile',
         required: false,

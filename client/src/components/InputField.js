@@ -1,29 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CloseCircle from '../assets/SVGR/CloseCircle'
-import BookingsIcon from '../assets/SVGR/BookingsIcon'
-import RequestsIcon from '../assets/SVGR/RequestsIcon'
-
-
+import EyeHide from '../assets/SVGR/EyeHide'
+import EyeShow from '../assets/SVGR/EyeShow'
+import Search from '../assets/SVGR/Search'
 
 const InputField = (props) => {
-    const ShowPassword = (prop) => {
-        // Passes the correct SVG to NavBarIcon Component depending on screen name
-        switch (props.type) {
-            case 'password':
-                return <BookingsIcon />
-            case 'text':
-                return <RequestsIcon />
+    const [passwordVisibility, setPasswordVisibility] = useState('hide')
+    const ShowPassword = () => {
+        // Passes the correct SVG to ShowPassword Component depending on if the user wants to see their password or not
+        switch (passwordVisibility) {
+            case 'show':
+                return <EyeShow className="eye-show" />
+            case 'hide':
+                return <EyeHide className="eye-hide" />
             default:
                 return <p>Error</p>
         }
     }
 
     const showPassword = () => {
-        console.log(props.password)
-        if (props.password === 'show') {
-            props.type = 'text'
+        if (passwordVisibility === 'show') {
+            setPasswordVisibility('hide')
         } else {
-            props.type = 'password'
+            setPasswordVisibility('show')
         }
     }
     // switch (variant)
@@ -31,39 +30,53 @@ const InputField = (props) => {
     // default
     return (
         <>
-            <label>{props.label}</label>
+            <label>{props.label ? props.label : null}</label>
             <div
                 className={
-                    props.variant !== 'error'
-                        ? 'input-div'
-                        : 'input-div error-div'
+                    props.variant && props.variant.includes('error')
+                        ? 'input-div error-div'
+                        : 'input-div'
                 }
             >
-                {/* {left-icon ? <InputIcon /> : null} */}
+                {props.variant && props.variant.includes('search') ? (
+                    <Search className="search" />
+                ) : null}
 
                 <input
-                    placeholder={props.placeholder ? props.placeholder : null}
+                    placeholder={
+                        props.variant && props.variant === 'search'
+                            ? 'Search'
+                            : props.placeholder
+                            ? props.placeholder
+                            : null
+                    }
                     required
-                    type={props.type}
+                    type={
+                        props.variant &&
+                        props.variant.includes('password') &&
+                        passwordVisibility === 'hide'
+                            ? 'password'
+                            : props.variant &&
+                              props.variant.includes('password') &&
+                              passwordVisibility === 'show'
+                            ? 'text'
+                            : props.type
+                    }
                     className="input-field"
                 ></input>
                 {/* {props.type === "password"? password icon: null} */}
-                {props.password === 'hide' && props.variant === 'password' ? (
-                    <button onClick={showPassword}>
-                        <ShowPassword />
-                    </button>
-                ) : null}
-                {props.password === 'show' && props.variant.includes('password') ? (
-                    <button onClick={showPassword}>
+                {props.variant && props.variant.includes('password') ? (
+                    <button className="eye" onClick={showPassword}>
                         <ShowPassword />
                     </button>
                 ) : null}
                 {/* {right-icon ? <InputIcon /> : null} */}
-                {/* {message ? <MessageOptions /> : null} */}
+                {/* props.variant === message ? <MessageOptions /> : null} */}
 
                 {/* {props.error ? <span>{props.error}</span> : null} Check data type based on schema */}
             </div>
-            {props.variant === 'error' ? (
+            {/*props.variant === "message"? <div></div> */}
+            {props.variant && props.variant.includes('error') ? (
                 <div className="error-msg">
                     <CloseCircle /> <p>{props.msg}</p>
                 </div>
