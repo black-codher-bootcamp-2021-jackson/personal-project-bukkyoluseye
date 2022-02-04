@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import BookingsIcon from '../../assets/BookingsIcon'
-import RequestsIcon from '../../assets/RequestsIcon'
-import SchoolsIcon from '../../assets/SchoolsIcon'
-import MessagesIcon from '../../assets/MessagesIcon'
-import MeatballsIcon from '../../assets/MeatballsIcon'
+import BookingsIcon from '../../assets/SVGR/BookingsIcon'
+import RequestsIcon from '../../assets/SVGR/RequestsIcon'
+import SchoolsIcon from '../../assets/SVGR/SchoolsIcon'
+import MessagesIcon from '../../assets/SVGR/MessagesIcon'
+import MeatballsIcon from '../../assets/SVGR/MeatballsIcon'
 
 const NavBarIcon = (props) => {
     // Passes the correct SVG to NavBarIcon Component depending on screen name

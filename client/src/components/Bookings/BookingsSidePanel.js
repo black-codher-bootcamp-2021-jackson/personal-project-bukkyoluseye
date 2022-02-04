@@ -1,24 +1,29 @@
-import React from 'react';
+import React from 'react'
+import SubjectDetails from './SubjectDetails'
+import StandardButton from './StandardButton'
+import ErrorButton from './ErrorButton'
+import StudentAvatar from './StudentAvatar'
 
 const BookingsSidePanel = (props) => {
     return (
-        <div id="side-panel">
+        <div className="bookings-side-panel">
             <span>Upcoming Lesson</span>
-            <h2>{}</h2>
-            <div>
-                <button>{`${props.student.name.first[0]}${props.student.name.last[0]}`}</button>
-                <h3>{`${props.student.name.first} ${props.student.name.last[0]}`}</h3>
+            <h2 id="bookings-date">props.booking.date</h2>
+            <div className="student-summary">
+                <StudentAvatar />
+                <h4>{`{props.student.name.first} {props.student.name.last[0]}`}</h4>
                 <p>
-                    {props.student.pronouns
-                        ? `${props.student.year} | ${props.student.pronouns}`
-                        : props.student.year}
+                    {`props.student.pronouns
+                        ? {props.student.year} | {props.student.pronouns}
+                        : props.student.year`}
                 </p>
             </div>
             <div>
                 <h4>
                     {/*`${props number of lessons had} of ${props number of lessons booked}`*/}
                 </h4>
-                <div className="subject-dtls">
+                <SubjectDetails />
+                {/* <div className="subject-dtls">
                     <p className="subject-dtls-labels">Subject</p>
                     <p>{props.booking.subject}</p>
                     <p className="subject-dtls-labels">Tier</p>
@@ -30,15 +35,15 @@ const BookingsSidePanel = (props) => {
                     <p className="subject-dtls-labels">Exam board</p>
                     <p>{props.student.subject.examBoard}</p>
                     
-                </div>
+                </div> */}
             </div>
             <p>{/*Data about plan for last lesson*/}</p>
-            <div id="bookings-btn">
-                <button>{`Message ${props.student.name.first}`}</button>
-                <button className="cancel error-btn">Cancel Lesson</button>
+            <div className="two-btns">
+                <StandardButton label={`Message props.student.name.first`} />
+                <ErrorButton label="Cancel Lesson" />
             </div>
         </div>
     )
 }
 
-export default BookingsSidePanel;
+export default BookingsSidePanel

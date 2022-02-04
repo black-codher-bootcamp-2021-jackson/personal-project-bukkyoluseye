@@ -1,10 +1,12 @@
 import React from 'react'
+import { BrowserRouter as Router} from 'react-router-dom'
 // import DarkMode from "./components/DarkMode";
 import DarkModeWrapper from './components/DarkModeWrapper'
 import BottomNavBar from './components/Navigation/BottomNavBar'
 import SideNavBar from './components/Navigation/SideNavBar'
-import './App.css'
-import {BrowserRouter as Router} from 'react-router-dom'
+import BookingsScreen from './components/Bookings/BookingsScreen'
+import './styles/App.css'
+import InputField from './components/InputField'
 
 // SERVICES THAT CALL OUR API ENDPOINTS
 // import { getAllProfiles } from "./services/profileService";
@@ -36,16 +38,17 @@ function App() {
     //   );
     // };
 
-  return (
-      <Router>
-          <DarkModeWrapper>
-              <div id="main-with-nav">
-                  <SideNavBar />
-                  <div id="main">
-                      {/* <DarkMode /> */}
-
-                      <h1>Hi there my name is Bukky</h1>
-                      {/* <ul>
+    return (
+        <Router>
+            <DarkModeWrapper>
+                <div id="main-with-nav">
+                    <SideNavBar />
+                    <div id="main">
+                        {/* <DarkMode /> */}
+              <BookingsScreen />
+              {/* :null} */} 
+                        
+                        {/* <ul>
         {profiles && profiles.length > 0 ? (
           profiles.map((profile) => renderProfile(profile))
         ) : (
@@ -53,12 +56,12 @@ function App() {
         )}
       </ul> */}
 
-                      <BottomNavBar />
-                  </div>
-              </div>
-          </DarkModeWrapper>
-      </Router>
-  )
+                        <BottomNavBar />
+                    </div>
+                </div>
+            </DarkModeWrapper>
+        </Router>
+    )
 }
 
 export default App

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import NavBarItem from './NavBarItem'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import NavBarItem from './NavBarItem'
+import BookingsScreen from '../Bookings/BookingsScreen'
+
 
 
 const BottomNavBar = () => {
@@ -25,14 +27,19 @@ const BottomNavBar = () => {
     ))
 
     return (
-        <div id="bottom-nav">
+        <div id="bottom-nav" className="nav-bar">
             <>
                 <Routes>
                     <Route
                         path="/bookings"
                         id="bookingslink"
-                        element={<>{navItems}</>}
-                    />
+                        element={
+                            <>
+                                {navItems}
+                            </>
+                        }
+                    >
+                    </Route>
                     <Route
                         path="/requests"
                         id="requestslink"
@@ -44,7 +51,6 @@ const BottomNavBar = () => {
                         element={
                             <>
                                 {navItems}
-                                {console.log(activeButton)}
                             </>
                         }
                     />

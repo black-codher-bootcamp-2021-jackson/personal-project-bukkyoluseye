@@ -5,6 +5,8 @@ const { Schema } = mongoose
 require('./StudentProfile')
 require('./TutorProfile')
 
+//Add subject details
+
 const bookingsSchema = new Schema({
     tutorName: {
         type: Schema.Types.ObjectId,

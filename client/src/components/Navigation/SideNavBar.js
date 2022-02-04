@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import NavBarItem from './NavBarItem';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import DarkModeButton from '../DarkModeButton';
 
 
 const SideNavBar = () => {
@@ -25,7 +26,7 @@ const SideNavBar = () => {
     ))
 
     return (
-        <div id="side-nav">
+        <div id="side-nav" className="nav-bar">
             <div className="logo"></div>
             <div id="side-nav-items">
                 <>
@@ -33,8 +34,13 @@ const SideNavBar = () => {
                         <Route
                             path="/bookings"
                             id="bookingslink"
-                            element={<>{navItems}</>}
-                        />
+                            element={
+                                <>
+                                    {navItems}
+                                </>
+                            }
+                       />
+
                         <Route
                             path="/requests"
                             id="requestslink"
@@ -46,7 +52,6 @@ const SideNavBar = () => {
                             element={
                                 <>
                                     {navItems}
-                                    {console.log(activeButton)}
                                 </>
                             }
                         />
@@ -58,7 +63,9 @@ const SideNavBar = () => {
                     </Routes>
                 </>
             </div>
-            <div className="dark-mode-btn"></div>
+            <div className="dark-mode-btn">
+                <DarkModeButton />
+            </div>
         </div>
     )
 }
