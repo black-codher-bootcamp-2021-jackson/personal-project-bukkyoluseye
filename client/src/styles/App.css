@@ -85,6 +85,18 @@ h1 {
     width: 100%;
 }
 
+.modal-background {
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(48, 51, 54, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .student-avatar {
     width: 55px;
     height: 55px;
@@ -104,7 +116,6 @@ h1 {
     gap: 8px;
 }
 
-
 .subject-dtls-title svg {
     width: 16px;
     height: 16px;
@@ -116,7 +127,6 @@ h1 {
 .subject-dtls {
     display: grid;
     grid-template-columns: 1fr 1fr;
-
 }
 .student-summary {
     display: grid;
@@ -125,13 +135,22 @@ h1 {
 }
 
 .student-summary .student-avatar {
-    grid-row: 1 / span 2
+    grid-row: 1 / span 2;
 }
 .bookings-side-panel .accordion-item {
     margin-bottom: 24px;
 }
 .bookings-side-panel {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    background-color: var(--grey-7);
+        width: 60vw;
+    height: 60%;
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0 32px 32px;
 }
 
 #bookings-date {
@@ -168,7 +187,6 @@ input {
 .input-div .search {
     stroke: var(--grey-4);
     margin-right: 12px;
-
 }
 button {
     box-sizing: border-box;
@@ -250,14 +268,14 @@ button {
     stroke-width: 45px;
 }
 
-.close-btn svg{
+.close-btn svg {
     fill: var(--grey-4);
-    width:16px;
+    width: 16px;
     height: auto;
 }
 
 .close-div {
-    display:flex;
+    display: flex;
     width: 100%;
     padding: 16px 0 0;
     justify-content: flex-end;
@@ -275,6 +293,7 @@ button {
     font-weight: 600;
     padding: 8px 16px;
 }
+
 input:-ms-input-placeholder {
     color: var(--grey-4);
     opacity: 1;
@@ -290,9 +309,8 @@ input::-ms-input-placeholder {
     opacity: 1;
 }
 
-
 .eye-hide {
-    fill: var(--grey-1)
+    fill: var(--grey-1);
 }
 
 /* Tablet (S) */
@@ -304,24 +322,25 @@ input::-ms-input-placeholder {
         height: 100vh;
     }
     #main {
-    margin-left: 88px;
-}
+        margin-left: 88px;
+    }
     #bookings-content {
         padding: 32px;
     }
     .bookings-side-panel {
         display: block;
         width: 304px;
+        height:100vh;
         background-color: var(--grey-7);
         top: 0px;
         bottom: 0px;
         right: 0px;
-        position: fixed;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        padding: 0 32px 32px;
-        border: 1px solid #F5F4F7;
+        border: 1px solid #f5f4f7;
         box-shadow: -1px 0px 20px rgba(176, 176, 176, 0.35);
+    }
+    .modal-background {
+        background-color: transparent;
+        z-index: 0;
     }
 
     #bookings-screen {

@@ -1,6 +1,7 @@
 .light {
   padding-left: 88px;
     height: 100%;
+
     --primary-color-light: rgba(221, 213, 255, 1);
     --primary-color-default: rgba(84, 46, 255, 1);
     /*Text Styles
@@ -69,6 +70,7 @@
 
 /*Dark Mode Design System */
 .dark {
+      overflow-x: hidden;
   padding-left: 88px;
     height: 100%;
     background-color: #121212;

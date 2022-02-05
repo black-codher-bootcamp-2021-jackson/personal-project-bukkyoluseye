@@ -1,30 +1,30 @@
-import React, { useState } from 'react'
-import CloseCircle from '../assets/SVGR/CloseCircle'
-import EyeHide from '../assets/SVGR/EyeHide'
-import EyeShow from '../assets/SVGR/EyeShow'
-import Search from '../assets/SVGR/Search'
+import React, { useState } from 'react';
+import CloseCircle from '../assets/SVGR/CloseCircle';
+import EyeHide from '../assets/SVGR/EyeHide';
+import EyeShow from '../assets/SVGR/EyeShow';
+import Search from '../assets/SVGR/Search';
 
 const InputField = (props) => {
-    const [passwordVisibility, setPasswordVisibility] = useState('hide')
+    const [passwordVisibility, setPasswordVisibility] = useState('hide');
     const ShowPassword = () => {
         // Passes the correct SVG to ShowPassword Component depending on if the user wants to see their password or not
         switch (passwordVisibility) {
             case 'show':
-                return <EyeShow className="eye-show" />
+                return <EyeShow className="eye-show" />;
             case 'hide':
-                return <EyeHide className="eye-hide" />
+                return <EyeHide className="eye-hide" />;
             default:
-                return <p>Error</p>
+                return <p>Error</p>;
         }
-    }
+    };
 
     const showPassword = () => {
         if (passwordVisibility === 'show') {
-            setPasswordVisibility('hide')
+            setPasswordVisibility('hide');
         } else {
-            setPasswordVisibility('show')
+            setPasswordVisibility('show');
         }
-    }
+    };
     // switch (variant)
     // case
     // default
@@ -43,6 +43,7 @@ const InputField = (props) => {
                 ) : null}
 
                 <input
+                    className="input-field"
                     placeholder={
                         props.variant && props.variant === 'search'
                             ? 'Search'
@@ -50,7 +51,7 @@ const InputField = (props) => {
                             ? props.placeholder
                             : null
                     }
-                    required
+                    required={props.required? props.required : null}
                     type={
                         props.variant &&
                         props.variant.includes('password') &&
@@ -62,7 +63,8 @@ const InputField = (props) => {
                             ? 'text'
                             : props.type
                     }
-                    className="input-field"
+                    onChange={props.onChange ? props.onChange : null}
+                    value={props.value? props.value : null}
                 ></input>
                 {/* {props.type === "password"? password icon: null} */}
                 {props.variant && props.variant.includes('password') ? (
@@ -82,7 +84,7 @@ const InputField = (props) => {
                 </div>
             ) : null}
         </>
-    )
-}
+    );
+};
 
-export default InputField
+export default InputField;

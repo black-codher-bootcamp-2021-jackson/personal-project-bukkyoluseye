@@ -1,6 +1,54 @@
 const mongoose = require('mongoose')
-let validator = require('validator')
+// let validator = require('validator')
 const { Schema } = mongoose
+
+const nameSchema = new Schema({
+    first: {
+        type: String,
+        required: [true, 'Please enter your first name'],
+    },
+
+    last: {
+        type: String,
+        required: [true, 'Please enter your last name'],
+    },
+});
+
+const gradeSchema = new Schema({
+    current: {
+        type: String,
+        required: false,
+    },
+    target: {
+        type: String,
+        required: true,
+    },
+});
+
+const studentSubjectDetailsSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    level: {
+        type: String,
+        required: true,
+    },
+    examBoard: {
+        type: String,
+        required: false,
+    },
+    tier: {
+        type: String,
+        required: false,
+    },
+    grade: {
+        type: gradeSchema,
+        required: true,
+    },
+});
+
+
 
 const studentProfileSchema = new Schema({
     name: {
@@ -12,14 +60,14 @@ const studentProfileSchema = new Schema({
         required: true,
         index: { unique: true },
         lowercase: true,
-        validate: (value) => {
-            return validator.isEmail(value)
-        },
-    },
+    //     validate: (value) => {
+    //         return validator.isEmail(value)
+    //     },
+    // },
     // password: {
     //     type: String,
     //     required: true
-    // },
+    },
     year: {
         type: String,
         required: true,
@@ -38,51 +86,7 @@ const studentProfileSchema = new Schema({
     }
 })
 
-const nameSchema = new Schema({
-    first: {
-        type: String,
-        required: [true, 'Please enter your first name']
-    },
 
-    last: {
-        type: String,
-        required: [true, 'Please enter your last name']
-    }
-})
-
-const studentSubjectDetailsSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    level: {
-        type: String,
-        required: true
-    },
-    examBoard: {
-        type: String,
-        required: false
-    },
-    tier: {
-        type: String,
-        required: false
-    },
-    grade: {
-        type: gradeSchema,
-        required: true
-    }
-})
-
-const gradeSchema = new Schema({
-    current: {
-        type: String,
-        required: false
-    },
-    target: {
-        type: String,
-        required: true
-    }
-})
 
 mongoose.model('StudentProfiles', studentProfileSchema)
 

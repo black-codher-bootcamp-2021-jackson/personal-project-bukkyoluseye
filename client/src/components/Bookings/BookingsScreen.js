@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Tabs from '../Tabs/Tabs'
-import StudentAvatar from './StudentAvatar'
-import SubjectDetails from './SubjectDetails'
 import BookingsSidePanel from './BookingsSidePanel'
-import InputField from '../InputField'
-import SignUp from '../Signup/SignUp'
-import LogIn from '../Signup/Login'
+
+
 
 const BookingsScreen = () => {
     const [date, setDate] = useState(new Date())
@@ -27,6 +24,7 @@ const BookingsScreen = () => {
     return (
         <div id="bookings-screen">
             <div id="bookings-content">
+                <h1>Bookings</h1>
                 <Tabs labels={['Upcoming', 'Completed', 'Cancelled']} />
                 <h2>{currentMonth}</h2>
                 <h1>Hi there my name is Bukky</h1>

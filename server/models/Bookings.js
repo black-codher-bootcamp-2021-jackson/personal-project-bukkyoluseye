@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-let validator = require('validator')
+const mongoose = require('mongoose');
+// let validator = require('validator')
 const { Schema } = mongoose
 
 require('./StudentProfile')
@@ -31,7 +31,16 @@ const bookingsSchema = new Schema({
     },
     lessonsHad: {
         type: Number
+    },
+    cancelled: {
+        type: Boolean,
+        required: false
+    },
+    completed: {
+        type: Boolean,
+        required: false
     }
+
 })
 
 mongoose.model('Bookings', bookingsSchema)

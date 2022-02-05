@@ -1,32 +1,35 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import React, {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import DarkMode from "./components/DarkMode";
-import DarkModeWrapper from './components/DarkModeWrapper'
-import BottomNavBar from './components/Navigation/BottomNavBar'
-import SideNavBar from './components/Navigation/SideNavBar'
-import BookingsScreen from './components/Bookings/BookingsScreen'
-import './styles/App.css'
-import InputField from './components/InputField'
-import LogIn from './components/Signup/Login'
-import SignUp from './components/Signup/SignUp'
+import DarkModeWrapper from './components/DarkModeWrapper';
+import BottomNavBar from './components/Navigation/BottomNavBar';
+import SideNavBar from './components/Navigation/SideNavBar';
+import BookingsScreen from './components/Bookings/BookingsScreen';
+import './styles/App.css';
+import LogIn from './components/Signup/Login';
+import SignUp from './components/Signup/SignUp';
+import RequestsScreen from './components/Requests/RequestsScreen';
+import MessagesScreen from './components/Messages/MessagesScreen';
+import MoreScreen from './components/More/MoreScreen';
 
 // SERVICES THAT CALL OUR API ENDPOINTS
-// import { getAllProfiles } from "./services/profileService";
+import { getAllTutorProfiles } from "./services/tutorProfilesService"
 
 function App() {
+    const [tutorprofiles, setTutorProfiles] = useState(null);
     //Get rid of stuff below
-    // const [profiles, setProfiles] = useState(null);
 
-    // useEffect(() => {
-    //   async function getProfiles() {
-    //     if (!profiles) {
-    //       const response = await getAllProfiles();
-    //       setProfiles(response);
-    //     }
-    //   }
 
-    //   getProfiles();
-    // }, [profiles]);
+    useEffect(() => {
+      async function getTutorProfiles() {
+        if (!tutorprofiles) {
+          const response = await getAllTutorProfiles();
+          setTutorProfiles(response);
+        }
+      }
+
+      getTutorProfiles();
+    }, [tutorprofiles]);
 
     // const renderProfile = (user) => {
     //   return (
@@ -40,48 +43,56 @@ function App() {
     //   );
     // };
 
-  return (
-      <DarkModeWrapper>
-          <Router>
-              <Routes>
-                  <Route path="/" id="sign-up" element={<SignUp />} />
-                  <Route path="/login" id="log-in" element={<LogIn />} />
-                  <Route
-                      path="/bookings"
-                      id="bookingslink"
-                      element={
-                          <>
-                              <BookingsScreen />
-                          </>
-                      }
-                  />
+    return (
+        <DarkModeWrapper>
+            <Router>
+                <Routes>
+                    <Route path="/" id="sign-up" element={<SignUp />} />
+                    <Route path="/login" id="log-in" element={<LogIn />} />
+                    <Route
+                        path="/bookings"
+                        id="bookingslink"
+                        element={
+                            <>
+                                <BookingsScreen />
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/requests"
+                        id="requestslink"
+                        element={
+                            <>
+                                <RequestsScreen />
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/messages"
+                        id="messageslink"
+                        element={
+                            <>
+                                <MessagesScreen />
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/more"
+                        id="morelink"
+                        element={
+                            <>
+                                <MoreScreen />
+                            </>
+                        }
+                    />
+                </Routes>
 
-                  <Route path="/requests" id="requestslink" element={<></>} />
-                  <Route path="/messages" id="messageslink" element={<></>} />
-                  <Route path="/more" id="morelink" element={<></>} />
-              </Routes>
+                <SideNavBar />
 
-              <div id="main-with-nav">
-                  <SideNavBar />
-                  <div id="main">
-                      {/* <DarkMode /> */}
-
-                      {/* :null} */}
-
-                      {/* <ul>
-        {profiles && profiles.length > 0 ? (
-          profiles.map((profile) => renderProfile(profile))
-        ) : (
-          <p>No profiles found</p>
-        )}
-      </ul> */}
-
-                      <BottomNavBar />
-                  </div>
-              </div>
-          </Router>
-      </DarkModeWrapper>
-  )
+                <BottomNavBar />
+            </Router>
+        </DarkModeWrapper>
+    );
 }
 
-export default App
+export default App;

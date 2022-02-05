@@ -1,17 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import NavBarItem from './NavBarItem';
-import {useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import DarkModeButton from '../DarkModeButton';
-
-
 
 const SideNavBar = (props) => {
     const location = useLocation();
     const [activeButton, setActiveButton] = useState(location.pathname);
 
-    const [isClicked, setIsClicked] = useState(true)
+    const [isClicked, setIsClicked] = useState(true);
 
-    const items = ['bookings', 'requests', 'messages', 'more']
+    const items = ['bookings', 'requests', 'messages', 'more'];
 
     const navItems = items.map((item) => (
         <NavBarItem
@@ -24,7 +22,7 @@ const SideNavBar = (props) => {
             setActiveButton={setActiveButton}
             setIsClicked={setIsClicked}
         />
-    ))
+    ));
 
     return (
         <div id="side-nav" className="nav-bar">
@@ -33,10 +31,10 @@ const SideNavBar = (props) => {
                 <>{navItems}</>
             </div>
             <div className="dark-mode-btn">
-                <DarkModeButton onClick={props.onClick}/>
+                <DarkModeButton onClick={props.onClick} />
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default SideNavBar;

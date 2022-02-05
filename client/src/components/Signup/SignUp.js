@@ -1,14 +1,14 @@
-import React from 'react'
-import InputField from '../InputField'
-import TextLink from '../Buttons/TextLink'
+import React from 'react';
+import InputField from '../InputField';
+import TextLink from '../Buttons/TextLink';
 
 const SignUp = () => {
     return (
         <>
-            <div className='have-you'>
+            <div className="have-you">
                 <h1>Sign Up</h1>
                 <p>Already have an account? </p>
-                <TextLink text="Sign Up" href="/" />
+                <TextLink text="Log in" href="/login" target="_self" />
             </div>
             <form method="post">
                 <InputField label="First Name*" type="text" />
@@ -17,7 +17,7 @@ const SignUp = () => {
                 <InputField label="Password*" variant="password" />
             </form>
         </>
-    )
-}
+    );
+};
 
-export default SignUp
+export default SignUp;
