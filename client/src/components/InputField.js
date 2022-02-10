@@ -51,7 +51,7 @@ const InputField = (props) => {
                             ? props.placeholder
                             : null
                     }
-                    required={props.required? props.required : null}
+                    required={props.required ? props.required : null}
                     type={
                         props.variant &&
                         props.variant.includes('password') &&
@@ -63,8 +63,8 @@ const InputField = (props) => {
                             ? 'text'
                             : props.type
                     }
-                    onChange={props.onChange ? props.onChange : null}
-                    value={props.value? props.value : null}
+                    onChange={props.onChange ? props.onChange : `defaultValue`}
+                    value={props.value ? props.value : ''}
                 ></input>
                 {/* {props.type === "password"? password icon: null} */}
                 {props.variant && props.variant.includes('password') ? (

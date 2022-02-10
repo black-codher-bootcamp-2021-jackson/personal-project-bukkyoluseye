@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import DarkMode from "./components/DarkMode";
 import DarkModeWrapper from './components/DarkModeWrapper';
@@ -13,24 +13,50 @@ import MessagesScreen from './components/Messages/MessagesScreen';
 import MoreScreen from './components/More/MoreScreen';
 
 // SERVICES THAT CALL OUR API ENDPOINTS
-import { getAllTutorProfiles } from "./services/tutorProfilesService"
+import {
+    getAllTutorProfiles,
+    getAllStudentProfiles,
+    getAllBookings,
+} from './services/tutorAppService';
 
 function App() {
-    const [tutorprofiles, setTutorProfiles] = useState(null);
-    //Get rid of stuff below
-
+    const [tutorprofiles, setTutorProfiles] = useState([]);
+    const [studentprofiles, setStudentProfiles] = useState([]);
+    const [bookings, setBookings] = useState([]);
 
     useEffect(() => {
-      async function getTutorProfiles() {
-        if (!tutorprofiles) {
-          const response = await getAllTutorProfiles();
-          setTutorProfiles(response);
+        async function getTutorProfiles() {
+            if (!tutorprofiles) {
+                const response = await getAllTutorProfiles();
+                setTutorProfiles(response);
+            }
         }
-      }
 
-      getTutorProfiles();
+        getTutorProfiles();
     }, [tutorprofiles]);
+    
+    useEffect(() => {
+        async function getStudentProfiles() {
+            if (!studentprofiles) {
+                const response = await getAllStudentProfiles();
+                setStudentProfiles(response);
+            }
+        }
 
+        getStudentProfiles();
+    }, [studentprofiles]);
+
+    useEffect(() => {
+        async function getBookings() {
+            // console.log("get bookings",bookings)
+            if (!bookings || bookings.length === 0) {
+                const response = await getAllBookings();
+                setBookings(response);
+            }
+        }
+
+        getBookings();
+    }, [bookings]);
     // const renderProfile = (user) => {
     //   return (
     //     <li key={user._id}>
@@ -54,7 +80,7 @@ function App() {
                         id="bookingslink"
                         element={
                             <>
-                                <BookingsScreen />
+                                <BookingsScreen bookings={bookings}/>
                             </>
                         }
                     />

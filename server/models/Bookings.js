@@ -1,21 +1,20 @@
 const mongoose = require('mongoose');
-// let validator = require('validator')
-const { Schema } = mongoose
+const { Schema } = mongoose;
 
-require('./StudentProfile')
-require('./TutorProfile')
+require('./StudentProfile');
+require('./TutorProfile');
 
 //Add subject details
 
 const bookingsSchema = new Schema({
     tutorId: {
         type: Schema.Types.ObjectId,
-        ref: 'TutorProfile',
+        ref: 'tutorprofile',
         required: false,
     },
     studentId: {
         type: Schema.Types.ObjectId,
-        ref: 'StudentProfile',
+        ref: 'studentprofile',
         required: false,
     },
     status: {
@@ -24,23 +23,16 @@ const bookingsSchema = new Schema({
     },
     booking: {
         type: Date,
-        required: true
-    },
-    lessonsBooked: {
-        type: Number
-    },
-    lessonsHad: {
-        type: Number
+        required: true,
     },
     cancelled: {
         type: Boolean,
-        required: false
+        required: false,
     },
     completed: {
         type: Boolean,
-        required: false
-    }
+        required: false,
+    },
+});
 
-})
-
-mongoose.model('Bookings', bookingsSchema)
+module.exports = mongoose.model('Bookings', bookingsSchema, "Bookings");

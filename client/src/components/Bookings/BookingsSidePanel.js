@@ -5,8 +5,10 @@ import ErrorButton from '../Buttons/ErrorButton'
 import StudentAvatar from './StudentAvatar'
 import CloseButton from '../Buttons/CloseButton'
 
-const BookingsSidePanel = () => {
-    const [show, setShow] = useState(true)
+const BookingsSidePanel = (props) => {
+    const [show, setShow] = useState(false)
+
+    setShow(props.setShow);
 
     const onClose = () => {
         setShow(false);        
@@ -19,14 +21,16 @@ const BookingsSidePanel = () => {
                     <div className="bookings-side-panel">
                         <CloseButton onClick={onClose} />
                         <span>Upcoming Lesson</span>
-                        <h2 id="bookings-date">props.booking.date</h2>
+                        <h2 id="bookings-date">
+                            props.bookingId.studentId[0].date - this is currently just a string
+                        </h2>
                         <div className="student-summary">
                             <StudentAvatar />
-                            <h4>{`{props.student.name.first} {props.student.name.last[0]}`}</h4>
+                            <h4>{`${props.bookings.studentId.name.first} ${props.bookings.studentId.name.last[0]}.`}</h4>
                             <p>
-                                {`props.student.pronouns
-                        ? {props.student.year} | {props.student.pronouns}
-                        : props.student.year`}
+                                {props.bookings.studentId.pronouns
+                        ? (props.bookings.studentId.year + " | " + props.bookings.studentId.pronouns)
+                        : props.bookings.studentId.year}
                             </p>
                         </div>
                         <div>

@@ -26,7 +26,7 @@ const LogIn = () => {
         // send the username and password to the server
         const response = await axios.post('/api/login', user);
         // Authenticate the user
-        // authenticateUser(email, password); if user is authenticated then do the follwoing
+        // authenticateUser(email, password); if user is authenticated then do the following
         // set the state of the user
         setUser(response.data);
         // store the user in localStorage
@@ -39,6 +39,7 @@ const LogIn = () => {
         navigate(`/bookings`);
     };
 
+    // if email===email && password === password {let them sign in} else 
     return (
         <>
             <div className="have-you">

@@ -18,14 +18,14 @@ const DarkModeWrapper = ({ children }) => {
     // if the value saved in storage doesn't match the current theme
     const switchTheme = (e) => {
         e.preventDefault();
-        console.log('switch theme', theme);
+        // console.log('switch theme', theme);
         if (theme === 'dark') {
             setTheme('light');
         } else {
             setTheme('dark');
         }
     };
-    console.log(theme);
+    // console.log(theme);
     return (
         <div className={theme}>
             <DarkModeButton
@@ -35,7 +35,7 @@ const DarkModeWrapper = ({ children }) => {
             />
             {/* <SideNavBar onClick={switchTheme} />
             <BottomNavBar />  */}
-            {console.log('darkmodewrapper', theme)}
+            {/* {console.log('darkmodewrapper', theme)} */}
             {children}
         </div>
     );

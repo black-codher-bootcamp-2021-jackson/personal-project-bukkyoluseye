@@ -40,9 +40,6 @@ const tutorProfileSchema = new Schema({
         required: true,
         index: { unique: true },
         lowercase: true,
-        validate: (value) => {
-            return validator.isEmail(value);
-        },
     },
     // password: {
     //     type: String,
@@ -62,5 +59,4 @@ const tutorProfileSchema = new Schema({
     },
 });
 
-
-mongoose.model('TutorProfile', tutorProfileSchema);
+module.exports = mongoose.model('tutorprofile', tutorProfileSchema, "TutorProfiles");

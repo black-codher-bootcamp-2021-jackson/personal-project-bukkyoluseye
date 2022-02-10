@@ -88,6 +88,6 @@ const studentProfileSchema = new Schema({
 
 
 
-mongoose.model('StudentProfiles', studentProfileSchema)
+mongoose.model('studentprofile', studentProfileSchema, 'StudentProfiles');
 
 

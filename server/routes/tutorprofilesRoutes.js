@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const TutorProfile = mongoose.model("TutorProfile");
+const TutorProfile = mongoose.model("tutorprofile");
 // const session = require("express-session");
 
-const tutorprofileRoutes = (app) => {
+const tutorProfileRoutes = (app) => {
   app.get(`/api/tutorprofile`, async (req, res) => {
     const tutorprofiles = await TutorProfile.find();
 
@@ -41,4 +41,4 @@ const tutorprofileRoutes = (app) => {
   });
 };
 
-module.exports = tutorprofileRoutes;
+module.exports = tutorProfileRoutes;
