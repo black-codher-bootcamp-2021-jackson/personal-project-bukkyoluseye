@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import SubjectDetails from './SubjectDetails'
-import StandardButton from '../Buttons/StandardButton'
-import ErrorButton from '../Buttons/ErrorButton'
-import StudentAvatar from './StudentAvatar'
-import CloseButton from '../Buttons/CloseButton'
+import React, { useState } from 'react';
+import SubjectDetails from './SubjectDetails';
+import StandardButton from '../Buttons/StandardButton';
+import ErrorButton from '../Buttons/ErrorButton';
+import StudentAvatar from './StudentAvatar';
+import CloseButton from '../Buttons/CloseButton';
 
 const BookingsSidePanel = (props) => {
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
 
     setShow(props.setShow);
 
     const onClose = () => {
-        setShow(false);        
-    }
+        setShow(false);
+    };
 
     return (
         <>
@@ -22,15 +22,18 @@ const BookingsSidePanel = (props) => {
                         <CloseButton onClick={onClose} />
                         <span>Upcoming Lesson</span>
                         <h2 id="bookings-date">
-                            props.bookingId.studentId[0].date - this is currently just a string
+                            props.bookingId.studentId[0].date - this is
+                            currently just a string
                         </h2>
                         <div className="student-summary">
                             <StudentAvatar />
                             <h4>{`${props.bookings.studentId.name.first} ${props.bookings.studentId.name.last[0]}.`}</h4>
                             <p>
                                 {props.bookings.studentId.pronouns
-                        ? (props.bookings.studentId.year + " | " + props.bookings.studentId.pronouns)
-                        : props.bookings.studentId.year}
+                                    ? props.bookings.studentId.year +
+                                      ' | ' +
+                                      props.bookings.studentId.pronouns
+                                    : props.bookings.studentId.year}
                             </p>
                         </div>
                         <div>
@@ -64,6 +67,6 @@ const BookingsSidePanel = (props) => {
             ) : null}
         </>
     );
-}
+};
 
-export default BookingsSidePanel
+export default BookingsSidePanel;

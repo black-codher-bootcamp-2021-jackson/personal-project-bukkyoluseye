@@ -39,8 +39,8 @@ const BookingsScreen = (props) => {
     async function getSelectedBooking(bookingId) {
         const response = await axios.get(`/api/bookings/${bookingId}`);
         console.log(response);
-        console.log(response.data)
-        console.log(typeof(response.data.bookings))
+        console.log(response.data);
+        console.log(typeof response.data.bookings);
         console.log('button1', bookingId);
         console.log(bookingId);
 
@@ -50,8 +50,7 @@ const BookingsScreen = (props) => {
             console.log('After Set Selected Booking', selectedBooking);
             // console.log('not an error', response.data);
         } else {
-
-                        console.log('error', response.error);
+            console.log('error', response.error);
         }
     }
 
@@ -78,7 +77,12 @@ const BookingsScreen = (props) => {
                         </button>
                     );
                 })}
-                {selectedBooking.length !== 0 ? <BookingsSidePanel bookings={selectedBooking} setShow="true" /> : null}
+                {selectedBooking.length !== 0 ? (
+                    <BookingsSidePanel
+                        bookings={selectedBooking}
+                        setShow="true"
+                    />
+                ) : null}
 
                 {/* {/* {props.screen==="bookings"? */}
             </div>
