@@ -8,7 +8,9 @@ import CloseButton from '../Buttons/CloseButton';
 const BookingsSidePanel = (props) => {
     const [show, setShow] = useState(false);
 
-    setShow(props.setShow);
+    if (props.setShow !== show) {
+        setShow(props.setShow);
+    }
 
     const onClose = () => {
         setShow(false);
