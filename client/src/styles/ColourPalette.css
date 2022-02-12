@@ -9,7 +9,8 @@
     --h4-font-size: 1.375rem; /*Body Titles*/
     --h5-font-size: 1.125rem; /*Body Titles*/
     --pl-font-size: 1rem; /*Large Body Copy*/
-    --p2-font-size: 0.75rem; /*Body Copy, CTAs*/
+    --p2-font-size: 0.875rem; /*Tags*/
+    --p3-font-size: 0.75rem; /*Body Copy, CTAs*/
 
     /* Light Mode Design System */
     --primary-color-default: rgba(84, 46, 255, 1);
@@ -45,7 +46,7 @@
     --rag-success-default: rgba(54, 180, 135, 1);
     --rag-success-light: rgba(221, 248, 238, 1);
     --rag-success-dark: rgba(30, 154, 109, 1);
-    --rag-success-darkest: rgba(27, 126, 102, 1);
+    --rag-success-darkest: rgba(26, 122, 99, 1);
 
     --rag-informational-default: rgba(84, 46, 255, 1);
     --rag-informational-light: rgba(227, 221, 255, 1);

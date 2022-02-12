@@ -85,7 +85,7 @@
     }
 
     #side-nav span {
-        font-size: 0.75rem;
+        font-size: var(--p3-font-size);
     }
 
     #side-nav-items svg {

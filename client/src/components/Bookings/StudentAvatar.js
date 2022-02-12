@@ -1,14 +1,8 @@
 import React from 'react';
 
-const StudentAvatar = () => {
-    let student = {
-        name: {
-            first: "Timi",
-            last: "Olu"
-        }
-    }
+const StudentAvatar = (props) => {
     return (
-        <button className='student-avatar'>{`${student.name.first[0]}${student.name.last[0]}`}</button>
+        <button className='student-avatar'>{`${props.student.name.first[0]}${props.student.name.last[0]}`}</button>
     )
 }
 

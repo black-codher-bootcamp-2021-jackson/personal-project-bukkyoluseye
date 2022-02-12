@@ -1,23 +1,15 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import InputField from '../InputField';
 import Tabs from '../Tabs/Tabs';
 import BookingsSidePanel from './BookingsSidePanel';
+import BookingsTabs from './BookingsTabs';
+import BookingRow from './BookingRow';
 // import { getAllBookings } from '../../services/tutorAppService';
 
 const BookingsScreen = (props) => {
+    const [show, setShow] = useState(false);
     const [selectedBooking, setSelectedBooking] = useState([]);
-    console.log('props.bookings', props.bookings); // Not show why first render is empty
-    // const [bookings, setBookings] = useState(null);
-    // useEffect(() => {
-    //     async function getBookings() {
-    //         if (!bookings) {
-    //             const response = await getAllBookings();
-    //             setBookings(response);
-    //         }
-    //     }
-
-    //     getBookings();
-    // }, [bookings]);
 
     const [date, setDate] = useState(new Date());
     const DateTime = () => {
@@ -38,55 +30,51 @@ const BookingsScreen = (props) => {
 
     async function getSelectedBooking(bookingId) {
         const response = await axios.get(`/api/bookings/${bookingId}`);
-        console.log(response);
-        console.log(response.data);
-        console.log(typeof response.data.bookings);
-        console.log('button1', bookingId);
-        console.log(bookingId);
 
-        if (!response.error && selectedBooking.length === 0) {
-            console.log('before Set Selected Booking', response.data.bookings);
-            setSelectedBooking(response.data.bookings);
-            console.log('After Set Selected Booking', selectedBooking);
-            // console.log('not an error', response.data);
+        if (!response.error) {
+            setSelectedBooking(response.data.booking);
+            setShow(true);
         } else {
             console.log('error', response.error);
         }
     }
 
-    return (
-        <div id="bookings-screen">
-            <div id="bookings-content">
-                <h1>Bookings</h1>
-                <Tabs labels={['Upcoming', 'Completed', 'Cancelled']} />
-                <h2>{currentMonth}</h2>
-                <h1>Hi there my name is Bukky</h1>
-                {props.bookings.map((booking, index) => {
-                    console.log(booking);
-                    return (
-                        <button
-                            key={index}
-                            className="error-btn"
-                            onClick={() => getSelectedBooking(booking._id)}
-                        >
-                            <div>{booking.status}</div>
-                            <p>booking id = {booking._id}</p>
-                            <p>tutor id = {booking.tutorId}</p>
-                            <p>student id = {booking.studentId}</p>
-                            {/* <p>student id = {booking.studentId.name}</p> */}
-                        </button>
-                    );
-                })}
-                {selectedBooking.length !== 0 ? (
-                    <BookingsSidePanel
-                        bookings={selectedBooking}
-                        setShow="true"
-                    />
-                ) : null}
+    const onClose = () => {
+        setShow(false);
+    };
 
-                {/* {/* {props.screen==="bookings"? */}
+    return (
+        <>
+            <div className="bookings-title">
+                <h1>Bookings</h1>
+                <InputField variant="search" />
             </div>
-        </div>
+            <div id="bookings-screen">
+                <div id="bookings-content">
+                    {/* <BookingsTabs bookings={props.bookings} /> */}
+                    <Tabs labels={['Upcoming', 'Completed', 'Cancelled']} />
+                    <h2>{currentMonth}</h2>
+                    {props.bookings.map((booking, index) => {
+                        return (
+                            <BookingRow
+                                booking={booking}
+                                key={index}
+                                onClick={() => getSelectedBooking(booking._id)}
+                            />
+                        );
+                    })}
+                    {selectedBooking.length !== 0 ? (
+                        <BookingsSidePanel
+                            bookings={selectedBooking}
+                            show={show}
+                            onClose={onClose}
+                        />
+                    ) : null}
+
+                    {/* {/* {props.screen==="bookings"? */}
+                </div>
+            </div>
+        </>
     );
 };
 

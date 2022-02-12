@@ -62,7 +62,7 @@ const LogIn = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required="required"
                 />
-                <StandardButton type="submit" label="Sign Up" />
+                <StandardButton type="submit" label="Log In" />
             </form>
         </>
     );

@@ -8,6 +8,14 @@ const studentProfileRoutes = (app) => {
 
     return res.status(200).send(studentprofiles);
   });
+    
+    
+    app.get(`/api/studentprofile/:id`, async (req, res) => {
+              const { id } = req.params;
+        const studentprofile = await StudentProfile.findById(id);
+
+        return res.status(200).send(studentprofile);
+    });
 
   app.post(`/api/studentprofile`, async (req, res) => {
       const studentprofiles = await StudentProfile.create(req.body);

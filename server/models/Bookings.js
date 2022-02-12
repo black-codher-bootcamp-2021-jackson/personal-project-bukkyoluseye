@@ -4,9 +4,21 @@ const { Schema } = mongoose;
 require('./StudentProfile');
 require('./TutorProfile');
 
-//Add subject details
+const gradeSchema = new Schema({
+    current: {
+        type: String,
+        required: false,
+    },
+    target: {
+        type: String,
+        required: true,
+    },
+});
 
 const bookingsSchema = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId,
+    },
     tutorId: {
         type: Schema.Types.ObjectId,
         ref: 'tutorprofile',
@@ -17,22 +29,49 @@ const bookingsSchema = new Schema({
         ref: 'studentprofile',
         required: false,
     },
-    status: {
+    date: {
+        type: Date,
+        required: true,
+    },
+    subject: {
         type: String,
         required: true,
     },
-    booking: {
-        type: Date,
+    level: {
+        type: String,
         required: true,
+    },
+    examBoard: {
+        type: String,
+        required: true,
+    },
+    tier: { type: String },
+    grade: {
+        type: gradeSchema,
+    },
+    type: {
+        type: String,
+        required: true
+    },
+    frequency: {
+        type: String,
+        required: false
+    },
+    status: {
+        type: String,
+        required: false,
+        default: 'Awaiting Confirmation',
     },
     cancelled: {
         type: Boolean,
         required: false,
+        default: false,
     },
     completed: {
         type: Boolean,
         required: false,
+        default: false,
     },
 });
 
-module.exports = mongoose.model('Bookings', bookingsSchema, "Bookings");
+module.exports = mongoose.model('booking', bookingsSchema, 'Bookings');

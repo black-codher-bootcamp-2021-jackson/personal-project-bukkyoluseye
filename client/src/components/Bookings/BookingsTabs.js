@@ -1,28 +1,38 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+// import Tab from '../Tabs/Tab';
 
-const BookingsTab = (props) => {
-    const booking = {
-        name: 'Trudy',
-        age: 90,
-        cancelled: false,
-        completed: true,
-    };
-    const [filter, setFilter] = useState(Object.keys(tabMap[0]));
-    const tabMap = {
-        Upcoming: (booking) => !booking.cancelled && booking.completed,
-        Completed: (booking) => booking.completed,
-        Cancelled: (booking) => booking.cancelled,
-    };
+// const BookingsTabs = (props) => {
 
-    const tabNames = Object.keys(tabMap);
-    const bookingsList = bookings
-        .filter(tabMap[filter])
-        .map('booking to booking element with props & key');
+//     const [filter, setFilter] = useState(Object.keys(tabMap[0]));
+//     const tabMap = {
+//         Upcoming: (props.bookings) => !props.bookings.cancelled && props.bookings.completed,
+//         Completed: (props.bookings) => props.bookings.completed,
+//         Cancelled: (props.bookings) => props.bookings.cancelled,
+//     };
 
-    const tabs = tabMap.map(
-        'name to Tab button component with props including setFilter={setFilter} inside the component onClick = {() => props.setFilter(props.name)}'
-    );
-    return <></>;
-};
+//     const tabNames = Object.keys(tabMap);
+//     const bookingsList = props.bookings
+//         .filter(tabMap[filter])
+//         .map('booking to booking element with props & key');
 
-export default BookingsTab;
+// const tabs = tabMap.map(label => (
+//     <Tab label={label} key={label} isPressed={label === filter} setFilter={setFilter}/>
+// ));
+// return <>
+//     <div className="tabs">
+//         <Tab label={label} key={label}/>
+//             <ul className="tabs-nav">
+
+//                 {tabMap((label) => (
+//                     <li className={activeTab === label ? "active tab" : 'tab'} onClick={handleTab} key={label}>
+//                         {label}
+//                     </li>
+//                 ))}
+//             </ul>
+//             <div className="tab-content">
+//                 {activeTab !=null? "display content" : null}
+//             </div>
+//         </div></>;
+// };
+
+// export default BookingsTab;
