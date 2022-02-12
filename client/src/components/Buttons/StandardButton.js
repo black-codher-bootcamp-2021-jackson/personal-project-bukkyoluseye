@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
 
 const StandardButton = (props) => {
     return (
-        <button className="std-btn" onClick={() => props.onClick}>
+        <button
+            className="std-btn"
+            type={props.type ? props.type : null}
+            onClick={() => props.onClick}
+        >
             {props.label}
         </button>
-    )
-}
+    );
+};
 
-export default StandardButton
+export default StandardButton;

@@ -1,75 +1,76 @@
 .light {
-  padding-left: 88px;
+    padding-left: 88px;
     height: 100%;
-    --primary-color-light: rgba(221, 213, 255, 1);
+
+    /*Text Styles  */
+    --h1-font-size: 2.25rem; /*Large Titles*/
+    --h2-font-size: 1.75rem; /*Titles*/
+    --h3-font-size: 1.5625rem; /*Body Titles*/
+    --h4-font-size: 1.375rem; /*Body Titles*/
+    --h5-font-size: 1.125rem; /*Body Titles*/
+    --pl-font-size: 1rem; /*Large Body Copy*/
+    --p2-font-size: 0.875rem; /*Tags*/
+    --p3-font-size: 0.75rem; /*Body Copy, CTAs*/
+
+    /* Light Mode Design System */
     --primary-color-default: rgba(84, 46, 255, 1);
-    /*Text Styles
-  --mobile-h1-font-size: ; Large Titles
-  --mobile-h2-font-size: ; Titles
-  --mobile-h3-font-size: ; Body Titles
-  --mobile-bl-font-size: ; Large Body Copy
-  --mobile-b2-font-size: ; Body Copy, CTAs
-  */
+    --primary-color-light: rgba(227, 221, 255, 1);
+    --primary-color-dark: rgba(59, 20, 200, 1);
+    --primary-color-darkest: rgba(53, 27, 146, 1);
 
-    /*Light Mode Design System
-  --primary-color-default: ;
-  --primary-color-light: ;
-  --primary-color-dark: ;
-  --primary-color-darkest: ;
+    --accent-1-color-default: rgba(0, 204, 187, 1);
+    --accent-1-color-light: rgba(223, 246, 244, 1);
+    --accent-1-color-dark: rgba(0, 173, 160, 1);
+    --accent-1-color-darkest: rgba(0, 143, 131, 1);
 
-  --accent-1-color-default: ;
-  --accent-1-color-light: ;
-  --accent-1-color-dark: ;
-  --accent-1-color-darkest: ;
-*/
-  --accent-2-color-default: rgba(255, 181, 2, 1);
-  /* --accent-2-color-light: ;
-  --accent-2-color-dark: ;
-  --accent-2-color-darkest: ;
+    --accent-2-color-default: rgba(255, 181, 2, 1);
+    --accent-2-color-light: rgba(255, 243, 209, 1);
+    --accent-2-color-dark: rgba(229, 162, 0, 1);
+    --accent-2-color-darkest: rgba(204, 146, 0, 1);
 
-  --accent-3-color-default: ;
-  --accent-3-color-light: ;
-  --accent-3-color-dark: ;
-  --accent-3-color-darkest: ;
-*/ 
-    --rag-error-default: rgba(235, 87, 87, 1);
-    /* --rag-error-light: ;
-  --rag-error-dark: ;
-  --rag-error-darkest: ;
+    --accent-3-color-default: rgba(239, 75, 119, 1);
+    --accent-3-color-light: rgba(255, 229, 237, 1);
+    --accent-3-color-dark: rgba(217, 21, 93, 1);
+    --accent-3-color-darkest: rgba(183, 0, 67, 1);
 
-  --rag-warning-default: ;
-  --rag-warning-light: ;
-  --rag-warning-dark: ;
-  --rag-warning-darkest: ;
+    --rag-error-default: rgba(225, 45, 45, 1);
+    --rag-error-light: rgba(254, 225, 225, 1);
+    --rag-error-dark: rgba(205, 29, 29, 1);
+    --rag-error-darkest: rgba(170, 24, 24, 1);
 
-  --rag-success-default: ;
-  --rag-success-light: ;
-  --rag-success-dark: ;
-  --rag-success-darkest: ;
+    --rag-warning-default: rgba(251, 149, 59, 1);
+    --rag-warning-light: rgba(254, 233, 215, 1);
+    --rag-warning-dark: rgba(225, 116, 20, 1);
+    --rag-warning-darkest: rgba(178, 80, 0, 1);
 
-  --rag-informational-default: ;
-  --rag-informational-light: ;
-  --rag-informational-dark: ;
-  --rag-informational-darkest: ; */
+    --rag-success-default: rgba(54, 180, 135, 1);
+    --rag-success-light: rgba(221, 248, 238, 1);
+    --rag-success-dark: rgba(30, 154, 109, 1);
+    --rag-success-darkest: rgba(26, 122, 99, 1);
 
-    --grey-1: #303336;
-    --grey-4: rgba(189, 189, 189, 1);
-    --grey-5: rgba(224, 224, 224, 1);
-    --grey-7: #ffffff;
+    --rag-informational-default: rgba(84, 46, 255, 1);
+    --rag-informational-light: rgba(227, 221, 255, 1);
+    --rag-informational-dark: rgba(59, 20, 200, 1);
+    --rag-informational-darkest: rgba(53, 27, 146, 1);
 
-    /*
-  --grey-2: ;
-  --grey-3: ;
-  
+    --grey-1: rgba(48, 51, 54, 1);
+    --grey-2: rgba(73, 77, 80, 1);
+    --grey-3: rgba(119, 122, 126, 1);
+    --grey-4: rgba(187, 189, 191, 1);
+    --grey-5: rgba(223, 224, 225, 1);
+    --grey-6: rgba(245, 245, 245, 1);
+    --grey-7: rgba(255, 255, 255, 1);
 
-  --grey-6: #f5f4f7;
+    --modal-background: rgba(48, 51, 54, 0.5);
 
-  */
+    --shadow-level-1: rgba(176, 176, 176, 0.25);
+    --shadow-level-2: rgba(176, 176, 176, 0.35);
 }
 
 /*Dark Mode Design System */
 .dark {
-  padding-left: 88px;
+    overflow-x: hidden;
+    padding-left: 88px;
     height: 100%;
     background-color: #121212;
     /*

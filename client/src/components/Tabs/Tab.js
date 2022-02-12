@@ -1,7 +1,13 @@
 import React from 'react'
 
 const Tab = (props) => {
-    return <div className={`${props.label} tab`}>//insert content here</div>
+    return (
+        <button className={`${props.label} tab`}>
+            <span className="visually-hidden">Show</span>
+            <span>{props.label}</span>
+            <span className="visually-hidden">lessons</span>
+        </button>
+    );
 
 }
 

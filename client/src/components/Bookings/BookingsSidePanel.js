@@ -1,63 +1,75 @@
-import React, { useState } from 'react'
-import SubjectDetails from './SubjectDetails'
-import StandardButton from '../Buttons/StandardButton'
-import ErrorButton from '../Buttons/ErrorButton'
-import StudentAvatar from './StudentAvatar'
-import CloseButton from '../Buttons/CloseButton'
+import React from 'react';
+import SubjectDetails from './SubjectDetails';
+import StandardButton from '../Buttons/StandardButton';
+import ErrorButton from '../Buttons/ErrorButton';
+import StudentAvatar from './StudentAvatar';
+import CloseButton from '../Buttons/CloseButton';
 
-const BookingsSidePanel = () => {
-    const [show, setShow] = useState(true)
+const BookingsSidePanel = (props) => {
 
-    const onClose = () => {
-        setShow(false);        
-    }
+
+    const options = {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    };
+
+    // let currentMonth = date.toLocaleDateString('en-GB', options);
+
+    // if (props.setShow !== show) {
+    //     setShow(props.setShow);
+    // }
+
 
     return (
         <>
-            {show ? (
-                <div className="bookings-side-panel">
-                    <CloseButton onClick={onClose} />
-                    <span>Upcoming Lesson</span>
-                    <h2 id="bookings-date">props.booking.date</h2>
-                    <div className="student-summary">
-                        <StudentAvatar />
-                        <h4>{`{props.student.name.first} {props.student.name.last[0]}`}</h4>
-                        <p>
-                            {`props.student.pronouns
-                        ? {props.student.year} | {props.student.pronouns}
-                        : props.student.year`}
-                        </p>
-                    </div>
-                    <div>
-                        <h4>
-                            {/*`${props number of lessons had} of ${props number of lessons booked}`*/}
-                        </h4>
-                        <SubjectDetails />
-                        {/* <div className="subject-dtls">
-                    <p className="subject-dtls-labels">Subject</p>
-                    <p>{props.booking.subject}</p>
-                    <p className="subject-dtls-labels">Tier</p>
-                    <p>{props.student.}</p>
-                    <p className="subject-dtls-labels">Current grade</p>
-                    <p>{props.student.grade.current}</p>
-                    <p className="subject-dtls-labels">Target grade</p>
-                    <p>{props.student.grade.target}</p>
-                    <p className="subject-dtls-labels">Exam board</p>
-                    <p>{props.student.subject.examBoard}</p>
-                    
-                </div> */}
-                    </div>
-                    <p>{/*Data about plan for last lesson*/}</p>
-                    <div className="two-btns">
-                        <StandardButton
-                            label={`Message props.student.name.first`}
-                        />
-                        <ErrorButton label="Cancel Lesson" />
+            {props.show ? (
+                <div className="modal-background">
+                    <div className="bookings-side-panel">
+                        <CloseButton onClick={props.onClose} />
+                        <span>Upcoming Lesson</span>
+                        {/* <h2 id="bookings-date">
+                            {JSON.parse(props.bookings.date).toLocaleDateString(
+                                'en-GB',
+                                options
+                            )}
+                        </h2> */}
+                        <div className="student-summary">
+                            <StudentAvatar student={props.bookings.studentId} />
+                            <h4>{`${props.bookings.studentId.name.first} ${props.bookings.studentId.name.last[0]}.`}</h4>
+                            <p>
+                                {props.bookings.studentId.pronouns
+                                    ? 'Year ' +
+                                      props.bookings.studentId.year +
+                                      ' | ' +
+                                      props.bookings.studentId.pronouns
+                                    : props.bookings.studentId.year}
+                            </p>
+                        </div>
+                        <div>
+                            {/* <h4>
+                                `${props number of lessons had} of ${props number of lessons booked}`
+                            </h4> */}
+                            <p>
+                                {props.bookings.frequency}
+                            </p>
+                        </div>
+                        <SubjectDetails student={props.bookings} />
+                        <p>{/*Data about plan for last lesson*/}</p>
+                        <div className="two-btns">
+                            <StandardButton
+                                label={`Message ${props.bookings.studentId.name.first}`}
+                            />
+                            <ErrorButton label="Cancel Lesson" />
+                        </div>
                     </div>
                 </div>
             ) : null}
         </>
-    )
-}
+    );
+};
 
-export default BookingsSidePanel
+export default BookingsSidePanel;

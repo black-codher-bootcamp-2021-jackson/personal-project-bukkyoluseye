@@ -2,7 +2,7 @@
 
 #bottom-nav {
     background: var(--grey-7);
-    box-shadow: 0px -1px 20px rgba(176, 176, 176, 0.25);
+    box-shadow: 0px -1px 20px var(--shadow-level-1);
     display: flex;
     bottom: 0px;
     left: 0px;
@@ -85,7 +85,7 @@
     }
 
     #side-nav span {
-        font-size: 0.75rem;
+        font-size: var(--p3-font-size);
     }
 
     #side-nav-items svg {

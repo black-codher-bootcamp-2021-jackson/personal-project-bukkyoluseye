@@ -1,37 +1,77 @@
-const mongoose = require('mongoose')
-let validator = require('validator')
-const { Schema } = mongoose
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-require('./StudentProfile')
-require('./TutorProfile')
+require('./StudentProfile');
+require('./TutorProfile');
 
-//Add subject details
+const gradeSchema = new Schema({
+    current: {
+        type: String,
+        required: false,
+    },
+    target: {
+        type: String,
+        required: true,
+    },
+});
 
 const bookingsSchema = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId,
+    },
     tutorId: {
         type: Schema.Types.ObjectId,
-        ref: 'TutorProfile',
+        ref: 'tutorprofile',
         required: false,
     },
     studentId: {
         type: Schema.Types.ObjectId,
-        ref: 'StudentProfile',
+        ref: 'studentprofile',
         required: false,
     },
-    status: {
+    date: {
+        type: Date,
+        required: true,
+    },
+    subject: {
         type: String,
         required: true,
     },
-    booking: {
-        type: Date,
+    level: {
+        type: String,
+        required: true,
+    },
+    examBoard: {
+        type: String,
+        required: true,
+    },
+    tier: { type: String },
+    grade: {
+        type: gradeSchema,
+    },
+    type: {
+        type: String,
         required: true
     },
-    lessonsBooked: {
-        type: Number
+    frequency: {
+        type: String,
+        required: false
     },
-    lessonsHad: {
-        type: Number
-    }
-})
+    status: {
+        type: String,
+        required: false,
+        default: 'Awaiting Confirmation',
+    },
+    cancelled: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    completed: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+});
 
-mongoose.model('Bookings', bookingsSchema)
+module.exports = mongoose.model('booking', bookingsSchema, 'Bookings');
