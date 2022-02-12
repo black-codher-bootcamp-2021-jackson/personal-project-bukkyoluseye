@@ -2,6 +2,18 @@ import React from 'react';
 import StudentAvatar from './StudentAvatar';
 
 const BookingRow = (props) => {
+    const day = {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long',
+
+    };
+
+    const time = {
+        hour: '2-digit',
+        minute: '2-digit',
+    };
+
     return (
         <div onClick={props.onClick} className="booking-row">
             <StudentAvatar student={props.booking.studentId} />
@@ -11,8 +23,18 @@ const BookingRow = (props) => {
                     <p>{`${props.booking.subject} ${props.booking.level}`}</p>
                 </div>
                 <div>
-                    <p></p>
-                    <p></p>
+                    <p>
+                        {new Date(props.booking.date).toLocaleDateString(
+                            'en-GB',
+                            day
+                        )}
+                    </p>
+                    <p>
+                        {new Date(props.booking.date).toLocaleTimeString(
+                            'en-GB',
+                            time
+                        )}
+                    </p>
                 </div>
                 <div className="booking-2-items">
                     <p>
@@ -27,7 +49,7 @@ const BookingRow = (props) => {
                     </p>
                 </div>
                 <div>
-                    <p className={`${props.booking.status.toLowerCase()} tag` }>
+                    <p className={`${props.booking.status.toLowerCase()} tag`}>
                         {props.booking.status}
                     </p>
                 </div>

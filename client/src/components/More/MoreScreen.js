@@ -3,7 +3,9 @@ import React from 'react';
 const MoreScreen = () => {
     return (
         <>
-            <h1>More</h1>
+            <div className="page-title">
+                <h1>More</h1>
+            </div>
         </>
     );
 };

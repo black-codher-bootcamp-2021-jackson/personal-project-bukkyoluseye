@@ -1,6 +1,7 @@
 @import './ColourPalette.css';
 @import './NavBar.css';
 @import './Tabs.css';
+@import './CalendarStyles.css';
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 #root {
@@ -12,6 +13,7 @@
 }
 * {
     margin: 0px;
+    font-size: var(--p1-font-size);
     color: var(--grey-1);
     font-family: Outfit, sans-serif;
 }
@@ -59,6 +61,9 @@ h5 {
     font-size: var(--h5-font-size);
 }
 
+p {
+    font-size: var(--p1-font-size);
+}
 .moon:hover {
     fill: var(--grey-1);
     stroke: var(--grey-1);
@@ -95,13 +100,13 @@ h5 {
     align-items: center;
 }
 .student-avatar {
+    display: block;
     width: 50px;
     height: 50px;
     font-weight: 700;
-    margin-bottom: 16px;
     color: var(--grey-1);
     letter-spacing: 0.05em;
-    font-size: 22px;
+    font-size: var(--h5-font-size);
     border: none;
     box-shadow: 0px 3px 6px var(--grey-5);
     background-color: var(--accent-2-color-default); /* Remove this */
@@ -124,23 +129,33 @@ h5 {
 .subject-dtls {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-self: stretch;
 }
 
 .dtl-content {
     justify-self: end;
 }
 
+.dtl-title {
+    color: var(--grey-2);
+}
+
 .student-summary {
     display: grid;
     grid-template-columns: auto 1fr;
-    margin-bottom: 24px;
+    column-gap: 12px;
 }
 
 .student-summary .student-avatar {
     grid-row: 1 / span 2;
 }
 .bookings-side-panel .accordion-item {
-    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    flex: 0;
+    gap: 12px;
+    align-self: stretch;
 }
 .bookings-side-panel {
     display: flex;
@@ -151,12 +166,13 @@ h5 {
     height: 60%;
     position: fixed;
     overflow-x: hidden;
-    overflow-y: scroll;
-    padding: 0 32px 32px;
+    padding: 0;
 }
-
+.bookings-side-panel span {
+    margin: 0px 32px;
+}
 #bookings-date {
-    margin-bottom: 24px;
+    margin: 0px 32px 24px;
 }
 
 #darkMode {
@@ -251,6 +267,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    align-self: stretch;
 }
 
 .text-link {
@@ -283,6 +300,10 @@ button {
     justify-content: flex-end;
 }
 
+.close-div .close-btn {
+    margin-right: 16px;
+}
+
 .have-you {
     display: inline-flex;
 }
@@ -295,7 +316,15 @@ button {
     font-weight: 600;
     padding: 8px 16px;
 }
-
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
 input:-ms-input-placeholder {
     color: var(--grey-4);
     opacity: 1;
@@ -315,7 +344,7 @@ input::-ms-input-placeholder {
     fill: var(--grey-1);
 }
 
-.bookings-title .input-div {
+.page-title .input-div {
     display: none;
 }
 
@@ -353,6 +382,7 @@ input::-ms-input-placeholder {
     flex-direction: row;
     align-items: center;
     padding: 12px 16px;
+    margin-bottom: 8px;
 }
 
 .booking-row-info {
@@ -371,6 +401,16 @@ input::-ms-input-placeholder {
     padding: 0px;
 }
 
+.side-student-dtls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 0px 32px;
+}
+
+
+
 /* Tablet (S) */
 @media screen and (min-width: 867px) {
     #main-with-nav {
@@ -383,12 +423,12 @@ input::-ms-input-placeholder {
         margin-left: 88px;
     }
     #bookings-content {
-        padding: 0px;
-        width: calc(100% - 304px);
+        padding: 24px 32px 0px;
+        width: calc(100% - 368px);
     }
     .bookings-side-panel {
         display: block;
-        width: 240px;
+        width: 304px;
         height: 100vh;
         background-color: var(--grey-7);
         top: 0px;
@@ -407,19 +447,19 @@ input::-ms-input-placeholder {
         display: flex;
         flex-direction: row;
         background-color: var(--grey-6);
-        height: 100%
+        height: 100%;
     }
-    .bookings-title {
+    .page-title {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 16px 32px;
+        padding: 12px 32px;
         background-color: var(--grey-7);
         border: 1px solid var(--grey-6);
         position: sticky;
     }
-    .bookings-title .input-div {
+    .page-title .input-div {
         display: flex;
     }
 }

@@ -45,10 +45,10 @@ const InputField = (props) => {
                 <input
                     className="input-field"
                     placeholder={
-                        props.variant && props.variant === 'search'
-                            ? 'Search'
-                            : props.placeholder
+                        props.placeholder
                             ? props.placeholder
+                            : props.variant && props.variant === 'search'
+                            ? 'Search'
                             : null
                     }
                     required={props.required ? props.required : null}
