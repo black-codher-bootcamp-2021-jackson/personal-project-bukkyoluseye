@@ -35,6 +35,7 @@ const BookingRow = (props) => {
                             time
                         )}
                     </p>
+                    <p></p>
                 </div>
                 <div className="booking-2-items">
                     <p>

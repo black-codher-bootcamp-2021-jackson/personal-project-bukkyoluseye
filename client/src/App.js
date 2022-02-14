@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    useNavigate,
+} from 'react-router-dom';
 // import DarkMode from "./components/DarkMode";
 import DarkModeWrapper from './components/DarkModeWrapper';
 import BottomNavBar from './components/Navigation/BottomNavBar';
@@ -11,6 +16,7 @@ import SignUp from './components/Signup/SignUp';
 import RequestsScreen from './components/Requests/RequestsScreen';
 import MessagesScreen from './components/Messages/MessagesScreen';
 import MoreScreen from './components/More/MoreScreen';
+import jwt from 'jsonwebtoken';
 
 // SERVICES THAT CALL OUR API ENDPOINTS
 import {
@@ -23,6 +29,21 @@ function App() {
     const [tutorprofiles, setTutorProfiles] = useState([]);
     const [studentprofiles, setStudentProfiles] = useState([]);
     const [bookings, setBookings] = useState([]);
+    const navigate = useNavigate();
+
+    // Verify user is logged in
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const user = jwt.decode(token);
+            if (!user) {
+                localStorage.removeItem('token');
+                navigate.replace('/login');
+            } else {
+                getBookings();
+            }
+        }
+    }, []);
 
     useEffect(() => {
         async function getTutorProfiles() {
@@ -34,7 +55,7 @@ function App() {
 
         getTutorProfiles();
     }, [tutorprofiles]);
-    
+
     useEffect(() => {
         async function getStudentProfiles() {
             if (!studentprofiles) {
@@ -46,17 +67,17 @@ function App() {
         getStudentProfiles();
     }, [studentprofiles]);
 
-    useEffect(() => {
-        async function getBookings() {
-            // console.log("get bookings",bookings)
-            if (!bookings || bookings.length === 0) {
-                const response = await getAllBookings();
-                setBookings(response);
-            }
+    async function getBookings(e) {
+        e.preventDefault();
+        // console.log("get bookings",bookings)
+        if (!bookings || bookings.length === 0) {
+            const response = await getAllBookings();
+            setBookings(response);
         }
+    }
 
-        getBookings();
-    }, [bookings]);
+    getBookings();
+
     // const renderProfile = (user) => {
     //   return (
     //     <li key={user._id}>
@@ -80,7 +101,7 @@ function App() {
                         id="bookingslink"
                         element={
                             <>
-                                <BookingsScreen bookings={bookings}/>
+                                <BookingsScreen bookings={bookings} />
                             </>
                         }
                     />
@@ -113,9 +134,15 @@ function App() {
                     />
                 </Routes>
 
-                <SideNavBar />
+                {window.location.pathname === '/login' ||
+                window.location.pathname === '/' ? null : (
+                    <SideNavBar />
+                )}
 
-                <BottomNavBar />
+                {window.location.pathname === '/login' ||
+                window.location.pathname === '/' ? null : (
+                    <BottomNavBar />
+                )}
             </Router>
         </DarkModeWrapper>
     );

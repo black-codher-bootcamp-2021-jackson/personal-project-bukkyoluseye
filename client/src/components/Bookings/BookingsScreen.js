@@ -1,11 +1,14 @@
 import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import Tab from '../Tabs/Tab';
 import BookingsSidePanel from './BookingsSidePanel';
 import BookingRow from './BookingRow';
 import CalendarView from '../CalendarView';
+import jwt from 'jsonwebtoken';
 
+// This is for the tab filtering
 const tabMap = {
     Upcoming: (booking) => !booking.cancelled && !booking.completed,
     Completed: (booking) => booking.completed,
@@ -17,6 +20,7 @@ const tabNames = Object.keys(tabMap);
 const BookingsScreen = (props) => {
     const [show, setShow] = useState(false);
     const [selectedBooking, setSelectedBooking] = useState([]);
+    const navigate = useNavigate();
 
     // function treatAsUTC(date) {
     //     var result = new Date(date);
@@ -105,6 +109,10 @@ const BookingsScreen = (props) => {
                 />
             );
         });
+
+    
+
+ 
 
     return (
         <>

@@ -43,6 +43,33 @@ const bookingsRoutes = (app) => {
         });
     });
 
+    app.patch(`/api/bookings/:id/cancelled`, async (req, res) => {
+        const { id } = req.params;
+
+        const bookings = await Bookings.findByIdAndUpdate(id, {
+            cancelled: true,
+            status: 'cancelled',
+        });
+
+        return res.status(202).send({
+            error: false,
+            bookings,
+        });
+    });
+
+    app.patch(`/api/bookings/:id/completed`, async (req, res) => {
+        const { id } = req.params;
+
+        const bookings = await Bookings.findByIdAndUpdate(id, {
+            completed: true,
+        });
+
+        return res.status(202).send({
+            error: false,
+            bookings,
+        });
+    });
+
     app.delete(`/api/bookings/:id`, async (req, res) => {
         const { id } = req.params;
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import TextLink from '../Buttons/TextLink';
@@ -6,26 +7,25 @@ import StandardButton from '../Buttons/StandardButton';
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const [firstName, setFirstName] = useState();
+    const [surname, setSurname] = useState();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [user, setUser] = useState();
+    
 
-    async function registerUser(e) {
+    async function registerTutor(e) {
         e.preventDefault()
 
-        const response = await fetch(`/api/tutorlogin`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                user,
-                email,
-                password,
-            }),
-        });
-            const data = await response.json();
-            console.log(data);
+        const response = await axios.post(`/api/tutorprofile/signup`, {
+            name: { first: {firstName}, last: {surname}},
+            email: { email },
+            password: { password }
+        })
+
+            // .then(call a modal to open)
+            .catch(function (error) {
+                console.log(error)
+            });
     }
 
 
@@ -36,7 +36,7 @@ const SignUp = () => {
                 <p>Already have an account? </p>
                 <TextLink text="Log in" href="/login" target="_self" />
             </div>
-            <form onSubmit={registerUser}>
+            <form onSubmit={registerTutor}>
                 <InputField label="First Name*" type="text" />
                 <InputField label="Surname*" type="text" />
                 <InputField label="Email Address*" type="email" />

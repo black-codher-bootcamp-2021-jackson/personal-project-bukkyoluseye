@@ -9,7 +9,11 @@ const getAllTutorProfiles = async () => {
 };
 
 const getAllBookings = async () => {
-    const response = await axios.get(`/api/bookings`);
+    const response = await axios.get(`/api/bookings`, {
+        headers: {
+            'x-access-token': localStorage.getItem('token'),
+        },
+    });
 
     return response.data || [];
 };
