@@ -11,23 +11,23 @@ const SignUp = () => {
     const [surname, setSurname] = useState();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
 
     async function registerTutor(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        const response = await axios.post(`/api/tutorprofile/signup`, {
-            name: { first: {firstName}, last: {surname}},
-            email: { email },
-            password: { password }
-        })
-
+        await axios
+            .post(`/api/tutorprofile/signup`, {
+                firstname: firstName,
+                surname: surname,
+                email: email,
+                password: password,
+            })
+            .then((window.location.href = '/login'))
             // .then(call a modal to open)
             .catch(function (error) {
-                console.log(error)
+                console.log(error);
             });
     }
-
 
     return (
         <>
@@ -36,12 +36,28 @@ const SignUp = () => {
                 <p>Already have an account? </p>
                 <TextLink text="Log in" href="/login" target="_self" />
             </div>
-            <form onSubmit={registerTutor}>
-                <InputField label="First Name*" type="text" />
-                <InputField label="Surname*" type="text" />
-                <InputField label="Email Address*" type="email" />
-                <InputField label="Password*" variant="password" />
-                <StandardButton type="submit" label="Sign Up" />
+            <form id="signup" onSubmit={registerTutor}>
+                <InputField
+                    label="First Name*"
+                    type="text"
+                    onChange={(e) => setFirstName(e.target.value)}
+                />
+                <InputField
+                    label="Surname*"
+                    type="text"
+                    onChange={(e) => setSurname(e.target.value)}
+                />
+                <InputField
+                    label="Email Address*"
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <InputField
+                    label="Password*"
+                    variant="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <StandardButton form="signup" type="submit" label="Sign Up" />
             </form>
         </>
     );

@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Route,
     Routes,
-    useNavigate,
+    Navigate
 } from 'react-router-dom';
 // import DarkMode from "./components/DarkMode";
 import DarkModeWrapper from './components/DarkModeWrapper';
@@ -16,7 +16,7 @@ import SignUp from './components/Signup/SignUp';
 import RequestsScreen from './components/Requests/RequestsScreen';
 import MessagesScreen from './components/Messages/MessagesScreen';
 import MoreScreen from './components/More/MoreScreen';
-import jwt from 'jsonwebtoken';
+import jwt_decode from 'jwt-decode';
 
 // SERVICES THAT CALL OUR API ENDPOINTS
 import {
@@ -29,17 +29,22 @@ function App() {
     const [tutorprofiles, setTutorProfiles] = useState([]);
     const [studentprofiles, setStudentProfiles] = useState([]);
     const [bookings, setBookings] = useState([]);
-    const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(false);
+    // const navigate = useNavigate();
 
     // Verify user is logged in
     useEffect(() => {
         const token = localStorage.getItem('token');
+        
         if (token) {
-            const user = jwt.decode(token);
+            console.log('yes, I have the token');
+            const user = jwt_decode(token);
             if (!user) {
                 localStorage.removeItem('token');
-                navigate.replace('/login');
+                window.location.href = '/login';
             } else {
+                console.log("yes, you've logged in");
+                setLoggedIn(true);
                 getBookings();
             }
         }
@@ -67,8 +72,7 @@ function App() {
         getStudentProfiles();
     }, [studentprofiles]);
 
-    async function getBookings(e) {
-        e.preventDefault();
+    async function getBookings() {
         // console.log("get bookings",bookings)
         if (!bookings || bookings.length === 0) {
             const response = await getAllBookings();
@@ -76,32 +80,23 @@ function App() {
         }
     }
 
-    getBookings();
-
-    // const renderProfile = (user) => {
-    //   return (
-    //     <li key={user._id}>
-    //       <h3>
-    //         {`${user.first_name}
-    //         ${user.last_name}`}
-    //       </h3>
-    //       <p>{user.location}</p>
-    //     </li>
-    //   );
-    // };
 
     return (
         <DarkModeWrapper>
             <Router>
                 <Routes>
                     <Route path="/" id="sign-up" element={<SignUp />} />
-                    <Route path="/login" id="log-in" element={<LogIn />} />
+                    <Route path="/login" id="log-in" element={<LogIn setLoggedIn={setLoggedIn}/>} />
                     <Route
                         path="/bookings"
                         id="bookingslink"
                         element={
                             <>
-                                <BookingsScreen bookings={bookings} />
+                                {loggedIn ? (
+                                    <BookingsScreen bookings={bookings} />
+                                ) : (
+                                    <Navigate to="/login" />
+                                )}
                             </>
                         }
                     />
@@ -110,16 +105,25 @@ function App() {
                         id="requestslink"
                         element={
                             <>
-                                <RequestsScreen />
+                                {loggedIn ? (
+                                    <RequestsScreen />
+                                ) : (
+                                    <Navigate to="/login" />
+                                )}
                             </>
                         }
                     />
+                    {console.log(loggedIn)}
                     <Route
                         path="/messages"
                         id="messageslink"
                         element={
                             <>
-                                <MessagesScreen />
+                                {loggedIn ? (
+                                    <MessagesScreen />
+                                ) : (
+                                    <Navigate to="/login" />
+                                )}
                             </>
                         }
                     />
@@ -128,10 +132,15 @@ function App() {
                         id="morelink"
                         element={
                             <>
-                                <MoreScreen />
+                                {loggedIn ? (
+                                    <MoreScreen />
+                                ) : (
+                                    <Navigate to="/login" />
+                                )}
                             </>
                         }
                     />
+                    <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
 
                 {window.location.pathname === '/login' ||

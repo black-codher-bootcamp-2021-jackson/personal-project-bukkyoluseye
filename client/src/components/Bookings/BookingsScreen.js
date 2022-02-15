@@ -6,7 +6,7 @@ import Tab from '../Tabs/Tab';
 import BookingsSidePanel from './BookingsSidePanel';
 import BookingRow from './BookingRow';
 import CalendarView from '../CalendarView';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 // This is for the tab filtering
 const tabMap = {

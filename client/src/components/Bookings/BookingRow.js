@@ -39,7 +39,7 @@ const BookingRow = (props) => {
                 </div>
                 <div className="booking-2-items">
                     <p>
-                        {props.booking.type != 'Free Meeting'
+                        {props.booking.type !== 'Free Meeting'
                             ? `${props.booking.type} Lesson`
                             : props.booking.type}
                     </p>

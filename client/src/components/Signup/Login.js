@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, } from 'react-router-dom';
 import InputField from '../InputField';
 import TextLink from '../Buttons/TextLink';
 import StandardButton from '../Buttons/StandardButton';
 
-const LogIn = () => {
+const LogIn = (props) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
 
 
     // useEffect(() => {
@@ -22,33 +23,28 @@ const LogIn = () => {
     // log in the user
     const loginTutor = async (e) => {
         e.preventDefault();
+        console.log(email);
         const response = await axios
             .post(`/api/tutorprofile/login`, {
-                email: { email },
-                password: { password },
+                email: email,
+                password: password,
             })
 
             // .then(call a modal to open)
-            .catch(function (error) {
-                console.log(error);
-            });
+            // .catch(function (error) {
+            //     console.log(error);
+            // });
+        console.log(response);
 
-        const data = await response.json()
+        const data = response.data;
 
         if (data.tutorprofile) {
-            localStorage.setItem('token', data.tutorprofile)
-            alert('Login successful')
-            window.location.href="/bookings"
+            localStorage.setItem('token', data.tutorprofile);
+            props.setLoggedIn(true);
+         navigate('/bookings');
+        } else {
+            alert(data.error);
         }
-        else {
-            alert(data.error)
-        }
-        // Authenticate the user
-        // authenticateUser(email, password); if user is authenticated then do the following
-        // set the state of the user
-        // setUser(response.data);
-        // store the user in localStorage
-        // localStorage.setItem('user', JSON.stringify(response.data));
 
         // When the authentication is done
         // Redirect the user to the `/profile/${userName}` page
@@ -57,7 +53,7 @@ const LogIn = () => {
         // navigate(`/bookings`);
     };
 
-    // if email===email && password === password {let them sign in} else 
+    // if email===email && password === password {let them sign in} else
     return (
         <>
             <div className="have-you">

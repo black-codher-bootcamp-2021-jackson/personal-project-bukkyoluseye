@@ -5,7 +5,8 @@ const StandardButton = (props) => {
         <button
             className="std-btn"
             type={props.type ? props.type : null}
-            onClick={() => props.onClick}
+            onClick={props.onClick? () => props.onClick: null}
+            form={props.form? props.form : null}
         >
             {props.label}
         </button>
