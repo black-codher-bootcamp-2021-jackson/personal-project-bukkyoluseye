@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Route,
     Routes,
-    Navigate
+    Navigate,
 } from 'react-router-dom';
 // import DarkMode from "./components/DarkMode";
 import DarkModeWrapper from './components/DarkModeWrapper';
@@ -30,25 +30,31 @@ function App() {
     const [studentprofiles, setStudentProfiles] = useState([]);
     const [bookings, setBookings] = useState([]);
     const [loggedIn, setLoggedIn] = useState(false);
-    // const navigate = useNavigate();
 
     // Verify user is logged in
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        
-        if (token) {
-            console.log('yes, I have the token');
-            const user = jwt_decode(token);
-            if (!user) {
-                localStorage.removeItem('token');
-                window.location.href = '/login';
-            } else {
-                console.log("yes, you've logged in");
-                setLoggedIn(true);
-                getBookings();
+        if(!loggedIn){
+            const token = localStorage.getItem('token');
+            if (token) {
+                const user = jwt_decode(token);
+                if (!user) {
+                    localStorage.removeItem('token');
+                } else {
+                    setLoggedIn(true);
+                    async function getBookings() {
+                        // console.log("get bookings",bookings)
+                        if (!bookings || bookings.length === 0) {
+                            const response = await getAllBookings(user.id);
+                            setBookings(response);
+                            console.log(response);
+                            // setLoggedIn(loggedInUser);
+                        }
+                    }
+                    getBookings();
+                }
             }
         }
-    }, []);
+    }, [bookings]);
 
     useEffect(() => {
         async function getTutorProfiles() {
@@ -68,25 +74,31 @@ function App() {
                 setStudentProfiles(response);
             }
         }
-
         getStudentProfiles();
     }, [studentprofiles]);
-
-    async function getBookings() {
-        // console.log("get bookings",bookings)
-        if (!bookings || bookings.length === 0) {
-            const response = await getAllBookings();
-            setBookings(response);
-        }
-    }
-
 
     return (
         <DarkModeWrapper>
             <Router>
                 <Routes>
-                    <Route path="/" id="sign-up" element={<SignUp />} />
-                    <Route path="/login" id="log-in" element={<LogIn setLoggedIn={setLoggedIn}/>} />
+                    <Route
+                        path="/"
+                        id="sign-up"
+                        element={
+                            loggedIn ? <Navigate to="/bookings" /> : <SignUp />
+                        }
+                    />
+                    <Route
+                        path="/login"
+                        id="log-in"
+                        element={
+                            loggedIn ? (
+                                <Navigate to="/bookings" />
+                            ) : (
+                                <LogIn setLoggedIn={setLoggedIn} />
+                            )
+                        }
+                    />
                     <Route
                         path="/bookings"
                         id="bookingslink"
@@ -143,15 +155,9 @@ function App() {
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
 
-                {window.location.pathname === '/login' ||
-                window.location.pathname === '/' ? null : (
-                    <SideNavBar />
-                )}
+                {!loggedIn ? null : <SideNavBar />}
 
-                {window.location.pathname === '/login' ||
-                window.location.pathname === '/' ? null : (
-                    <BottomNavBar />
-                )}
+                {!loggedIn ? null : <BottomNavBar />}
             </Router>
         </DarkModeWrapper>
     );

@@ -22,7 +22,7 @@ const SignUp = () => {
                 email: email,
                 password: password,
             })
-            .then((window.location.href = '/login'))
+            .then((navigate("/bookings")))
             // .then(call a modal to open)
             .catch(function (error) {
                 console.log(error);

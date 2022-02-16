@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, } from 'react-router-dom';
 import InputField from '../InputField';
 import TextLink from '../Buttons/TextLink';
 import StandardButton from '../Buttons/StandardButton';
+import { getAllBookings } from '../../services/tutorAppService';
 
 const LogIn = (props) => {
-    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [bookings, setBookings] = useState([]);
 
-
+    
 
     // useEffect(() => {
     //     const loggedInUser = localStorage.getItem("user")
@@ -24,36 +24,29 @@ const LogIn = (props) => {
     const loginTutor = async (e) => {
         e.preventDefault();
         console.log(email);
-        const response = await axios
-            .post(`/api/tutorprofile/login`, {
-                email: email,
-                password: password,
-            })
-
-            // .then(call a modal to open)
-            // .catch(function (error) {
-            //     console.log(error);
-            // });
-        console.log(response);
+        const response = await axios.post(`/api/tutorprofile/login`, {
+            email: email,
+            password: password,
+        });
 
         const data = response.data;
 
         if (data.tutorprofile) {
             localStorage.setItem('token', data.tutorprofile);
+            async function getBookings() {
+                // console.log("get bookings",bookings)
+                if (!bookings || bookings.length === 0) {
+                    const response = await getAllBookings();
+                    setBookings(response);
+                }
+            }
+            getBookings();
             props.setLoggedIn(true);
-         navigate('/bookings');
         } else {
             alert(data.error);
         }
-
-        // When the authentication is done
-        // Redirect the user to the `/profile/${userName}` page
-        // the below code adds the `/profile/${userName}` page
-        // to the history stack.
-        // navigate(`/bookings`);
     };
 
-    // if email===email && password === password {let them sign in} else
     return (
         <>
             <div className="have-you">

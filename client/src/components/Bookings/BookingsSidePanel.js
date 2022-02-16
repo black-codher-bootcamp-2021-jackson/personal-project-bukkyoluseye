@@ -15,7 +15,7 @@ const BookingsSidePanel = (props) => {
         hour: '2-digit',
         minute: '2-digit',
     };
-
+    console.log(props.show)
     // let currentMonth = date.toLocaleDateString('en-GB', options);
 
     // if (props.setShow !== show) {

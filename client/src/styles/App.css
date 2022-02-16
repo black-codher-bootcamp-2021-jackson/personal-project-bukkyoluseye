@@ -14,10 +14,20 @@
 * {
     margin: 0px;
     font-size: var(--p1-font-size);
-    color: var(--grey-1);
     font-family: Outfit, sans-serif;
 }
 
+.calendar-carousel {
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+    align-items: center;
+}
+
+.calendar-carousel svg {
+    filter: grayscale(100%) contrast(95%) brightness(95%);
+    width: 60%;
+}
 html {
     font-size: 100%;
 } /*16px*/

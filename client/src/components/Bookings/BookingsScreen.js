@@ -6,7 +6,7 @@ import Tab from '../Tabs/Tab';
 import BookingsSidePanel from './BookingsSidePanel';
 import BookingRow from './BookingRow';
 import CalendarView from '../CalendarView';
-// import jwt from 'jsonwebtoken';
+import jwt_decode from 'jwt-decode';
 
 // This is for the tab filtering
 const tabMap = {
@@ -59,10 +59,13 @@ const BookingsScreen = (props) => {
 
     async function getSelectedBooking(bookingId) {
         const response = await axios.get(`/api/bookings/${bookingId}`);
-
+        console.log(response.data);
         if (!response.error) {
             setSelectedBooking(response.data.booking);
             setShow(true);
+            console.log(selectedBooking);
+            console.log(selectedBooking.length);
+            
         } else {
             console.log('error', response.error);
         }
@@ -102,17 +105,16 @@ const BookingsScreen = (props) => {
         .filter(tabMap[filter])
         .map((booking, index) => {
             return (
-                <BookingRow
-                    booking={booking}
-                    key={index}
-                    onClick={() => getSelectedBooking(booking._id)}
-                />
+                console.log(booking),
+                (
+                    <BookingRow
+                        booking={booking}
+                        key={index}
+                        onClick={() => getSelectedBooking(booking._id)}
+                    />
+                )
             );
         });
-
-    
-
- 
 
     return (
         <>
@@ -137,7 +139,7 @@ const BookingsScreen = (props) => {
                             />
                         );
                     })} */}
-                    {selectedBooking.length !== 0 ? (
+                    {selectedBooking.length > 0 ? (
                         <BookingsSidePanel
                             bookings={selectedBooking}
                             show={show}

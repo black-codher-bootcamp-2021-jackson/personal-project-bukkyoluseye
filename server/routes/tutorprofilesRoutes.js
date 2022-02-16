@@ -56,10 +56,12 @@ const tutorProfileRoutes = (app) => {
                 req.body.password,
                 tutorprofile.password
             );
-
             if (isPasswordValid) {
                 const token = jwt.sign(
-                    { email: tutorprofile.email },
+                    {
+                        email: tutorprofile.email,
+                        id: tutorprofile._id,
+                    },
                     process.env.SECRET
                 );
                 return res.status(201).send({
@@ -100,37 +102,12 @@ const tutorProfileRoutes = (app) => {
         } else {
             return res.status(500).send({
                 error: 'Log in failed. Please try again',
-                isLoggedIn: false
+                isLoggedIn: false,
             });
         }
     };
     app.get(`/api/tutorprofile/login`, verifyJWT, async (req, res) => {
-        res.status(200).send({isLoggedIn:true})
-        // try {
-        //     const decoded = jwt.verify(token, process.env.SECRET);
-        //     const email = decoded.email;
-        // } catch (err) {}
-        // const tutorprofile = await TutorProfile.findOne({
-        //     email: req.body.email,
-        //     password: req.body.password,
-        // });
-
-        // if (tutorprofile) {
-        //     const token = jwt.sign(
-        //         { email: tutorprofile.email },
-        //         process.env.SECRET,
-        //         { expiresIn: 907200 }
-        //     );
-        //     return res.status(201).send({
-        //         error: false,
-        //         tutorprofile: token,
-        //     });
-        // } else {
-        //     return res.status(500).send({
-        //         error: 'The email address or password entered is incorrect. Please try again.',
-        //         tutorprofile,
-        //     });
-        // }
+        res.status(200).send({ isLoggedIn: true });
     });
 
     app.put(`/api/tutorprofile/:id`, async (req, res) => {
