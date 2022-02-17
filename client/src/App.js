@@ -54,7 +54,7 @@ function App() {
                 }
             }
         }
-    }, [bookings]);
+    }, [loggedIn, bookings]);
 
     useEffect(() => {
         async function getTutorProfiles() {
@@ -145,7 +145,7 @@ function App() {
                         element={
                             <>
                                 {loggedIn ? (
-                                    <MoreScreen />
+                                    <MoreScreen setLoggedIn={setLoggedIn} />
                                 ) : (
                                     <Navigate to="/login" />
                                 )}

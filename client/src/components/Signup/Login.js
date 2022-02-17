@@ -42,6 +42,8 @@ const LogIn = (props) => {
             }
             getBookings();
             props.setLoggedIn(true);
+            setEmail("");
+            setPassword('');
         } else {
             alert(data.error);
         }
@@ -56,18 +58,20 @@ const LogIn = (props) => {
             </div>
             <form onSubmit={loginTutor}>
                 <InputField
-                    label="Email Address*"
+                    label="Email Address"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required="required"
+                    required
+                    compulsory
                 />
                 <InputField
-                    label="Password*"
+                    label="Password"
                     variant="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required="required"
+                    compulsory
                 />
                 <StandardButton type="submit" label="Log In" />
             </form>

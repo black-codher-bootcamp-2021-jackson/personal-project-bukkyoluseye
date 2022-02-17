@@ -5,7 +5,7 @@ import InputField from '../InputField';
 import Tab from '../Tabs/Tab';
 import BookingsSidePanel from './BookingsSidePanel';
 import BookingRow from './BookingRow';
-import CalendarView from '../CalendarView';
+import CalendarView from './CalendarView';
 import jwt_decode from 'jwt-decode';
 
 // This is for the tab filtering
@@ -40,32 +40,16 @@ const BookingsScreen = (props) => {
     //     );
     // }
 
-    const [date, setDate] = useState(new Date());
-    const DateTime = () => {
-        // new Date doesn't update if I set it directly to a variable so using useEffect to keep it updated
-
-        useEffect(() => {
-            let timer = setInterval(() => setDate(new date()), 1000);
-
-            // A UseEffect cleanup function helps clean effects to prevent unwanted behaviours and optimizes application performance
-            return function cleanup() {
-                clearInterval(timer);
-            };
-        });
-    };
     // const getMonth = { month: 'long' };
     // let currentMonth = date.toLocaleDateString('en-GB', getMonth); // Note to self: Change en-GB to undefined if you want the date to vary according to local timezone and default locale
     // let tomorrow = date.setDate(date.getDate() + 1);
 
     async function getSelectedBooking(bookingId) {
         const response = await axios.get(`/api/bookings/${bookingId}`);
-        console.log(response.data);
         if (!response.error) {
             setSelectedBooking(response.data.booking);
             setShow(true);
-            console.log(selectedBooking);
-            console.log(selectedBooking.length);
-            
+
         } else {
             console.log('error', response.error);
         }
@@ -101,18 +85,19 @@ const BookingsScreen = (props) => {
         />
     ));
 
+    const cancelLesson = async () => {
+        const response = await axios.patch('/api/bookings/:id/cancelled')
+    };
+
     const bookingsList = props.bookings
         .filter(tabMap[filter])
         .map((booking, index) => {
             return (
-                console.log(booking),
-                (
-                    <BookingRow
-                        booking={booking}
-                        key={index}
-                        onClick={() => getSelectedBooking(booking._id)}
-                    />
-                )
+                <BookingRow
+                    booking={booking}
+                    key={index}
+                    onClick={() => getSelectedBooking(booking._id)}
+                />
             );
         });
 
@@ -122,33 +107,20 @@ const BookingsScreen = (props) => {
                 <h1>Bookings</h1>
                 <InputField variant="search" placeholder="Search by student" />
             </div>
-            {/* <BookingsTabs bookings={props.bookings} /> */}
             <ul className="tabs-nav">{tabs}</ul>
-            {/* <Tabs labels={['Upcoming', 'Completed', 'Cancelled']} /> */}
             <div id="bookings-screen">
                 <div id="bookings-content">
                     {bookingsList}
-
-                    {/* bookings. */}
-                    {/* {props.bookings.map((booking, index) => {
-                        return (
-                            <BookingRow
-                                booking={booking}
-                                key={index}
-                                onClick={() => getSelectedBooking(booking._id)}
-                            />
-                        );
-                    })} */}
-                    {selectedBooking.length > 0 ? (
+                    {console.log(selectedBooking)}
+                    {console.log(show)}
+                    {selectedBooking && selectedBooking.length !==0 ? (
                         <BookingsSidePanel
-                            bookings={selectedBooking}
+                            booking={selectedBooking}
                             show={show}
                             onClose={onClose}
                             tab={filter}
                         />
                     ) : null}
-
-                    {/* {/* {props.screen==="bookings"? */}
                 </div>
                 <CalendarView />
             </div>

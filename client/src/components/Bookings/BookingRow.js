@@ -6,7 +6,6 @@ const BookingRow = (props) => {
         weekday: 'short',
         day: 'numeric',
         month: 'long',
-
     };
 
     const time = {
@@ -15,14 +14,21 @@ const BookingRow = (props) => {
     };
 
     return (
-        <div onClick={props.onClick} className="booking-row">
+        <div
+            onClick={props.onClick}
+            className={
+                props.className
+                    ? `${props.className} booking-row`
+                    : 'booking-row'
+            }
+        >
             <StudentAvatar student={props.booking.studentId} />
             <div className="booking-row-info">
-                <div className="booking-2-items">
+                <div className="booking-2-items name-subject">
                     <p>{`${props.booking.studentId.name.first} ${props.booking.studentId.name.last[0]}.`}</p>
-                    <p>{`${props.booking.subject} ${props.booking.level}`}</p>
+                    <p className="subject">{`${props.booking.subject} ${props.booking.level}`}</p>
                 </div>
-                <div>
+                <div className="booking-date">
                     <p>
                         {new Date(props.booking.date).toLocaleDateString(
                             'en-GB',
@@ -37,7 +43,7 @@ const BookingRow = (props) => {
                     </p>
                     <p></p>
                 </div>
-                <div className="booking-2-items">
+                <div className="booking-2-items lesson-freq">
                     <p>
                         {props.booking.type !== 'Free Meeting'
                             ? `${props.booking.type} Lesson`
@@ -49,7 +55,7 @@ const BookingRow = (props) => {
                             : null}
                     </p>
                 </div>
-                <div>
+                <div className="status">
                     <p className={`${props.booking.status.toLowerCase()} tag`}>
                         {props.booking.status}
                     </p>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
-import BookingRow from './Bookings/BookingRow';
+import BookingRow from './BookingRow';
 import jwt_decode from 'jwt-decode';
-import NoBookings from './Bookings/NoBookings';
+import NoBookings from './NoBookings';
 
 const CalendarView = () => {
     const [date, setDate] = useState(new Date());

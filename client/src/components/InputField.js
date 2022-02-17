@@ -30,7 +30,12 @@ const InputField = (props) => {
     // default
     return (
         <>
-            <label>{props.label ? props.label : null}</label>
+            <label>
+                {props.compulsory
+                    ? props.label + "*": props.label
+                    ? props.label
+                    : null}
+            </label>
             <div
                 className={
                     props.variant && props.variant.includes('error')

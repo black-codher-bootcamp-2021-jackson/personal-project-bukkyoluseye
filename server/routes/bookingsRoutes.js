@@ -21,7 +21,7 @@ const bookingsRoutes = (app) => {
         });
     });
 
-    app.get(`/api/bookings/:id`, async (req, res) => {
+    app.get(`/api/bookings/tutor/:id`, async (req, res) => {
         const { id } = req.params;
 
         if (id) {
@@ -35,6 +35,25 @@ const bookingsRoutes = (app) => {
             });
         } else if (err) {
             return res.status(200).send({
+                err,
+            });
+        }
+    });
+
+    app.get(`/api/bookings/:id`, async (req, res) => {
+        const { id } = req.params;
+
+        if (id) {
+            const booking = await Bookings.findOne({ _id: id })
+                .populate('tutorId')
+                .populate('studentId');
+
+            return res.status(200).send({
+                error: false,
+                booking,
+            });
+        } else if (err) {
+            return res.status(500).send({
                 err,
             });
         }
@@ -54,6 +73,43 @@ const bookingsRoutes = (app) => {
                 .find({
                     $and: [{ tutorId: req.body.id }, { date: { $gte: req.params.date, $lte: dateBeforeMidnight } }]
                 })
+                .populate('tutorId')
+                .populate('studentId');
+
+            return res.status(200).send({
+                error: false,
+                booking,
+            });
+        } catch (err) {
+            return res.status(500).send({
+                err,
+            });
+        }
+    });
+
+    app.post(`/api/bookings/search?:student`, async (req, res) => {
+
+        // Search - find by bookings by tutor id - populate data first then find by student name
+        const dateBeforeMidnight = new Date(req.params.date).setHours(
+            23,
+            59,
+            59,
+            999
+        );
+        console.log(req.body.id);
+
+        try {
+            const booking = await Bookings.find({
+                $and: [
+                    { tutorId: req.body.id },
+                    {
+                        date: {
+                            $gte: req.params.date,
+                            $lte: dateBeforeMidnight,
+                        },
+                    },
+                ],
+            })
                 .populate('tutorId')
                 .populate('studentId');
 
