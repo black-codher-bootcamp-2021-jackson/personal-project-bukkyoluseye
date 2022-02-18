@@ -4,7 +4,17 @@ import EyeHide from '../assets/SVGR/EyeHide';
 import EyeShow from '../assets/SVGR/EyeShow';
 import Search from '../assets/SVGR/Search';
 
-const InputField = (props) => {
+const InputField = ({
+    label,
+    compulsory,
+    variant,
+    placeholder,
+    onChange,
+    value,
+    type,
+    msg,
+    required,
+}) => {
     const [passwordVisibility, setPasswordVisibility] = useState('hide');
     const ShowPassword = () => {
         // Passes the correct SVG to ShowPassword Component depending on if the user wants to see their password or not
@@ -30,62 +40,57 @@ const InputField = (props) => {
     // default
     return (
         <>
-            <label>
-                {props.compulsory
-                    ? props.label + "*": props.label
-                    ? props.label
-                    : null}
-            </label>
+            <label>{compulsory ? label + '*' : label ? label : null}</label>
             <div
                 className={
-                    props.variant && props.variant.includes('error')
+                    variant && variant.includes('error')
                         ? 'input-div error-div'
                         : 'input-div'
                 }
             >
-                {props.variant && props.variant.includes('search') ? (
+                {variant && variant.includes('search') ? (
                     <Search className="search" />
                 ) : null}
 
                 <input
                     className="input-field"
                     placeholder={
-                        props.placeholder
-                            ? props.placeholder
-                            : props.variant && props.variant === 'search'
+                        placeholder
+                            ? placeholder
+                            : variant && variant === 'search'
                             ? 'Search'
                             : null
                     }
-                    required={props.required ? props.required : null}
+                    required={required ? required : null}
                     type={
-                        props.variant &&
-                        props.variant.includes('password') &&
+                        variant &&
+                        variant.includes('password') &&
                         passwordVisibility === 'hide'
                             ? 'password'
-                            : props.variant &&
-                              props.variant.includes('password') &&
+                            : variant &&
+                              variant.includes('password') &&
                               passwordVisibility === 'show'
                             ? 'text'
-                            : props.type
+                            : type
                     }
-                    onChange={props.onChange ? props.onChange : null}
-                    defaultValue={props.value ? props.value : ''}
+                    onChange={onChange ? onChange : null}
+                    defaultValue={value ? value : ''}
                 ></input>
-                {/* {props.type === "password"? password icon: null} */}
-                {props.variant && props.variant.includes('password') ? (
+                {/* {type === "password"? password icon: null} */}
+                {variant && variant.includes('password') ? (
                     <button className="eye" onClick={showPassword}>
                         <ShowPassword />
                     </button>
                 ) : null}
                 {/* {right-icon ? <InputIcon /> : null} */}
-                {/* props.variant === message ? <MessageOptions /> : null} */}
+                {/* variant === message ? <MessageOptions /> : null} */}
 
-                {/* {props.error ? <span>{props.error}</span> : null} Check data type based on schema */}
+                {/* {error ? <span>{error}</span> : null} Check data type based on schema */}
             </div>
-            {/*props.variant === "message"? <div></div> */}
-            {props.variant && props.variant.includes('error') ? (
+            {/*variant === "message"? <div></div> */}
+            {variant && variant.includes('error') ? (
                 <div className="error-msg">
-                    <CloseCircle /> <p>{props.msg}</p>
+                    <CloseCircle /> <p>{msg}</p>
                 </div>
             ) : null}
         </>

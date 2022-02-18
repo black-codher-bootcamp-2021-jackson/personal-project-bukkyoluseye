@@ -51,21 +51,3 @@ const NavBarItem = (props) => {
 
 export default NavBarItem
 
-   // console.log('are you working?')
-    // Check if button is active using an eventlister. The default
-    // const activeNavBarItem = (e) => {
-    //     e.preventDefault()
-    //     let previousActiveNavBarItem = document.getElementsByClassName('active-nav-bar-item')
-    //     console.log(previousActiveNavBarItem)
-    //     previousActiveNavBarItem[0].className -= ' active-nav-bar-item'
-    //     this.className += ' active-nav-bar-item'
-    // }
-    // for (var i = 0; i < btns.length; i++) {
-    //     btns[i].addEventListener('click', function () {
-    //         var current = document.getElementsByClassName('active')
-    //         current[0].className = current[0].className.replace(' active', '')
-    //         this.className += ' active'
-    //     })
-    // }
-    // I want my icon to take any svg in as a prop
-// window.localStorage.setItem('state', JSON.stringify(state)) 

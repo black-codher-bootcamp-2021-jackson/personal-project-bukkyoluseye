@@ -12,11 +12,9 @@ const CalendarView = () => {
     const onChange = async (date, e) => {
         e.preventDefault();
         setDate(date);
-        console.log(date);
         const token = localStorage.getItem('token');
         if (token) {
             const user = jwt_decode(token);
-            console.log(user.id);
             if (!user) {
                 localStorage.removeItem('token');
             } else {
@@ -24,7 +22,7 @@ const CalendarView = () => {
                     date: date,
                     id: user.id,
                 });
-                console.log(response);
+
 
                 if (response.data.booking) {
                     setBookingsList(

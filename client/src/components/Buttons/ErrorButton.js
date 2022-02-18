@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ErrorButton = (props) => {
-    console.log(props.onClick)
     return (
         <button
             className="error-btn"

@@ -14,7 +14,6 @@ const getAllBookings = async (userId) => {
     const token = localStorage.getItem('token');
     if (token && userId) {
             const response = await axios.get(`/api/bookings/tutor/${userId}`);
-            console.log(response.data.booking)
             return ((response.data.booking) || []);
         }
     

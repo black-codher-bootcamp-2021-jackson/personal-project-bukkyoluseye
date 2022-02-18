@@ -80,6 +80,7 @@ const BookingsScreen = (props) => {
         <Tab
             key={label}
             label={label}
+            labelType="lessons"
             isPressed={label === filter}
             setFilter={setFilter}
         />
@@ -111,8 +112,6 @@ const BookingsScreen = (props) => {
             <div id="bookings-screen">
                 <div id="bookings-content">
                     {bookingsList}
-                    {console.log(selectedBooking)}
-                    {console.log(show)}
                     {selectedBooking && selectedBooking.length !==0 ? (
                         <BookingsSidePanel
                             booking={selectedBooking}

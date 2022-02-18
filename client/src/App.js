@@ -35,6 +35,7 @@ function App() {
     useEffect(() => {
         if(!loggedIn){
             const token = localStorage.getItem('token');
+        
             if (token) {
                 const user = jwt_decode(token);
                 if (!user) {
@@ -42,16 +43,18 @@ function App() {
                 } else {
                     setLoggedIn(true);
                     async function getBookings() {
-                        // console.log("get bookings",bookings)
                         if (!bookings || bookings.length === 0) {
                             const response = await getAllBookings(user.id);
                             setBookings(response);
-                            console.log(response);
-                            // setLoggedIn(loggedInUser);
                         }
                     }
                     getBookings();
                 }
+            }
+
+            else {
+                const controller = new AbortController();
+                controller.abort();
             }
         }
     }, [loggedIn, bookings]);
@@ -145,7 +148,7 @@ function App() {
                         element={
                             <>
                                 {loggedIn ? (
-                                    <MoreScreen setLoggedIn={setLoggedIn} />
+                                    <MoreScreen setBookings={setBookings} setLoggedIn={setLoggedIn} />
                                 ) : (
                                     <Navigate to="/login" />
                                 )}

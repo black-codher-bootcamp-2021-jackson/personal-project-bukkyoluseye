@@ -23,7 +23,6 @@ const LogIn = (props) => {
     // log in the user
     const loginTutor = async (e) => {
         e.preventDefault();
-        console.log(email);
         const response = await axios.post(`/api/tutorprofile/login`, {
             email: email,
             password: password,
@@ -34,7 +33,6 @@ const LogIn = (props) => {
         if (data.tutorprofile) {
             localStorage.setItem('token', data.tutorprofile);
             async function getBookings() {
-                // console.log("get bookings",bookings)
                 if (!bookings || bookings.length === 0) {
                     const response = await getAllBookings();
                     setBookings(response);

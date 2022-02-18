@@ -8,7 +8,10 @@ const MoreScreen = (props) => {
             <div className="page-title">
                 <h1>More</h1>
             </div>
-            <LogOut setLoggedIn={props.setLoggedIn}/>
+            <LogOut
+                setBookings={props.setBookings}
+                setLoggedIn={props.setLoggedIn}
+            />
         </>
     );
 };

@@ -25,7 +25,6 @@ const tutorProfileRoutes = (app) => {
                     email: req.body.email.toLowerCase(),
                     password: newPassword,
                 });
-                console.log(tutorprofile);
 
                 return res.status(201).send({
                     error: false,
