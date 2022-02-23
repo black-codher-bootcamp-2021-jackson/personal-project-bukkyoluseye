@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import InputField from '../InputField';
 import TextLink from '../Buttons/TextLink';
-import StandardButton from '../Buttons/StandardButton';
+import Button from '../Buttons/Button';
 import { getAllBookings } from '../../services/tutorAppService';
 
 const LogIn = (props) => {
@@ -54,7 +54,7 @@ const LogIn = (props) => {
                 <p>New here? </p>
                 <TextLink text="Sign up" href="/" target="_self" />
             </div>
-            <form onSubmit={loginTutor}>
+            <form onSubmit={loginTutor} >
                 <InputField
                     label="Email Address"
                     type="email"
@@ -71,7 +71,7 @@ const LogIn = (props) => {
                     required="required"
                     compulsory
                 />
-                <StandardButton type="submit" label="Log In" />
+                <Button variant="primary" type="submit" label="Log In" />
             </form>
         </>
     );

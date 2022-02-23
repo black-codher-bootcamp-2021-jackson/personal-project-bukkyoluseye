@@ -78,7 +78,11 @@ const InputField = ({
                 ></input>
                 {/* {type === "password"? password icon: null} */}
                 {variant && variant.includes('password') ? (
-                    <button className="eye" onClick={showPassword}>
+                    <button
+                        className="eye"
+                        onClick={showPassword}
+                        
+                    >
                         <ShowPassword />
                     </button>
                 ) : null}

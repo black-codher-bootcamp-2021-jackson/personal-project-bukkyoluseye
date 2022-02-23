@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// let validator = require('validator')
 const { Schema } = mongoose;
 
 const nameSchema = new Schema({

@@ -1,6 +1,6 @@
 import React from 'react';
 import SubjectDetails from './SubjectDetails';
-import StandardButton from '../Buttons/StandardButton';
+import Button from '../Buttons/Button';
 import ErrorButton from '../Buttons/ErrorButton';
 import StudentAvatar from './StudentAvatar';
 import CloseButton from '../Buttons/CloseButton';
@@ -61,10 +61,11 @@ const BookingsSidePanel = (props) => {
                             <SubjectDetails student={props.booking} />
                             <p>{/*Data about plan for last lesson*/}</p>
                             <div className="two-btns">
-                                <StandardButton
+                                <Button
+                                    variant="primary"
                                     label={`Message ${props.booking.studentId.name.first}`}
                                 />
-                                <ErrorButton label="Cancel Lesson" />
+                                <Button variant="error-secondary" label="Cancel Lesson" onClick={props.cancelOnClick} />
                             </div>
                         </div>
                     </div>

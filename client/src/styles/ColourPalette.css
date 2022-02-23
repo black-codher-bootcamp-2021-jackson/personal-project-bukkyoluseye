@@ -63,7 +63,7 @@
 
     --modal-background: rgba(48, 51, 54, 0.5);
 
-    --shadow-level-1: rgba(176, 176, 176, 0.25);
+    --shadow-level-1: 0px -1px 12px rgba(176, 176, 176, 0.25);
     --shadow-level-2: rgba(176, 176, 176, 0.35);
 }
 

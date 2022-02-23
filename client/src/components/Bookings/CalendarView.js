@@ -23,12 +23,72 @@ const CalendarView = () => {
                     id: user.id,
                 });
 
-
                 if (response.data.booking) {
                     setBookingsList(
-                        response.data.booking.map((booking, index) => {
-                            return <BookingRow booking={booking} key={index} />;
-                        })
+                        response.data.booking
+                            .filter((booking) => !booking.cancelled)
+                            .map((booking, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className="booking-calendar"
+                                    >
+                                        
+                                            <span className="start-date">
+                                                {new Date(
+                                                    booking.date
+                                                ).toLocaleTimeString('en-GB', {
+                                                    hour: '2-digit',
+                                                    minute: '2-digit',
+                                                })}
+                                            </span>
+                                            <span className="end-date">
+                                                {booking.type === 'Free Meeting'
+                                                    ? new Date(
+                                                          new Date(
+                                                              booking.date
+                                                          ).getTime() +
+                                                              15 * 60000
+                                                      ).toLocaleTimeString(
+                                                          'en-GB',
+                                                          {
+                                                              hour: '2-digit',
+                                                              minute: '2-digit',
+                                                          }
+                                                      )
+                                                    : booking.type === 'Private'
+                                                    ? new Date(
+                                                          new Date(
+                                                              booking.date
+                                                          ).getTime() +
+                                                              60 * 60000
+                                                      ).toLocaleTimeString(
+                                                          'en-GB',
+                                                          {
+                                                              hour: '2-digit',
+                                                              minute: '2-digit',
+                                                          }
+                                                      )
+                                                    : booking.type === 'Schools'
+                                                    ? new Date(
+                                                          new Date(
+                                                              booking.date
+                                                          ).getTime() +
+                                                              55 * 60000
+                                                      ).toLocaleTimeString(
+                                                          'en-GB',
+                                                          {
+                                                              hour: '2-digit',
+                                                              minute: '2-digit',
+                                                          }
+                                                      )
+                                                    : null}
+                                            </span>
+                                        
+                                        <BookingRow line className="calendar-booking-row" booking={booking} />
+                                    </div>
+                                );
+                            })
                     );
                 }
             }

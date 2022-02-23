@@ -10,13 +10,11 @@ const getAllTutorProfiles = async () => {
 };
 
 const getAllBookings = async (userId) => {
-    
     const token = localStorage.getItem('token');
     if (token && userId) {
-            const response = await axios.get(`/api/bookings/tutor/${userId}`);
-            return ((response.data.booking) || []);
-        }
-    
+        const response = await axios.get(`/api/bookings/tutor/${userId}`);
+        return response.data.booking || [];
+    }
 };
 
 const getAllStudentProfiles = async () => {
@@ -25,7 +23,17 @@ const getAllStudentProfiles = async () => {
     return response.data || [];
 };
 
+const getAllSubjects = async () => {
+    const response = await axios.get(`/api/subjects`);
+    return response.data || [];
+    
+};
+
+
+
+
 // All of the endpoints in this file can be exported below
 export { getAllTutorProfiles };
 export { getAllBookings };
 export { getAllStudentProfiles };
+export { getAllSubjects };

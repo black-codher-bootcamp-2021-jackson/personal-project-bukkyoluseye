@@ -5,6 +5,8 @@ const Attach = (props) => (
         x={0}
         y={0}
         viewBox="0 0 24 24"
+        version="1.1"
+        preserveAspectRatio="xMidYMid meet"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         {...props}

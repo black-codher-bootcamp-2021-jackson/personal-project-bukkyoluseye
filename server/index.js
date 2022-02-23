@@ -9,6 +9,7 @@ const cors = require('cors');
 require('./models/TutorProfile');
 require('./models/StudentProfile');
 require('./models/Bookings');
+require('./models/Subjects');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(cors());
 require('./routes/tutorprofilesRoutes')(app);
 require('./routes/bookingsRoutes')(app);
 require('./routes/studentprofilesRoutes')(app);
+require('./routes/subjectsRoutes')(app);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

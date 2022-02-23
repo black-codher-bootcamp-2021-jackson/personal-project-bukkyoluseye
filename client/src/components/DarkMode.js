@@ -40,7 +40,7 @@ const DarkMode = () => {
 
     return (
         <>
-            <button id="darkMode" onClick={switchTheme}>
+            <button id="darkMode" onClick={switchTheme} >
                 {theme === 'dark' ? (
                     <svg
                         className="sun"
@@ -66,7 +66,7 @@ const DarkMode = () => {
                 )}
             </button>
         </>
-    )
+    );
 }
 
 export default DarkMode

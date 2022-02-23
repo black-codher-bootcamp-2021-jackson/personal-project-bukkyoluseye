@@ -1,4 +1,9 @@
 @import './ColourPalette.css';
+
+.messages-screen {
+    display: flex;
+    flex-direction: row;
+}
 .message-content {
     white-space: nowrap;
     overflow: hidden;
@@ -33,7 +38,13 @@
     fill: var(--grey-4);
 }
 
+.chat {
+    width: 100%;
+    padding: 0px 32px;
+}
+
 .send-message {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,6 +63,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .send-message-input {
@@ -72,8 +84,8 @@
     fill: var(--grey-1);
 }
 
-
 .messages-list {
     height: 100%;
     padding: 32px;
+    flex-basis: calc(100/3%);
 }

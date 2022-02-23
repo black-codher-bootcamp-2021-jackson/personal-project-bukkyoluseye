@@ -6,7 +6,7 @@ const DarkModeButton = (props) => {
     // console.log(props)
     // console.log(props.theme)
     return (
-        <button id="darkMode" onClick={props.onClick}>
+        <button id="darkMode" onClick={props.onClick} >
             {/* Button would be moved into the side navBar - take props for onclick = switchTheme */}
             {props.theme === 'dark' ? (
                 <svg

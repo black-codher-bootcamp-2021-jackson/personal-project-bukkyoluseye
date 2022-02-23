@@ -1,4 +1,5 @@
 import React from 'react';
+import CloseCircle from '../../assets/SVGR/CloseCircle';
 import StudentAvatar from './StudentAvatar';
 
 const BookingRow = (props) => {
@@ -15,17 +16,21 @@ const BookingRow = (props) => {
 
     return (
         <div
-            onClick={props.onClick}
             className={
                 props.className
                     ? `${props.className} booking-row`
                     : 'booking-row'
             }
         >
+            {props.line? <hr className="vertical-line"></hr>:null}
             <StudentAvatar student={props.booking.studentId} />
-            <div className="booking-row-info">
+            <div
+                className="booking-row-info"
+                onClick={!props.booking.cancelled ? props.onClick : null}
+                role="button"
+            >
                 <div className="booking-2-items name-subject">
-                    <p>{`${props.booking.studentId.name.first} ${props.booking.studentId.name.last[0]}.`}</p>
+                    <p className="booking-student-name">{`${props.booking.studentId.name.first} ${props.booking.studentId.name.last[0]}.`}</p>
                     <p className="subject">{`${props.booking.subject} ${props.booking.level}`}</p>
                 </div>
                 <div className="booking-date">
@@ -49,7 +54,7 @@ const BookingRow = (props) => {
                             ? `${props.booking.type} Lesson`
                             : props.booking.type}
                     </p>
-                    <p>
+                    <p className="booking-frequency">
                         {props.booking.frequency
                             ? `${props.booking.frequency} Slot`
                             : null}
@@ -61,6 +66,15 @@ const BookingRow = (props) => {
                     </p>
                 </div>
             </div>
+            {!props.booking.cancelled ? (
+                <div
+                    className="cancel-x"
+                    onClick={props.cancelOnClick}
+                    role="button"
+                >
+                    <CloseCircle />
+                </div>
+            ) : null}
         </div>
     );
 };

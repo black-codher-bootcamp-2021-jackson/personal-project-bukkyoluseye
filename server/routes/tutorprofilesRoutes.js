@@ -61,7 +61,7 @@ const tutorProfileRoutes = (app) => {
                         email: tutorprofile.email,
                         id: tutorprofile._id,
                     },
-                    process.env.SECRET
+                    process.env.JWT_SECRET
                 );
                 return res.status(201).send({
                     error: false,

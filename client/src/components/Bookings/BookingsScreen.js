@@ -6,6 +6,7 @@ import Tab from '../Tabs/Tab';
 import BookingsSidePanel from './BookingsSidePanel';
 import BookingRow from './BookingRow';
 import CalendarView from './CalendarView';
+import ConfirmModal from '../ConfirmModal';
 import jwt_decode from 'jwt-decode';
 
 // This is for the tab filtering
@@ -19,7 +20,9 @@ const tabNames = Object.keys(tabMap);
 
 const BookingsScreen = (props) => {
     const [show, setShow] = useState(false);
+    const [cancelShow, setCancelShow] = useState(false);
     const [selectedBooking, setSelectedBooking] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
     // function treatAsUTC(date) {
@@ -49,15 +52,20 @@ const BookingsScreen = (props) => {
         if (!response.error) {
             setSelectedBooking(response.data.booking);
             setShow(true);
-
         } else {
             console.log('error', response.error);
         }
     }
 
-    const onClose = () => {
-        setShow(false);
-    };
+    async function getSelectedBookingCancel(bookingId) {
+        const response = await axios.get(`/api/bookings/${bookingId}`);
+        if (!response.error) {
+            setSelectedBooking(response.data.booking);
+            setCancelShow(true);
+        } else {
+            console.log('error', response.error);
+        }
+    }
 
     // async function search(value) {
     //     const results = axios.get()
@@ -85,10 +93,23 @@ const BookingsScreen = (props) => {
             setFilter={setFilter}
         />
     ));
-
-    const cancelLesson = async () => {
-        const response = await axios.patch('/api/bookings/:id/cancelled')
+    const onCancelModalClose = () => {
+        setCancelShow(false);
     };
+    const cancelLesson = async (id) => {
+        const response = await axios.patch(`/api/bookings/${id}/cancelled`);
+        setCancelShow(false);
+        window.location.reload();
+    };
+    const onPanelClose = () => {
+        setShow(false);
+    };
+
+    const cancelOnClick = () => {
+        setCancelShow(true);
+    };
+    // {
+    //     () => cancelLesson(booking._id)
 
     const bookingsList = props.bookings
         .filter(tabMap[filter])
@@ -98,29 +119,48 @@ const BookingsScreen = (props) => {
                     booking={booking}
                     key={index}
                     onClick={() => getSelectedBooking(booking._id)}
+                    cancelOnClick={() => getSelectedBookingCancel(booking._id)}
                 />
             );
-        });
+        })
+        .filter((booking) =>
+            booking.props.booking.studentId.name.first
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase())
+        );
 
     return (
         <>
             <div className="page-title">
                 <h1>Bookings</h1>
-                <InputField variant="search" placeholder="Search by student" />
+                <InputField
+                    variant="search"
+                    placeholder="Search by student"
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                {selectedBooking && selectedBooking.length !== 0 ? (
+                    <ConfirmModal
+                        cancelShow={cancelShow}
+                        onClose={onCancelModalClose}
+                        cancelLesson={() => cancelLesson(selectedBooking._id)}
+                        booking={selectedBooking}
+                    />
+                ) : null}
             </div>
             <ul className="tabs-nav">{tabs}</ul>
             <div id="bookings-screen">
-                <div id="bookings-content">
-                    {bookingsList}
-                    {selectedBooking && selectedBooking.length !==0 ? (
-                        <BookingsSidePanel
-                            booking={selectedBooking}
-                            show={show}
-                            onClose={onClose}
-                            tab={filter}
-                        />
-                    ) : null}
-                </div>
+                <main id="bookings-content">{bookingsList}</main>
+                {selectedBooking && selectedBooking.length !== 0 ? (
+                    <BookingsSidePanel
+                        booking={selectedBooking}
+                        show={show}
+                        onClose={onPanelClose}
+                        tab={filter}
+                        cancelOnClick={() =>
+                            getSelectedBookingCancel(selectedBooking._id)
+                        }
+                    />
+                ) : null}
                 <CalendarView />
             </div>
         </>

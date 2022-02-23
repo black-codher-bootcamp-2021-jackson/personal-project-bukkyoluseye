@@ -1,0 +1,52 @@
+@import './ColourPalette.css';
+
+.std-btn {
+    font-size: var(--p1-font-size);
+    font-weight: 600;
+    padding: 8px 16px;
+}
+
+
+.primary {
+    background-color: var(--primary-color-default);
+    border: 2px solid var(--primary-color-default);
+    color: var(--grey-7);
+}
+
+.error-primary {
+    background-color: var(--rag-error-default);
+    border: 2px solid var(--rag-error-default);
+    color: var(--grey-7);
+}
+
+/* Secondary Button */
+.secondary {
+    color: var(--primary-color-default);
+    border: 2px solid var(--primary-color-default);
+    background-color: var(--grey-7);
+}
+
+.error-secondary {
+    background-color: var(--grey-7);
+    border: 2px solid var(--rag-error-default);
+    color: var(--rag-error-default);
+}
+
+/* Text Link Button */
+.text-link {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    text-decoration: none;
+}
+.text-link p {
+    color: var(--primary-color-default);
+}
+
+.text-link svg {
+    width: 16px;
+    height: auto;
+    stroke: var(--primary-color-default);
+    stroke-width: 45px;
+}
+

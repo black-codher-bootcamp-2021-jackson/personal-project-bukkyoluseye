@@ -134,7 +134,7 @@ const bookingsRoutes = (app) => {
 
         const bookings = await Bookings.findByIdAndUpdate(id, {
             cancelled: true,
-            status: 'cancelled',
+            status: 'Cancelled',
         });
 
         return res.status(202).send({

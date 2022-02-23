@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import TextLink from '../Buttons/TextLink';
-import StandardButton from '../Buttons/StandardButton';
+import Button from '../Buttons/Button';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const SignUp = () => {
                 email: email,
                 password: password,
             })
-            .then((navigate("/bookings")))
+            .then(navigate('/bookings'))
             // .then(call a modal to open)
             .catch(function (error) {
                 console.log(error);
@@ -36,7 +36,7 @@ const SignUp = () => {
                 <p>Already have an account? </p>
                 <TextLink text="Log in" href="/login" target="_self" />
             </div>
-            <form id="signup" onSubmit={registerTutor}>
+            <form id="signup" onSubmit={registerTutor} >
                 <InputField
                     label="First Name*"
                     type="text"
@@ -57,7 +57,12 @@ const SignUp = () => {
                     variant="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <StandardButton form="signup" type="submit" label="Sign Up" />
+                <Button
+                    variant="primary"
+                    form="signup"
+                    type="submit"
+                    label="Sign Up"
+                />
             </form>
         </>
     );

@@ -10,7 +10,9 @@ const Tab = (props) => {
         >
             <span className="visually-hidden">Show </span>
             <span>{props.label}</span>
-            <span className="visually-hidden">{props.labelType? ` ${props.labelType}` : null}</span>
+            <span className="visually-hidden">
+                {props.labelType ? ` ${props.labelType}` : null}
+            </span>
         </button>
     );
 };

@@ -26,10 +26,10 @@ const MessagesScreen = () => {
     ));
 
     return (
-        <>
+        <div className="messages-screen">
             <div className="messages-list">
                 <div className="messages-page-title">
-                    <h1>Messages</h1>
+                    <h1 >Messages</h1>
                     <NewMessage className="new-message" />
                 </div>
                 <div>
@@ -41,10 +41,10 @@ const MessagesScreen = () => {
                 <ul className="tabs-nav">{tabs}</ul>
                 <MessagesRow />
             </div>
-            <div>
+            <div className="chat">
                 <SendMessage />
             </div>
-        </>
+        </div>
     );
 };
 
