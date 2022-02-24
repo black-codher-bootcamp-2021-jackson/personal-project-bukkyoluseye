@@ -93,30 +93,30 @@ const bookingsRoutes = (app) => {
         }
     });
 
-    app.post(`/api/bookings/search/:studentName`, async (req, res) => {
-        // Search - find by bookings by tutor id - populate data first then find by student name
+    // app.post(`/api/bookings/search?studentname=:studentName`, async (req, res) => {
+    //     // Search - find by bookings by tutor id - populate data first then find by student name
 
-        const booking = await Bookings.find({
-            tutorId: req.body.id,
-        })
-            .populate('tutorId')
-            .populate('studentId');
-        // studentId: {
-        //     name: {
-        //         first: req.params.studentName;
-        //     }
-        // }
+    //     const booking = await Bookings.find({
+    //         tutorId: req.body.id,
+    //     })
+    //         .populate('tutorId')
+    //         .populate('studentId');
+    //     // studentId: {
+    //     //     name: {
+    //     //         first: req.params.studentName;
+    //     //     }
+    //     // }
 
-        return res.status(200).send({
-            error: false,
-            booking,
-        });
-        // } catch (err) {
-        //     return res.status(500).send({
-        //         err,
-        //     });
-        // }
-    });
+    //     return res.status(200).send({
+    //         error: false,
+    //         booking,
+    //     });
+    //     // } catch (err) {
+    //     //     return res.status(500).send({
+    //     //         err,
+    //     //     });
+    //     // }
+    // });
 
     app.put(`/api/bookings/:id`, async (req, res) => {
         const { id } = req.params;

@@ -1,9 +1,9 @@
 @import './ColourPalette.css';
+@import './Bookings.css';
 @import './NavBar.css';
 @import './Tabs.css';
 @import './CalendarStyles.css';
 @import './Messages.css';
-@import './Bookings.css';
 @import './Buttons.css';
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
@@ -18,14 +18,6 @@
     margin: 0px;
     font-size: var(--p1-font-size);
     font-family: Outfit, sans-serif;
-}
-
-.calendar-carousel {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    padding-right: 32px;
 }
 
 .calendar-carousel .student-avatar,
@@ -85,7 +77,6 @@ h2,
 h3,
 h4,
 h5 {
-    /* margin: 3rem 0 1.38rem; */
     font-family: 'Outfit', sans-serif;
     line-height: 1.3;
 }
@@ -139,10 +130,10 @@ p {
     border: 2px solid var(--primary-color-default);
     box-sizing: border-box;
     border-radius: 100px;
-
     font-weight: 600;
     gap: 8px;
 }
+
 #subject-select {
     width: 100%;
 }
@@ -270,20 +261,8 @@ p {
     gap: 12px;
     align-self: stretch;
 }
-.bookings-side-panel {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    background-color: var(--grey-7);
-    width: 60vw;
-    height: 60%;
-    position: fixed;
-    overflow-x: hidden;
-    padding: 0;
-}
-.bookings-side-panel span {
-    margin: 0px 32px;
-}
+
+
 #bookings-date {
     margin: 0px 32px 24px;
 }
@@ -414,7 +393,7 @@ button {
 
 .booking-calendar {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 2.3rem 1fr;
     grid-template-rows: 1fr 1fr;
     align-self: stretch;
     column-gap: 8px;
@@ -588,7 +567,7 @@ input::-ms-input-placeholder {
 }
 
 .booking-row-info {
-    display: flex;
+    display: flex; /* switch to grid*/
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -654,6 +633,7 @@ input::-ms-input-placeholder {
         margin-left: 88px;
     }
     #bookings-content {
+        justify-content: flex-start;
         padding: 24px 32px 0px;
         width: calc(100% - 368px);
     }
@@ -693,6 +673,13 @@ input::-ms-input-placeholder {
     .page-title .input-div {
         display: flex;
     }
+
+    .page-title h1 {
+        color: var(--grey-1);
+    }
+    .calendar-carousel {
+    padding-right: 32px;
+}
 }
 /* @media only screen and (min-width: ) {
   

@@ -2,6 +2,7 @@
 
 #bottom-nav {
     background: var(--grey-7);
+    border-top: 0.05px solid var(--grey-5);
     box-shadow: 0px -1px 20px var(--shadow-level-1);
     display: flex;
     bottom: 0px;
@@ -10,6 +11,7 @@
     position: fixed;
     padding: 8px 5vw 16px;
     justify-content: space-between;
+    z-index:1;
 }
 
 #bottom-nav a {
@@ -50,6 +52,7 @@
 .nav-label {
     text-decoration: none;
     font-weight: 600;
+    font-size: var(--p3-font-size);
 }
 
 #side-nav {

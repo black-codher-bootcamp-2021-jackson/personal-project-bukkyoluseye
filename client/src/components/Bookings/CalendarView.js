@@ -8,6 +8,13 @@ import NoBookings from './NoBookings';
 const CalendarView = () => {
     const [date, setDate] = useState(new Date());
     const [bookingsList, setBookingsList] = useState(null);
+    const options = { hour: '2-digit', minute: '2-digit' };
+    
+    const endTime = (bookingDate, length) => {
+        return new Date(
+            new Date(bookingDate).getTime() + length * 60000
+        ).toLocaleTimeString('en-GB', options);
+    };
 
     const onChange = async (date, e) => {
         e.preventDefault();
@@ -33,59 +40,24 @@ const CalendarView = () => {
                                         key={index}
                                         className="booking-calendar"
                                     >
-                                        
-                                            <span className="start-date">
-                                                {new Date(
-                                                    booking.date
-                                                ).toLocaleTimeString('en-GB', {
-                                                    hour: '2-digit',
-                                                    minute: '2-digit',
-                                                })}
-                                            </span>
-                                            <span className="end-date">
-                                                {booking.type === 'Free Meeting'
-                                                    ? new Date(
-                                                          new Date(
-                                                              booking.date
-                                                          ).getTime() +
-                                                              15 * 60000
-                                                      ).toLocaleTimeString(
-                                                          'en-GB',
-                                                          {
-                                                              hour: '2-digit',
-                                                              minute: '2-digit',
-                                                          }
-                                                      )
-                                                    : booking.type === 'Private'
-                                                    ? new Date(
-                                                          new Date(
-                                                              booking.date
-                                                          ).getTime() +
-                                                              60 * 60000
-                                                      ).toLocaleTimeString(
-                                                          'en-GB',
-                                                          {
-                                                              hour: '2-digit',
-                                                              minute: '2-digit',
-                                                          }
-                                                      )
-                                                    : booking.type === 'Schools'
-                                                    ? new Date(
-                                                          new Date(
-                                                              booking.date
-                                                          ).getTime() +
-                                                              55 * 60000
-                                                      ).toLocaleTimeString(
-                                                          'en-GB',
-                                                          {
-                                                              hour: '2-digit',
-                                                              minute: '2-digit',
-                                                          }
-                                                      )
-                                                    : null}
-                                            </span>
-                                        
-                                        <BookingRow line className="calendar-booking-row" booking={booking} />
+                                        <span className="start-date">
+                                            {endTime(booking.date, 0)}
+                                        </span>
+                                        <span className="end-date">
+                                            {booking.type === 'Free Meeting'
+                                                ? endTime(booking.date, 15)
+                                                : booking.type === 'Private'
+                                                ? endTime(booking.date, 60)
+                                                : booking.type === 'Schools'
+                                                ? endTime(booking.date, 55)
+                                                : null}
+                                        </span>
+
+                                        <BookingRow
+                                            line
+                                            className="calendar-booking-row"
+                                            booking={booking}
+                                        />
                                     </div>
                                 );
                             })
@@ -102,13 +74,19 @@ const CalendarView = () => {
         <div className="calendar-carousel">
             <div className="calendar">
                 <Calendar onChange={onChange} value={date} />
-                <p>{date.toLocaleDateString()}</p>
             </div>
-            {bookingsList && bookingsList.length > 0 ? (
-                bookingsList
-            ) : (
-                <NoBookings />
-            )}
+            <div className="calendar-booking-list">
+                <h5 className="calendar-date">
+                    {new Date().setHours(0, 0, 0, 0) ===
+                    new Date(date).setHours(0, 0, 0, 0)
+                        ? "Today (" + date.toLocaleDateString() +")" : date.toLocaleDateString()}
+                </h5>
+                {bookingsList && bookingsList.length > 0 ? (
+                    bookingsList
+                ) : (
+                    <NoBookings />
+                )}
+            </div>
         </div>
     );
 };

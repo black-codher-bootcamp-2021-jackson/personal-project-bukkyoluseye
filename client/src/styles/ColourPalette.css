@@ -1,17 +1,21 @@
-.light {
-    padding-left: 88px;
-    height: 100%;
+.light,
+.dark {
+    overflow-x: hidden;
 
     /*Text Styles  */
-    --h1-font-size: 2.25rem; /*Large Titles*/
-    --h2-font-size: 1.75rem; /*Titles*/
-    --h3-font-size: 1.5625rem; /*Body Titles*/
-    --h4-font-size: 1.375rem; /*Body Titles*/
+    --h1-font-size: 1.802rem; /*Large Titles*/
+    --h2-font-size: 1.602rem; /*Titles*/
+    --h3-font-size: 1.424rem; /*Body Titles*/
+    --h4-font-size: 1.266rem; /*Body Titles*/
     --h5-font-size: 1.125rem; /*Body Titles*/
     --pl-font-size: 1rem; /*Large Body Copy*/
     --p2-font-size: 0.875rem; /*Tags*/
     --p3-font-size: 0.75rem; /*Body Copy, CTAs*/
 
+    height: 100%;
+}
+
+.light {
     /* Light Mode Design System */
     --primary-color-default: rgba(84, 46, 255, 1);
     --primary-color-light: rgba(227, 221, 255, 1);
@@ -69,9 +73,6 @@
 
 /*Dark Mode Design System */
 .dark {
-    overflow-x: hidden;
-    padding-left: 88px;
-    height: 100%;
     background-color: #121212;
     /*
   --primary-color-default: ;
@@ -126,4 +127,22 @@
   --grey-6: #f5f4f7;
   --grey-7: #ffffff;
   */
+}
+
+/* Tablet (S) */
+@media screen and (min-width: 867px) {
+    .light,
+    .dark {
+        padding-left: 88px;
+
+        /*Text Styles  */
+        --h1-font-size: 2.25rem; /*Large Titles*/
+        --h2-font-size: 1.75rem; /*Titles*/
+        --h3-font-size: 1.5625rem; /*Body Titles*/
+        --h4-font-size: 1.375rem; /*Body Titles*/
+        --h5-font-size: 1.125rem; /*Body Titles*/
+        --pl-font-size: 1rem; /*Large Body Copy*/
+        --p2-font-size: 0.875rem; /*Tags*/
+        --p3-font-size: 0.75rem; /*Body Copy, CTAs*/
+    }
 }

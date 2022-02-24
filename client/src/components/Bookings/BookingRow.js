@@ -22,7 +22,7 @@ const BookingRow = (props) => {
                     : 'booking-row'
             }
         >
-            {props.line? <hr className="vertical-line"></hr>:null}
+            {props.line ? <hr className="vertical-line"></hr> : null}
             <StudentAvatar student={props.booking.studentId} />
             <div
                 className="booking-row-info"
@@ -55,8 +55,10 @@ const BookingRow = (props) => {
                             : props.booking.type}
                     </p>
                     <p className="booking-frequency">
-                        {props.booking.frequency
+                        {props.booking.frequency && props.slot
                             ? `${props.booking.frequency} Slot`
+                            : props.booking.frequency
+                            ? props.booking.frequency
                             : null}
                     </p>
                 </div>
