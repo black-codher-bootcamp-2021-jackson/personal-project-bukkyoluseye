@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// let validator = require('validator')
 const { Schema } = mongoose;
 
 const nameSchema = new Schema({
@@ -10,7 +9,7 @@ const nameSchema = new Schema({
 
     last: {
         type: String,
-        required: [true, 'Please enter your last name'],
+        required: [false],
     },
 });
 
@@ -41,21 +40,21 @@ const tutorProfileSchema = new Schema({
         index: { unique: true },
         lowercase: true,
     },
-    // password: {
-    //     type: String,
-    //     required: true,
-    // },
+    password: {
+        type: String,
+        required: true,
+    },
     pronouns: {
         type: String,
         required: false,
     },
     subject: {
         type: [subjectDetailsSchema],
-        required: true,
+        required: false,
     },
     availableToBook: {
         type: Boolean,
-        required: true,
+        required: false,
     },
 });
 

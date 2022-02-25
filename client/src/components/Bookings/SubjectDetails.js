@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import ChevronDown from '../../assets/SVGR/ChevronDown'
-import ChevronUp from '../../assets/SVGR/ChevronUp'
-import OpenLink from '../../assets/SVGR/OpenLink'
-import TextLink from '../Buttons/TextLink'
+import React, { useState } from 'react';
+import ChevronDown from '../../assets/SVGR/ChevronDown';
+import ChevronUp from '../../assets/SVGR/ChevronUp';
+import OpenLink from '../../assets/SVGR/OpenLink';
+import TextLink from '../Buttons/TextLink';
 
 const SubjectDetails = (props) => {
-    const [isActive, setIsActive] = useState('true')
+    const [isActive, setIsActive] = useState('true');
     return (
         <>
             <div className="accordion-item">
@@ -27,33 +27,52 @@ const SubjectDetails = (props) => {
                         </p>
                         <p className="dtl-title">Tier</p>
                         <p className="dtl-content">
-                            {props.student.tier ?
-                                props.student.tier : "n/a"}
+                            {props.student.tier ? props.student.tier : 'n/a'}
                         </p>
                         <p className="dtl-title">Current grade</p>
                         <p className="dtl-content">
-                            {props.student.grade.current ?
-                                props.student.grade.current : "n/a"}
+                            {props.student.grade.current
+                                ? props.student.grade.current
+                                : 'n/a'}
                         </p>
                         <p className="dtl-title">Target grade</p>
                         <p className="dtl-content">
-                            {props.student.grade.target?
-                                props.student.grade.target : "n/a"}
-                            
+                            {props.student.grade.target
+                                ? props.student.grade.target
+                                : 'n/a'}
                         </p>
                         <p className="dtl-title">Exam board</p>
-                        <TextLink
+                        {props.student.examBoard
+                                    ? <TextLink
                             className="dtl-content"
-                            href="https://qualifications.pearson.com/en/home.html"
-                            text={props.student.examBoard?
-                                props.student.examBoard : "n/a"}
-                            icon={<OpenLink />}
-                        />
+                            href={
+                                props.student.examBoard === 'Edexcel'
+                                    ? 'https://qualifications.pearson.com/en/home.html'
+                                    : props.student.examBoard === 'AQA'
+                                        ? 'https://www.aqa.org.uk/'
+                                        : props.student.examBoard === 'OCR'
+                                            ? 'https://ocr.org.uk/'
+                                            : props.student.examBoard === 'WJEC'
+                                                ? 'https://www.wjec.co.uk/'
+                                                : props.student.examBoard ===
+                                                    'City & Guilds'
+                                                    ? 'https://www.cityandguilds.com/'
+                                                    : props.student.examBoard === 'CCEA'
+                                                        ? 'https://ccea.org.uk/'
+                                                        : props.student.examBoard === 'SQA'
+                                                            ? 'https://www.sqa.org.uk/'
+                                                            : null
+                            }
+                            text={
+                                props.student.examBoard
+                            }
+                            icon={ <OpenLink /> }
+                        />: <p className="dtl-content">n/a</p>}
                     </div>
                 ) : null}
             </div>
         </>
     );
-}
+};
 
-export default SubjectDetails
+export default SubjectDetails;

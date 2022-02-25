@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import StandardButton from '../Buttons/StandardButton';
+import { useNavigate } from 'react-router-dom';
+import ErrorButton from '../Buttons/ErrorButton';
 
-const LogOut = () => {
-    const user = localStorage.getItem(user);
-    const [email, setEmail] = useState(user.email);
-    const [password, setPassword] = useState(user.password);
-
-    const handleLogout = () => {
-        setUser({});
-        setEmail('');
-        setPassword('');
-        localStorage.clear();
+const LogOut = (props) => {
+    const navigate = useNavigate();
+    const handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        props.setLoggedIn(false);
+        props.setBookings([])
+        navigate('/login');
     };
-    return <>{user ? <StandardButton onClick={ handleLogout} label="Log Out" /> : null}</>;
+
+    return (
+        <>
+            <ErrorButton type="button" onClick={handleLogout} label="Log Out" />
+        </>
+    );
 };
 
 export default LogOut;

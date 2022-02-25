@@ -1,37 +1,82 @@
 import React from 'react';
+import CloseCircle from '../../assets/SVGR/CloseCircle';
 import StudentAvatar from './StudentAvatar';
 
 const BookingRow = (props) => {
+    const day = {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'long',
+    };
+
+    const time = {
+        hour: '2-digit',
+        minute: '2-digit',
+    };
+
     return (
-        <div onClick={props.onClick} className="booking-row">
+        <div
+            className={
+                props.className
+                    ? `${props.className} booking-row`
+                    : 'booking-row'
+            }
+        >
+            {props.line ? <hr className="vertical-line"></hr> : null}
             <StudentAvatar student={props.booking.studentId} />
-            <div className="booking-row-info">
-                <div className="booking-2-items">
-                    <p>{`${props.booking.studentId.name.first} ${props.booking.studentId.name.last[0]}.`}</p>
-                    <p>{`${props.booking.subject} ${props.booking.level}`}</p>
+            <div
+                className="booking-row-info"
+                onClick={!props.booking.cancelled ? props.onClick : null}
+                role="button"
+            >
+                <div className="booking-2-items name-subject">
+                    <p className="booking-student-name">{`${props.booking.studentId.name.first} ${props.booking.studentId.name.last[0]}.`}</p>
+                    <p className="subject">{`${props.booking.subject} ${props.booking.level}`}</p>
                 </div>
-                <div>
-                    <p></p>
-                    <p></p>
-                </div>
-                <div className="booking-2-items">
+                <div className="booking-date">
                     <p>
-                        {props.booking.type != 'Free Meeting'
+                        {new Date(props.booking.date).toLocaleDateString(
+                            'en-GB',
+                            day
+                        )}
+                    </p>
+                    <p>
+                        {new Date(props.booking.date).toLocaleTimeString(
+                            'en-GB',
+                            time
+                        )}
+                    </p>
+                    <p></p>
+                </div>
+                <div className="booking-2-items lesson-freq">
+                    <p>
+                        {props.booking.type !== 'Free Meeting'
                             ? `${props.booking.type} Lesson`
                             : props.booking.type}
                     </p>
-                    <p>
-                        {props.booking.frequency
+                    <p className="booking-frequency">
+                        {props.booking.frequency && props.slot
                             ? `${props.booking.frequency} Slot`
+                            : props.booking.frequency
+                            ? props.booking.frequency
                             : null}
                     </p>
                 </div>
-                <div>
-                    <p className={`${props.booking.status.toLowerCase()} tag` }>
+                <div className="status">
+                    <p className={`${props.booking.status.toLowerCase()} tag`}>
                         {props.booking.status}
                     </p>
                 </div>
             </div>
+            {!props.booking.completed && !props.booking.cancelled && props.windowWidth && props.windowWidth > 867 ? (
+                <div
+                    className="cancel-x"
+                    onClick={props.cancelOnClick}
+                    role="button"
+                >
+                    <CloseCircle />
+                </div>
+            ) : null}
         </div>
     );
 };

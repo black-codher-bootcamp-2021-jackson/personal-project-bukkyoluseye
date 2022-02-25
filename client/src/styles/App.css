@@ -1,6 +1,10 @@
 @import './ColourPalette.css';
+@import './Bookings.css';
 @import './NavBar.css';
 @import './Tabs.css';
+@import './CalendarStyles.css';
+@import './Messages.css';
+@import './Buttons.css';
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 #root {
@@ -12,10 +16,53 @@
 }
 * {
     margin: 0px;
-    color: var(--grey-1);
+    font-size: var(--p1-font-size);
     font-family: Outfit, sans-serif;
 }
 
+.calendar-carousel .student-avatar,
+.calendar-carousel .booking-date,
+.calendar-carousel .cancel-x {
+    display: none;
+}
+.calendar-carousel .name-subject {
+    flex-direction: row;
+    font-weight: 700;
+    justify-content: flex-start;
+}
+/* .calendar-carousel .booking-row-info {
+    flex-direction: column;
+    align-items: flex-start;
+} */
+.calendar-carousel svg {
+    width: 60%;
+}
+
+.calendar-carousel .tag {
+    padding: 1px 8px;
+    justify-content: flex-start;
+}
+
+.calendar-carousel .subject::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 15px;
+    background-color: var(--grey-1);
+    margin: 0px 4px;
+}
+
+.calendar-carousel .booking-row {
+    align-self: stretch;
+}
+
+
+.calendar-carousel .lesson-freq {
+    flex-direction: row;
+}
 html {
     font-size: 100%;
 } /*16px*/
@@ -32,7 +79,6 @@ h2,
 h3,
 h4,
 h5 {
-    /* margin: 3rem 0 1.38rem; */
     font-family: 'Outfit', sans-serif;
     line-height: 1.3;
 }
@@ -59,6 +105,71 @@ h5 {
     font-size: var(--h5-font-size);
 }
 
+p {
+    font-size: var(--p1-font-size);
+}
+
+.level-qtn {
+    display: flex;
+}
+
+.level-qtn span {
+    font-weight: 600;
+    margin: 0px 3px;
+}
+.pills {
+    display: flex;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+}
+.pill-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    border: 2px solid var(--primary-color-default);
+    box-sizing: border-box;
+    border-radius: 100px;
+    font-weight: 600;
+    gap: 8px;
+}
+
+#subject-select {
+    width: 100%;
+}
+#signup-extra {
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+}
+.pill-qtn {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.pill-btn svg {
+    fill: var(--primary-color-default);
+    width: 16px;
+    height: auto;
+}
+.inactive-pill {
+    background: var(--grey-7);
+    stroke: var(--primary-color-default);
+    color: var(--primary-color-default);
+    fill: var(--primary-color-default);
+}
+.active-pill {
+    background: var(--primary-color-default);
+    color: var(--grey-7);
+}
+
+.active-pill svg {
+    fill: var(--grey-7);
+}
 .moon:hover {
     fill: var(--grey-1);
     stroke: var(--grey-1);
@@ -95,15 +206,14 @@ h5 {
     align-items: center;
 }
 .student-avatar {
+    display: block;
     width: 50px;
     height: 50px;
     font-weight: 700;
-    margin-bottom: 16px;
     color: var(--grey-1);
     letter-spacing: 0.05em;
-    font-size: 22px;
+    font-size: var(--h5-font-size);
     border: none;
-    box-shadow: 0px 3px 6px var(--grey-5);
     background-color: var(--accent-2-color-default); /* Remove this */
 }
 
@@ -124,39 +234,37 @@ h5 {
 .subject-dtls {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-self: stretch;
 }
 
 .dtl-content {
     justify-self: end;
 }
 
+.dtl-title {
+    color: var(--grey-2);
+}
+
 .student-summary {
     display: grid;
     grid-template-columns: auto 1fr;
-    margin-bottom: 24px;
+    column-gap: 12px;
 }
 
 .student-summary .student-avatar {
     grid-row: 1 / span 2;
 }
 .bookings-side-panel .accordion-item {
-    margin-bottom: 24px;
-}
-.bookings-side-panel {
     display: flex;
     flex-direction: column;
-    width: 80vw;
-    background-color: var(--grey-7);
-    width: 60vw;
-    height: 60%;
-    position: fixed;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    padding: 0 32px 32px;
+    justify-content: stretch;
+    flex: 0;
+    gap: 12px;
+    align-self: stretch;
 }
 
 #bookings-date {
-    margin-bottom: 24px;
+    margin: 0px 32px 24px;
 }
 
 #darkMode {
@@ -244,6 +352,7 @@ button {
     background: transparent;
     margin: 0px;
     height: 100%;
+    align-self: stretch;
     width: 100%;
 }
 
@@ -251,23 +360,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
-
-.text-link {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    text-decoration: none;
-}
-.text-link p {
-    color: var(--primary-color-default);
-}
-
-.text-link svg {
-    width: 16px;
-    height: auto;
-    stroke: var(--primary-color-default);
-    stroke-width: 45px;
+    align-self: stretch;
 }
 
 .close-btn svg {
@@ -278,24 +371,139 @@ button {
 
 .close-div {
     display: flex;
-    width: 100%;
+    align-self: stretch;
     padding: 16px 0 0;
     justify-content: flex-end;
 }
 
+.close-div .close-btn {
+    margin-right: 16px;
+}
+
 .have-you {
-    display: inline-flex;
+    display: flex;
+    flex-direction: column;
 }
 
-.std-btn {
-    background-color: var(--primary-color-default);
-    border: 2px solid var(--primary-color-default);
-    color: var(--grey-7);
-    font-size: var(--p1-font-size);
+.switch-login {
+   display: flex;
+   gap: 4px;
+    flex-direction: row; 
+}
+
+.cancel-warning {
+    fill: var(--rag-error-default);
+    stroke: var(--rag-error-default);
+    stroke-width: 2px;
+    width: 24px;
+    height: auto;
+}
+
+.booking-calendar {
+    display: grid;
+    grid-template-columns: 2.3rem 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-self: stretch;
+    column-gap: 8px;
+}
+
+.booking-calendar span {
+    text-align: right;
+    font-weight: bold;
+    font-size: var(--p2-font-size);
+    color: var(--grey-2);
+}
+
+.start-date {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+    align-self: start;
+    padding-top: 8px;
+}
+.end-date {
+    grid-row: 2 / -1;
+    grid-column: 1 / 1;
+    align-self: end;
+    padding-bottom: 12px;
+}
+
+.booking-frequency {
+    color: var(--primary-color-default);
+}
+
+.calendar-booking-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row: 1 / -1;
+    grid-column: 2 / -1;
+}
+
+.vertical-line {
+    border-left: 7px solid var(--accent-1-color-default);
+    align-self: stretch;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.cancel-modal {
+    display: flex;
+    width: 75vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 24px;
+    gap: 24px;
+    background: var(--grey-7);
+    border: 1px solid var(--grey-5);
+    box-sizing: border-box;
+    border-radius: 7px;
+    box-shadow: var(--shadow-level-1);
+}
+
+.cancel-modal-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 12px;
+}
+
+.modal-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    align-self: stretch;
+    padding: 0px 24px;
+}
+
+.cancel-modal-content {
+    margin: 0px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.cancel-modal span {
     font-weight: 600;
-    padding: 8px 16px;
 }
 
+.cancel-modal hr {
+    align-self: stretch;
+    border-top: 0.5px solid var(--grey-5);
+    margin: 0px 24px;
+}
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
 input:-ms-input-placeholder {
     color: var(--grey-4);
     opacity: 1;
@@ -315,7 +523,7 @@ input::-ms-input-placeholder {
     fill: var(--grey-1);
 }
 
-.bookings-title .input-div {
+.page-title .input-div {
     display: none;
 }
 
@@ -324,7 +532,7 @@ input::-ms-input-placeholder {
     font-size: var(--p2-font-size);
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     padding: 2px 8px;
     border-radius: 7px;
@@ -340,7 +548,7 @@ input::-ms-input-placeholder {
     color: var(--rag-error-dark);
 }
 
-.confirmed {
+.confirmed, .completed {
     background: var(--rag-success-light);
     color: var(--rag-success-darkest);
 }
@@ -352,27 +560,100 @@ input::-ms-input-placeholder {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 12px 16px;
+    margin-bottom: 8px;
+    gap: 16px;
+}
+.booking-row .student-avatar {
+    margin-left: 16px;
+}
+
+#bookings-content .booking-student-name {
+    font-weight: 600;
 }
 
 .booking-row-info {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     justify-content: space-between;
     align-items: center;
-    padding: 0px;
+    padding: 12px 0px;
     flex-grow: 1;
 }
 
-.booking-2-items {
+.booking-row-info .status {
+            justify-self: start;
+    }
+
+.calendar-booking-row .booking-row-info {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: space-between;
+    justify-items: start;
+    align-items: center;
+    padding: 12px 0px;
+    flex-grow: 1;
+}
+
+.booking-2-items,
+.booking-date {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 6px;
+}
+@media screen and (max-width: 866px) {
+.booking-date {
+    order: -1;
+    font-weight: 500;
+    color: var(--grey-2);
+}}
+
+.side-student-dtls {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0px;
+    gap: 24px;
+    padding: 0px 32px;
 }
 
+.cancel-x svg {
+    stroke: var(--rag-error-default);
+    stroke-width: 40px;
+    width: 16px;
+    height: auto;
+}
+
+.cancel-x {
+    display: flex;
+    width: 48px;
+    align-self: stretch;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cancel-x:hover {
+    background-color: var(--rag-error-light);
+}
+
+.cancel-modal-background {
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--modal-background);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* Tablet (S) */
 @media screen and (min-width: 867px) {
+    .login-signup {
+        margin-right: 88px;
+    }
     #main-with-nav {
         display: flex;
         flex-basis: 0;
@@ -383,12 +664,12 @@ input::-ms-input-placeholder {
         margin-left: 88px;
     }
     #bookings-content {
-        padding: 0px;
-        width: calc(100% - 304px);
+        justify-content: flex-start;
+        padding: 24px 32px 0px;
     }
     .bookings-side-panel {
         display: block;
-        width: 240px;
+        width: 304px;
         height: 100vh;
         background-color: var(--grey-7);
         top: 0px;
@@ -400,28 +681,63 @@ input::-ms-input-placeholder {
 
     .modal-background {
         background-color: transparent;
-        z-index: 0;
+        z-index: auto;
     }
 
     #bookings-screen {
         display: flex;
         flex-direction: row;
         background-color: var(--grey-6);
-        height: 100%
+        height: 100%;
     }
-    .bookings-title {
+    .page-title {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 16px 32px;
+        padding: 12px 32px;
         background-color: var(--grey-7);
         border: 1px solid var(--grey-6);
-        position: sticky;
+        position: fixed;
     }
-    .bookings-title .input-div {
+    .page-title .input-div {
         display: flex;
     }
+
+    .page-title h1 {
+        color: var(--grey-1);
+    }
+
+    .Completed .booking-row-info, .Cancelled .booking-row-info {
+        padding-right: 16px;
+    }
+    .calendar-carousel {
+        padding: 32px 0px 0px 32px;
+                background-color: var(--grey-6);
+    }
+    .booking-row-info {
+        grid-template-columns: 1fr 1fr 1fr 10.1rem;
+        grid-template-rows: 1fr;
+    }
+
+    .tag {
+        justify-content: flex-end;
+    }
+    .booking-2-items,
+    .booking-date {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 0px;
+    }
+
+    .booking-row-info .status {
+            justify-self: end;
+    }
+    .calendar-booking-row .status {
+            justify-self: flex-start;
+    }
+
 }
 /* @media only screen and (min-width: ) {
   

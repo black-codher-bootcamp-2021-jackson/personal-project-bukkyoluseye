@@ -43,7 +43,7 @@ const bookingsSchema = new Schema({
     },
     examBoard: {
         type: String,
-        required: true,
+        required: false,
     },
     tier: { type: String },
     grade: {
@@ -51,11 +51,11 @@ const bookingsSchema = new Schema({
     },
     type: {
         type: String,
-        required: true
+        required: true,
     },
     frequency: {
         type: String,
-        required: false
+        required: false,
     },
     status: {
         type: String,

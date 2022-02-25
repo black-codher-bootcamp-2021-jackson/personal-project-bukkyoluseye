@@ -1,70 +1,81 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import TextLink from '../Buttons/TextLink';
-import StandardButton from '../Buttons/StandardButton';
+import Button from '../Buttons/Button';
+import { getAllBookings } from '../../services/tutorAppService';
 
-const LogIn = () => {
-    const navigate = useNavigate();
+const LogIn = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [user, setUser] = useState();
+    const [bookings, setBookings] = useState([]);
 
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem("user")
-        if (loggedInUser) {
-            const foundUser = JSON.parse(loggedInUser);
-            setUser(foundUser)
-        }
-    }, [])
+    
+
+    // useEffect(() => {
+    //     const loggedInUser = localStorage.getItem("user")
+    //     if (loggedInUser) {
+    //         const foundUser = JSON.parse(loggedInUser);
+    //         setUser(foundUser)
+    //     }
+    // }, [])
 
     // log in the user
-    const handleSubmit = async (e) => {
+    const loginTutor = async (e) => {
         e.preventDefault();
-        const user = { email, password };
-        // send the username and password to the server
-        const response = await axios.post('/api/login', user);
-        // Authenticate the user
-        // authenticateUser(email, password); if user is authenticated then do the following
-        // set the state of the user
-        setUser(response.data);
-        // store the user in localStorage
-        localStorage.setItem('user', JSON.stringify(response.data));
+        const response = await axios.post(`/api/tutorprofile/login`, {
+            email: email,
+            password: password,
+        });
 
-        // When the authentication is done
-        // Redirect the user to the `/profile/${userName}` page
-        // the below code adds the `/profile/${userName}` page
-        // to the history stack.
-        navigate(`/bookings`);
+        const data = response.data;
+
+        if (data.tutorprofile) {
+            localStorage.setItem('token', data.tutorprofile);
+            async function getBookings() {
+                if (!bookings || bookings.length === 0) {
+                    const response = await getAllBookings();
+                    setBookings(response);
+                }
+            }
+            getBookings();
+            props.setLoggedIn(true);
+            setEmail("");
+            setPassword('');
+        } else {
+            alert(data.error);
+        }
     };
 
-    // if email===email && password === password {let them sign in} else 
     return (
-        <>
+        <div className="login-signup">
             <div className="have-you">
                 <h1>Login</h1>
+                <div className="switch-login">
                 <p>New here? </p>
-                <TextLink text="Sign up" href="/" target="_self" />
+                    <TextLink text="Sign up" href="/" target="_self" />
+                    </div>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={loginTutor}>
                 <InputField
-                    label="Email Address*"
+                    label="Email Address"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required="required"
+                    required
+                    compulsory
                 />
                 <InputField
-                    label="Password*"
+                    label="Password"
                     variant="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required="required"
+                    compulsory
                 />
-                <StandardButton type="submit" label="Log In" />
+                <Button variant="primary" type="submit" label="Log In" />
             </form>
-        </>
+        </div>
     );
 };
 

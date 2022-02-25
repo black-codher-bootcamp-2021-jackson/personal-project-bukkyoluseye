@@ -1,49 +1,72 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../InputField';
 import TextLink from '../Buttons/TextLink';
-import StandardButton from '../Buttons/StandardButton';
+import Button from '../Buttons/Button';
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const [firstName, setFirstName] = useState();
+    const [surname, setSurname] = useState();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [user, setUser] = useState();
 
-    async function registerUser(e) {
-        e.preventDefault()
+    async function registerTutor(e) {
+        e.preventDefault();
 
-        const response = await fetch(`/api/tutorlogin`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                user,
-                email,
-                password,
-            }),
-        });
-            const data = await response.json();
-            console.log(data);
+        await axios
+            .post(`/api/tutorprofile/signup`, {
+                firstname: firstName,
+                surname: surname,
+                email: email,
+                password: password,
+            })
+            .then(navigate('/bookings'))
+            // .then(call a modal to open)
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
-
     return (
-        <>
+        <div className="login-signup">
             <div className="have-you">
                 <h1>Sign Up</h1>
+                <div className="switch-login">
                 <p>Already have an account? </p>
-                <TextLink text="Log in" href="/login" target="_self" />
+                    <TextLink text="Log in" href="/login" target="_self" />
+                </div>
             </div>
-            <form onSubmit={registerUser}>
-                <InputField label="First Name*" type="text" />
-                <InputField label="Surname*" type="text" />
-                <InputField label="Email Address*" type="email" />
-                <InputField label="Password*" variant="password" />
-                <StandardButton type="submit" label="Sign Up" />
+            <form id="signup" onSubmit={registerTutor}>
+                <InputField
+                    label="First Name*"
+                    type="text"
+                    onChange={(e) => setFirstName(e.target.value)}
+                />
+                <InputField
+                    label="Surname*"
+                    type="text"
+                    onChange={(e) => setSurname(e.target.value)}
+                />
+                <InputField
+                    label="Email Address*"
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <InputField
+                    label="Password*"
+                    variant="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button
+                    variant="primary"
+                    form="signup"
+                    type="submit"
+                    label="Sign Up"
+                />
             </form>
-        </>
+        </div>
     );
 };
 

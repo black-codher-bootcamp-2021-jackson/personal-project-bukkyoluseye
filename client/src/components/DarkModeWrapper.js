@@ -28,11 +28,11 @@ const DarkModeWrapper = ({ children }) => {
     // console.log(theme);
     return (
         <div className={theme}>
-            <DarkModeButton
+            {/* <DarkModeButton
                 className="mobile-dark-mode"
                 onClick={switchTheme}
                 theme={theme}
-            />
+            /> */}
             {/* <SideNavBar onClick={switchTheme} />
             <BottomNavBar />  */}
             {/* {console.log('darkmodewrapper', theme)} */}

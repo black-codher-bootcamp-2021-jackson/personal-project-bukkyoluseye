@@ -5,7 +5,7 @@ const ErrorButton = (props) => {
         <button
             className="error-btn"
             type={props.type ? props.type : null}
-            onClick={() => props.onClick}
+            onClick={props.onClick ? props.onClick : null}
         >
             {props.label}
         </button>

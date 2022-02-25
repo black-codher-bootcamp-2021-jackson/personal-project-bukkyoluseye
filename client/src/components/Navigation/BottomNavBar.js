@@ -21,10 +21,16 @@ const BottomNavBar = () => {
                 (activeButton === item && isClicked) ||
                 location.pathname === `/${item}`
             }
+            aria-current={
+                (activeButton === item && isClicked) ||
+                location.pathname === `/${item}`
+                    ? 'page'
+                    : false
+            }
             setActiveButton={setActiveButton}
             setIsClicked={setIsClicked}
         />
-    ))
+    ));
 
     return (
         <div id="bottom-nav" className="nav-bar">
