@@ -33,9 +33,9 @@ function App() {
 
     // Verify user is logged in
     useEffect(() => {
-        if(!loggedIn){
+        if (!loggedIn) {
             const token = localStorage.getItem('token');
-        
+
             if (token) {
                 const user = jwt_decode(token);
                 if (!user) {
@@ -50,14 +50,15 @@ function App() {
                     }
                     getBookings();
                 }
-            }
-
-            else {
+            } else {
                 const controller = new AbortController();
                 controller.abort();
             }
         }
+
     }, [loggedIn, bookings]);
+
+    console.log(bookings)
 
     useEffect(() => {
         async function getTutorProfiles() {
@@ -80,6 +81,17 @@ function App() {
         getStudentProfiles();
     }, [studentprofiles]);
 
+    /* CONTROL WHAT USERS SEE ON SCREENS OF DIFFERENT WIDTHS */
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+        useEffect(() => {
+            const handleResize = () => {
+                setWindowWidth(window.innerWidth);
+            };
+            window.addEventListener('resize', handleResize);
+            return (_) => {
+                window.removeEventListener('resize', handleResize);
+            };
+        });
     return (
         <DarkModeWrapper>
             <Router>
@@ -108,7 +120,7 @@ function App() {
                         element={
                             <>
                                 {loggedIn ? (
-                                    <BookingsScreen bookings={bookings} />
+                                    <BookingsScreen bookings={bookings} windowWidth={windowWidth}/>
                                 ) : (
                                     <Navigate to="/login" />
                                 )}
@@ -148,7 +160,10 @@ function App() {
                         element={
                             <>
                                 {loggedIn ? (
-                                    <MoreScreen setBookings={setBookings} setLoggedIn={setLoggedIn} />
+                                    <MoreScreen
+                                        setBookings={setBookings}
+                                        setLoggedIn={setLoggedIn}
+                                    />
                                 ) : (
                                     <Navigate to="/login" />
                                 )}

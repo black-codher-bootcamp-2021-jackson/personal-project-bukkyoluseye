@@ -42,16 +42,32 @@ const SubjectDetails = (props) => {
                                 : 'n/a'}
                         </p>
                         <p className="dtl-title">Exam board</p>
-                        <TextLink
+                        {props.student.examBoard
+                                    ? <TextLink
                             className="dtl-content"
-                            href="https://qualifications.pearson.com/en/home.html"
+                            href={
+                                props.student.examBoard === 'Edexcel'
+                                    ? 'https://qualifications.pearson.com/en/home.html'
+                                    : props.student.examBoard === 'AQA'
+                                        ? 'https://www.aqa.org.uk/'
+                                        : props.student.examBoard === 'OCR'
+                                            ? 'https://ocr.org.uk/'
+                                            : props.student.examBoard === 'WJEC'
+                                                ? 'https://www.wjec.co.uk/'
+                                                : props.student.examBoard ===
+                                                    'City & Guilds'
+                                                    ? 'https://www.cityandguilds.com/'
+                                                    : props.student.examBoard === 'CCEA'
+                                                        ? 'https://ccea.org.uk/'
+                                                        : props.student.examBoard === 'SQA'
+                                                            ? 'https://www.sqa.org.uk/'
+                                                            : null
+                            }
                             text={
                                 props.student.examBoard
-                                    ? props.student.examBoard
-                                    : 'n/a'
                             }
-                            icon={<OpenLink />}
-                        />
+                            icon={ <OpenLink /> }
+                        />: <p className="dtl-content">n/a</p>}
                     </div>
                 ) : null}
             </div>

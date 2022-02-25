@@ -1,6 +1,6 @@
 .light,
 .dark {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 
     /*Text Styles  */
     --h1-font-size: 1.802rem; /*Large Titles*/
@@ -15,6 +15,10 @@
     height: 100%;
 }
 
+@media screen and (max-width: 866px) {
+  .light, .dark {height: calc(100% - 88px);}
+  
+}
 .light {
     /* Light Mode Design System */
     --primary-color-default: rgba(84, 46, 255, 1);

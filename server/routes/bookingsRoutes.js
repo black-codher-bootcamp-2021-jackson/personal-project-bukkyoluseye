@@ -5,7 +5,7 @@ const Bookings = require('../models/Bookings');
 // This API makes use of Mongoose model helper functions to query the data
 const bookingsRoutes = (app) => {
     app.get(`/api/bookings`, async (req, res) => {
-        const bookings = await Bookings.find({ sort: { Date: 'asc' } })
+        const bookings = await Bookings.find({ sort: { date: 'asc' } })
             .populate('tutorId')
             .populate('studentId');
 
@@ -23,11 +23,12 @@ const bookingsRoutes = (app) => {
 
     app.get(`/api/bookings/tutor/:id`, async (req, res) => {
         const { id } = req.params;
-
+        console.log(id);
         if (id) {
             const booking = await Bookings.find({ tutorId: id })
                 .populate('tutorId')
-                .populate('studentId');
+                .populate('studentId')
+                .sort( { date: 'asc' } );
 
             return res.status(200).send({
                 error: false,

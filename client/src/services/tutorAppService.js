@@ -10,11 +10,11 @@ const getAllTutorProfiles = async () => {
 };
 
 const getAllBookings = async (userId) => {
-    const token = localStorage.getItem('token');
-    if (token && userId) {
+    // const token = localStorage.getItem('token');
+    // if (token && userId) {
         const response = await axios.get(`/api/bookings/tutor/${userId}`);
         return response.data.booking || [];
-    }
+    // }
 };
 
 const getAllStudentProfiles = async () => {

@@ -9,7 +9,7 @@ const BookingsSidePanel = (props) => {
     const options = {
         weekday: 'short',
         day: 'numeric',
-        month: 'long',
+        month: 'short',
         hour: '2-digit',
         minute: '2-digit',
     };
@@ -24,7 +24,7 @@ const BookingsSidePanel = (props) => {
         <>
             {props.show ? (
                 <div className="modal-background">
-                    <div className="bookings-side-panel">
+                    <div className="bookings-side-panel" id={props.id}>
                         <CloseButton onClick={props.onClose} />
                         <span>{`${props.tab} Lesson`}</span>
                         <h3 id="bookings-date">
@@ -45,7 +45,8 @@ const BookingsSidePanel = (props) => {
                                           props.booking.studentId.year +
                                           ' | ' +
                                           props.booking.studentId.pronouns
-                                        : props.booking.studentId.year}
+                                        : 'Year ' +
+                                          props.booking.studentId.year}
                                 </p>
                             </div>
                             <div>
@@ -65,7 +66,11 @@ const BookingsSidePanel = (props) => {
                                     variant="primary"
                                     label={`Message ${props.booking.studentId.name.first}`}
                                 />
-                                <Button variant="error-secondary" label="Cancel Lesson" onClick={props.cancelOnClick} />
+                                <Button
+                                    variant="error-secondary"
+                                    label="Cancel Lesson"
+                                    onClick={props.cancelOnClick}
+                                />
                             </div>
                         </div>
                     </div>

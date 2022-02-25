@@ -1,13 +1,11 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import InputField from '../InputField';
 import Tab from '../Tabs/Tab';
 import BookingsSidePanel from './BookingsSidePanel';
 import BookingRow from './BookingRow';
 import CalendarView from './CalendarView';
 import ConfirmModal from '../ConfirmModal';
-import jwt_decode from 'jwt-decode';
 import BookingsToggle from './BookingsToggle';
 
 // This is for the tab filtering
@@ -21,18 +19,19 @@ const tabNames = Object.keys(tabMap);
 
 const BookingsScreen = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const navigate = useNavigate();
 
     /* FETCH DATA ON A SPECIFIC BOOKING */
     const [selectedBooking, setSelectedBooking] = useState([]);
     const [show, setShow] = useState(false);
     const [cancelShow, setCancelShow] = useState(false);
+    const [colourIndex, setColourIndex] = useState('');
 
-    async function getSelectedBooking(bookingId, setState) {
+    async function getSelectedBooking(bookingId, index) {
         const response = await axios.get(`/api/bookings/${bookingId}`);
         if (!response.error) {
             setSelectedBooking(response.data.booking);
             setShow(true);
+            setColourIndex(index + 1);
         } else {
             console.log('error', response.error);
         }
@@ -50,18 +49,8 @@ const BookingsScreen = (props) => {
     /* ------------- */
 
     /* CONTROL WHAT USERS SEE ON SCREENS OF DIFFERENT WIDTHS */
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const tabletSize = windowWidth < 867;
+    const tabletSize = props.windowWidth < 867;
 
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-        window.addEventListener('resize', handleResize);
-        return (_) => {
-            window.removeEventListener('resize', handleResize);
-        };
-    });
     /* ------------- */
 
     /* TABS TO FILTER THE BOOKING LIST */
@@ -85,13 +74,9 @@ const BookingsScreen = (props) => {
         setCancelShow(false);
     };
 
-    const cancelOnClick = () => {
-        setCancelShow(true);
-    };
-
     /* Cancel lesson button */
     const cancelLesson = async (id) => {
-        const response = await axios.patch(`/api/bookings/${id}/cancelled`);
+        await axios.patch(`/api/bookings/${id}/cancelled`);
         setCancelShow(false);
         window.location.reload();
     };
@@ -110,11 +95,13 @@ const BookingsScreen = (props) => {
         .map((booking, index) => {
             return (
                 <BookingRow
+                    className={`${index + 1} ${filter}`}
                     booking={booking}
                     key={index}
-                    slot
-                    onClick={() => getSelectedBooking(booking._id)}
+                    slot={tabletSize ? false : true}
+                    onClick={() => getSelectedBooking(booking._id, index)}
                     cancelOnClick={() => getSelectedBookingCancel(booking._id)}
+                    windowWidth={props.windowWidth}
                 />
             );
         })
@@ -124,6 +111,7 @@ const BookingsScreen = (props) => {
                 .includes(searchTerm.toLowerCase())
         );
 
+    console.log(bookingsList);
     const today = bookingsList.filter(
         (booking) =>
             new Date(booking.props.booking.date).setHours(0, 0, 0, 0) ===
@@ -146,7 +134,13 @@ const BookingsScreen = (props) => {
             checkWeek(new Date(booking.props.booking.date)) ===
                 checkWeek(new Date()) &&
             new Date(booking.props.booking.date).setHours(0, 0, 0, 0) !==
-                new Date().setHours(0, 0, 0, 0)
+                new Date().setHours(0, 0, 0, 0) &&
+            (new Date(booking.props.booking.date) > new Date())
+    );
+
+    const past = bookingsList.filter(
+        (booking) =>
+            new Date(booking.props.booking.date) < new Date()
     );
 
     const upcoming = bookingsList.filter(
@@ -218,6 +212,12 @@ const BookingsScreen = (props) => {
                                     {thisWeek}
                                 </div>
                             ) : null}
+                            {past.length > 0 ? (
+                                <div className="booking-groups">
+                                    <h5>{`Past Lessons & Meetings`}</h5>
+                                    {past}
+                                </div>
+                            ) : null}
                             {upcoming.length > 0 ? (
                                 <div className="booking-groups">
                                     <h5>Upcoming</h5>
@@ -226,9 +226,11 @@ const BookingsScreen = (props) => {
                             ) : null}
                         </main>
                     ) : null}
+                    {console.log(colourIndex)}
                     {selectedBooking && selectedBooking.length !== 0 ? (
                         <BookingsSidePanel
                             booking={selectedBooking}
+                            id={`${colourIndex}`}
                             show={show}
                             onClose={onPanelClose}
                             tab={filter}

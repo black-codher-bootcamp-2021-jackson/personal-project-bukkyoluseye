@@ -48,13 +48,15 @@ const LogIn = (props) => {
     };
 
     return (
-        <>
+        <div className="login-signup">
             <div className="have-you">
                 <h1>Login</h1>
+                <div className="switch-login">
                 <p>New here? </p>
-                <TextLink text="Sign up" href="/" target="_self" />
+                    <TextLink text="Sign up" href="/" target="_self" />
+                    </div>
             </div>
-            <form onSubmit={loginTutor} >
+            <form onSubmit={loginTutor}>
                 <InputField
                     label="Email Address"
                     type="email"
@@ -73,7 +75,7 @@ const LogIn = (props) => {
                 />
                 <Button variant="primary" type="submit" label="Log In" />
             </form>
-        </>
+        </div>
     );
 };
 

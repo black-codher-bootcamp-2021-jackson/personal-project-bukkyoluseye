@@ -30,13 +30,15 @@ const SignUp = () => {
     }
 
     return (
-        <>
+        <div className="login-signup">
             <div className="have-you">
                 <h1>Sign Up</h1>
+                <div className="switch-login">
                 <p>Already have an account? </p>
-                <TextLink text="Log in" href="/login" target="_self" />
+                    <TextLink text="Log in" href="/login" target="_self" />
+                </div>
             </div>
-            <form id="signup" onSubmit={registerTutor} >
+            <form id="signup" onSubmit={registerTutor}>
                 <InputField
                     label="First Name*"
                     type="text"
@@ -64,7 +66,7 @@ const SignUp = () => {
                     label="Sign Up"
                 />
             </form>
-        </>
+        </div>
     );
 };
 

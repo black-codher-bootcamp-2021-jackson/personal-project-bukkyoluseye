@@ -68,7 +68,7 @@ const BookingRow = (props) => {
                     </p>
                 </div>
             </div>
-            {!props.booking.cancelled ? (
+            {!props.booking.completed && !props.booking.cancelled && props.windowWidth && props.windowWidth > 867 ? (
                 <div
                     className="cancel-x"
                     onClick={props.cancelOnClick}

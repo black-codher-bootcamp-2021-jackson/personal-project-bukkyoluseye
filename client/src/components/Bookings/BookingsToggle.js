@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Calendar from '../../assets/SVGR/Calendar';
 import List from '../../assets/SVGR/List';
 

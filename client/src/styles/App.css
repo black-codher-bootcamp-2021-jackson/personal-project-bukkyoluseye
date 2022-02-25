@@ -28,18 +28,19 @@
 .calendar-carousel .name-subject {
     flex-direction: row;
     font-weight: 700;
-    justify-content: center;
+    justify-content: flex-start;
 }
-.calendar-carousel .booking-row-info {
+/* .calendar-carousel .booking-row-info {
     flex-direction: column;
     align-items: flex-start;
-}
+} */
 .calendar-carousel svg {
     width: 60%;
 }
 
 .calendar-carousel .tag {
-    padding: 1px 6px;
+    padding: 1px 8px;
+    justify-content: flex-start;
 }
 
 .calendar-carousel .subject::before {
@@ -57,6 +58,7 @@
 .calendar-carousel .booking-row {
     align-self: stretch;
 }
+
 
 .calendar-carousel .lesson-freq {
     flex-direction: row;
@@ -212,7 +214,6 @@ p {
     letter-spacing: 0.05em;
     font-size: var(--h5-font-size);
     border: none;
-    box-shadow: 0px 3px 6px var(--grey-5);
     background-color: var(--accent-2-color-default); /* Remove this */
 }
 
@@ -261,7 +262,6 @@ p {
     gap: 12px;
     align-self: stretch;
 }
-
 
 #bookings-date {
     margin: 0px 32px 24px;
@@ -353,6 +353,7 @@ button {
     margin: 0px;
     height: 100%;
     align-self: stretch;
+    width: 100%;
 }
 
 .two-btns {
@@ -380,7 +381,14 @@ button {
 }
 
 .have-you {
-    display: inline-flex;
+    display: flex;
+    flex-direction: column;
+}
+
+.switch-login {
+   display: flex;
+   gap: 4px;
+    flex-direction: row; 
 }
 
 .cancel-warning {
@@ -404,7 +412,6 @@ button {
     font-weight: bold;
     font-size: var(--p2-font-size);
     color: var(--grey-2);
-
 }
 
 .start-date {
@@ -425,7 +432,7 @@ button {
 }
 
 .calendar-booking-row {
-    display:grid;
+    display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-row: 1 / -1;
@@ -438,8 +445,6 @@ button {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-
-
 
 .cancel-modal {
     display: flex;
@@ -527,7 +532,7 @@ input::-ms-input-placeholder {
     font-size: var(--p2-font-size);
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     padding: 2px 8px;
     border-radius: 7px;
@@ -543,7 +548,7 @@ input::-ms-input-placeholder {
     color: var(--rag-error-dark);
 }
 
-.confirmed {
+.confirmed, .completed {
     background: var(--rag-success-light);
     color: var(--rag-success-darkest);
 }
@@ -567,20 +572,43 @@ input::-ms-input-placeholder {
 }
 
 .booking-row-info {
-    display: flex; /* switch to grid*/
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     justify-content: space-between;
     align-items: center;
     padding: 12px 0px;
     flex-grow: 1;
 }
 
-.booking-2-items {
+.booking-row-info .status {
+            justify-self: start;
+    }
+
+.calendar-booking-row .booking-row-info {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: space-between;
+    justify-items: start;
+    align-items: center;
+    padding: 12px 0px;
+    flex-grow: 1;
+}
+
+.booking-2-items,
+.booking-date {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     padding: 0px;
+    gap: 6px;
 }
+@media screen and (max-width: 866px) {
+.booking-date {
+    order: -1;
+    font-weight: 500;
+    color: var(--grey-2);
+}}
 
 .side-student-dtls {
     display: flex;
@@ -623,6 +651,9 @@ input::-ms-input-placeholder {
 }
 /* Tablet (S) */
 @media screen and (min-width: 867px) {
+    .login-signup {
+        margin-right: 88px;
+    }
     #main-with-nav {
         display: flex;
         flex-basis: 0;
@@ -635,7 +666,6 @@ input::-ms-input-placeholder {
     #bookings-content {
         justify-content: flex-start;
         padding: 24px 32px 0px;
-        width: calc(100% - 368px);
     }
     .bookings-side-panel {
         display: block;
@@ -668,7 +698,7 @@ input::-ms-input-placeholder {
         padding: 12px 32px;
         background-color: var(--grey-7);
         border: 1px solid var(--grey-6);
-        position: sticky;
+        position: fixed;
     }
     .page-title .input-div {
         display: flex;
@@ -677,9 +707,37 @@ input::-ms-input-placeholder {
     .page-title h1 {
         color: var(--grey-1);
     }
+
+    .Completed .booking-row-info, .Cancelled .booking-row-info {
+        padding-right: 16px;
+    }
     .calendar-carousel {
-    padding-right: 32px;
-}
+        padding: 32px 0px 0px 32px;
+                background-color: var(--grey-6);
+    }
+    .booking-row-info {
+        grid-template-columns: 1fr 1fr 1fr 10.1rem;
+        grid-template-rows: 1fr;
+    }
+
+    .tag {
+        justify-content: flex-end;
+    }
+    .booking-2-items,
+    .booking-date {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 0px;
+    }
+
+    .booking-row-info .status {
+            justify-self: end;
+    }
+    .calendar-booking-row .status {
+            justify-self: flex-start;
+    }
+
 }
 /* @media only screen and (min-width: ) {
   
