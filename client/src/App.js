@@ -55,10 +55,9 @@ function App() {
                 controller.abort();
             }
         }
-
     }, [loggedIn, bookings]);
 
-    console.log(bookings)
+    console.log(bookings);
 
     useEffect(() => {
         async function getTutorProfiles() {
@@ -83,15 +82,15 @@ function App() {
 
     /* CONTROL WHAT USERS SEE ON SCREENS OF DIFFERENT WIDTHS */
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-        useEffect(() => {
-            const handleResize = () => {
-                setWindowWidth(window.innerWidth);
-            };
-            window.addEventListener('resize', handleResize);
-            return (_) => {
-                window.removeEventListener('resize', handleResize);
-            };
-        });
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+        return (_) => {
+            window.removeEventListener('resize', handleResize);
+        };
+    });
     return (
         <DarkModeWrapper>
             <Router>
@@ -120,7 +119,10 @@ function App() {
                         element={
                             <>
                                 {loggedIn ? (
-                                    <BookingsScreen bookings={bookings} windowWidth={windowWidth}/>
+                                    <BookingsScreen
+                                        bookings={bookings}
+                                        windowWidth={windowWidth}
+                                    />
                                 ) : (
                                     <Navigate to="/login" />
                                 )}
